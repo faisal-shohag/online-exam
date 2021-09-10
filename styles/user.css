@@ -338,13 +338,13 @@ textarea{
     /* font-weight: bold; */
     padding: 5px;
     font-size: 20px;
-    font-family: 'Kalpurush'; 
+    font-family: 'Kalpurush' Noto Sans; 
 }
 
 
 .option{
     margin-top: 20px;
-    font-family:'Kalpurush'; 
+    font-family:'Kalpurush' Noto Sans; 
 }
 
 .explanation{
