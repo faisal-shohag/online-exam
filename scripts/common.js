@@ -541,3 +541,22 @@ var negativeTag  ={
     "0.25" :'<i class="icofont-arrow-down"></i>0.25',
     "0.50" : '<i class="icofont-arrow-down"></i>0.50'
 }
+
+var timer;
+
+function countDownTimer(time,element){
+var countDownDate = new Date(time).getTime();
+timer = setInterval(function() {
+  var now = new Date().getTime();
+  var distance = countDownDate - now;
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  $('#'+element).html(`<i class="icofont-ui-timer"></i> Remaining: ${days}d ${hours} ${minutes}m ${seconds}s`);
+  if (distance < 0) {
+    clearInterval(x);
+    $('#'+element).html("Ended!");
+  }
+}, 1000);
+}

@@ -42,6 +42,7 @@ router.on(function() {
   `;
  const examlist = document.querySelector('.examlist');
  store.collection('public_exams').orderBy("publish_date", 'desc').limit(20).get().then(snap=> {
+   clearInterval(timer);
    $('.app_loader').hide();
   snap.forEach(doc=> {
     let data = doc.data();
@@ -51,9 +52,8 @@ router.on(function() {
         <a href="#!/view_exam/${doc.id}"><div class="list_exam">
         <div class="list_name">${data.details.exam_name} <span class="lock"><i class="icofont-lock"></i></span></div>
         <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
-        <div class="list_neg"><span style="color:green"><i class="icofont-arrow-up"></i>${data.questions.length}</span> · ${negativeTag[data.details.negative_mark]}</div>
+        <div id="${doc.id}" class="timer">${countDownTimer(data.details.end_date, doc.id)}</div>
         <div class="chip red">${tag[data.details.sl_class]}</div>
-        <div class="chip pink">${tag[data.details.sl_group]}</div>
         <div class="chip green">${tag[data.details.sl_subject]}</div>
         <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
         </div>
@@ -63,9 +63,8 @@ router.on(function() {
         <a href="#!/view_exam/${doc.id}"><div class="list_exam">
         <div class="list_name">${data.details.exam_name}</div>
         <div class="list_dur">${data.questions.length} Questions In ${data.details.sl_duration} minutes</div>
-        <div class="list_neg"><span style="color:green"><i class="icofont-arrow-up"></i>${data.questions.length}</span> · ${negativeTag[data.details.negative_mark]}</div>
+        <div id="${doc.id}" class="timer">${countDownTimer(data.details.end_date, doc.id)}</div>
         <div class="chip red">${tag[data.details.sl_class]}</div>
-        <div class="chip pink">${tag[data.details.sl_group]}</div>
         <div class="chip green">${tag[data.details.sl_subject]}</div>
         <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
         </div>
@@ -74,7 +73,9 @@ router.on(function() {
     
     }
     
-  })
+  });
+
+
  })
 
 }).resolve();
