@@ -44,9 +44,11 @@ router.on(function() {
  store.collection('public_exams').orderBy("publish_date", 'desc').limit(20).get().then(snap=> {
    clearInterval(timer);
    $('.app_loader').hide();
+   let empty = true;
   snap.forEach(doc=> {
     let data = doc.data();
     if(new Date(data.details.end_date) > new Date() && new Date(data.details.start_date) < new Date()){
+      empty = false;
       if(data.details.password === ""){
         examlist.innerHTML += `
         <a href="#!/view_exam/${doc.id}"><div class="list_exam">
@@ -56,13 +58,14 @@ router.on(function() {
         <div class="chip red">${tag[data.details.sl_class]}</div>
         <div class="chip green">${tag[data.details.sl_subject]}</div>
         <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
-        </div>
+        </div></a>
         `
       }else{
+        empty = false;
         examlist.innerHTML += `
-        <a href="#!/view_exam/${doc.id}"><div class="list_exam">
+        <div id="${doc.id}" class="list_exam with_pass">
         <div class="list_name">${data.details.exam_name}</div>
-        <div class="list_dur">${data.questions.length} Questions In ${data.details.sl_duration} minutes</div>
+        <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
         <div id="${doc.id}" class="timer">${countDownTimer(data.details.end_date, doc.id)}</div>
         <div class="chip red">${tag[data.details.sl_class]}</div>
         <div class="chip green">${tag[data.details.sl_subject]}</div>
@@ -74,6 +77,19 @@ router.on(function() {
     }
     
   });
+  
+  if(empty){
+    examlist.innerHTML = `
+    
+    <center><h3>No Exam</h3></center>
+    
+    `
+  }
+
+
+  $('.with_pass').click(function(){
+    
+  })
 
 
  })
@@ -103,7 +119,6 @@ router.on({
     $('.crt').addClass('footerIconActive');
     $($($('.crt')[0].parentNode)[0].lastElementChild).show();
   }
-
   $('.top_logo').html(`<span class="animate__animated animate__fadeInLeft">Create</span>`);
   db.ref('app/users/'+user.uid+'/create').on('value', snap=>{
     $('.app_loader').hide();
@@ -277,7 +292,6 @@ detalisform.addEventListener('submit', e=>{
     }
     db.ref('app/users/'+user.uid+'/create/history').update({details: details, status: true});
   });
-  $('.top_logo').html(`<span class="animate__animated animate__fadeInLeft">Donate</span>`)
   $(document).ready(function () {
     $("select").formSelect();
   });
@@ -420,7 +434,7 @@ question_form.addEventListener('submit', e=> {
     $('.footer').show();
     $('.footertext').hide();
       $('.footerIcon').removeClass('footerIconActive');
-      $('.top_logo').html(`<span class="animate__animated animate__fadeInLeft">Donate</span>`);
+      $('.top_logo').html(`<span class="animate__animated animate__fadeInLeft">Edit</span>`);
   db.ref('app/users/'+user.uid+'/create/history/questions/'+params.id).on('value', snap=>{
     $('.app_loader').hide();
     app.innerHTML = `
@@ -514,29 +528,44 @@ question_form.addEventListener('submit', e=> {
 
   "/myprofile" : function (){
     $('.footer').show();
+    $(document).ready(function(){
+      $('.modal').modal();
+      $('#modal1').modal('close');
+});
     $('.top_logo').html(`<span class="animate__animated animate__fadeInLeft">Profile</span>`)
    app.innerHTML=`
    <center><div class="headlines">প্রোফাইল</div>
    <div class="imagexbig"><img src="${user.photoURL}"/></div>
    <div class="displayName">${user.displayName}</div>
-   <div class="email">${user.email}</div>
-   <div class="details">
-   <div class="rank cardXmed">
+   <div class="email"><i class="icofont-email"></i> ${user.email}</div>
+   <div class="row z-depth-3 card">
+   <div class="rank cardXmed col s4 red darken-1 white-text">
    <div class="number">...</div>
-   <div class="text">অবস্থান</div>
+   <div class="text"><i class="icofont-group-students"></i> অবস্থান</div>
    </div>
 
-   <div class="exam cardXmed">
+   <div class="exam cardXmed col s4 yellow darken-1 black-text">
    <div class="number">...</div>
-   <div class="text">পরীক্ষা</div>
+   <div class="text"><i class="icofont-clip-board"></i> পরীক্ষা</div>
    </div>
 
-   <div class="score cardXmed">
+   <div class="score cardXmed col s4 purple darken-2 white-text">
    <div class="number">...</div>
-   <div class="text">স্কোর</div>
+   <div class="text white-text"><i class="icofont-star-shape"></i> স্কোর</div>
    </div>
    </div>
-   <div id="donut-chart"></div>
+   <div id="donut-chart" class="card-panel grey darken-3">
+   <center>   <div class="preloader-wrapper big active">
+   <div class="spinner-layer spinner-blue">
+     <div class="circle-clipper left">
+       <div class="circle"></div>
+     </div><div class="gap-patch">
+       <div class="circle"></div>
+     </div><div class="circle-clipper right">
+       <div class="circle"></div>
+     </div>
+   </div></center>
+   </div>
    </center>
    
    `;
@@ -544,6 +573,8 @@ question_form.addEventListener('submit', e=> {
 db.ref("app/users/"+user.uid).on('value', snap=>{
   $(".exam .number").text(snap.val().exams.total);
   $(".score .number").text(snap.val().scores.totalScore);
+  var ser = [snap.val().scores.totalCorrect, snap.val().scores.totalEmpt, snap.val().scores.totalWrong];
+  console.log(ser);
     window.ApexCharts && (new ApexCharts(document.getElementById('donut-chart'), {
       chart: {
         type: "donut",
@@ -560,7 +591,7 @@ db.ref("app/users/"+user.uid).on('value', snap=>{
       fill: {
         opacity: 1,
       },
-      series: [snap.val().scores.totalCorrect, snap.val().scores.totalEmpt, snap.val().scores.totalWrong],
+      series: ser,
       labels: ["সঠিক", "ফাঁকা", "ভুল"],
       grid: {
         strokeDashArray: 4,
