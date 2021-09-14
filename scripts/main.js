@@ -579,7 +579,7 @@ db.ref("app/users/"+user.uid).on('value', snap=>{
       chart: {
         type: "donut",
         fontFamily: 'inherit',
-        foreColor: "red",
+        foreColor: "white",
         height: 200,
         sparkline: {
           enabled: true

@@ -103,6 +103,8 @@ a{
  display: flex;
  align-items: center;
  margin: 0px 5px;
+ font-size: 17px;
+ font-weight: bold;
 
 }
 
@@ -121,14 +123,14 @@ a{
 
 .grp-item .image{
 margin-right: 10px;
- width: 30px;
- height: 30px;
+ width: 35px;
+ height: 35px;
  overflow: hidden;
 }
 
 .grp-item .image img{
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
 }
 
 
