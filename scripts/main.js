@@ -35,52 +35,120 @@ router.on(function() {
     $('.hm').addClass('footerIconActive');
     $($($('.hm')[0].parentNode)[0].lastElementChild).show();
   }
-  $('.top_logo').html(`<span class="animate__animated animate__fadeInLeft">যাচাই</span>`);
-  app.innerHTML = `
+  $('.top_logo').html(`<div class="animate__animated animate__fadeInLeft top_app_title"><i class="icofont-focus"></i> বৃত্ত</div>`);
+  app.innerHTML= `
+  <div class="div-1"></div>
+  `
+let rncount = 0, upcount=0;
+  store.collection('public_exams').orderBy("publish_date", 'desc').limit(100).get().then(snap=> {
+    $('.app_loader').hide();
+    $('.div-1').html(`<div class="h-menu">
+    <div class="menu_title"><i class="icofont-people"></i> Public Exams</div>
+  <div class="menu_items">
+  <a href="#!/all_exam/running"><div class="item">
+  <div class="item_name">Running</div> <div id="rn_count" class="c_num">0</div>
+  </div></a>
+  <a href="#!/all_exam/upcoming"><div class="item">
+  <div class="item_name">Upcoming</div> <div id="up_count" class="c_num">0</div>
+  </div></a>
+    </div>
+    </div>`)
+    snap.forEach(doc=> {
+      let data = doc.data();
+      if(new Date(data.details.end_date) > new Date() && new Date(data.details.start_date) < new Date()){rncount++}
+      if(new Date(data.details.start_date) > new Date()){upcount++;}
+     })
+    $('#rn_count').text(rncount);
+    $('#up_count').text(upcount);
+  });
+}).resolve();
+
+
+
+router.on({
+  "/all_exam/:id": function(params){
+    console.log(params.id);
+    $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Public Exams</div>`);
+    $('.app_loader').show();
+    app.innerHTML = `
+    <div class="menu_title" id="all_t"></div>
   <div class="examlist">
   </div>
   `;
  const examlist = document.querySelector('.examlist');
+
  store.collection('public_exams').orderBy("publish_date", 'desc').limit(20).get().then(snap=> {
    clearInterval(timer);
    $('.app_loader').hide();
    let empty = true;
   snap.forEach(doc=> {
     let data = doc.data();
+
+    if(params.id==="running"){
+    $('#all_t').html(`<i class="icofont-hand-drag1"></i> Running`)
     if(new Date(data.details.end_date) > new Date() && new Date(data.details.start_date) < new Date()){
       empty = false;
-      if(data.details.password === ""){
+      if(data.details.password == ""){
         examlist.innerHTML += `
-        <a href="#!/view_exam/${doc.id}"><div class="list_exam">
-        <div class="list_name">${data.details.exam_name} <span class="lock"><i class="icofont-lock"></i></span></div>
-        <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
-        <div id="${doc.id}" class="timer">${countDownTimer(data.details.end_date, doc.id)}</div>
-        <div class="chip red">${tag[data.details.sl_class]}</div>
-        <div class="chip green">${tag[data.details.sl_subject]}</div>
-        <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
-        </div></a>
-        `
-      }else{
-        empty = false;
-        examlist.innerHTML += `
-        <div id="${doc.id}" class="list_exam with_pass">
+        <div class="list_exam with_pass">
         <div class="list_name">${data.details.exam_name}</div>
         <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
-        <div id="${doc.id}" class="timer">${countDownTimer(data.details.end_date, doc.id)}</div>
+        <div class="timer"><i class="icofont-ui-clock"></i> Remaining: <span id="${doc.id}"> ${countDownTimer(data.details.end_date, doc.id)}</span></div>
         <div class="chip red">${tag[data.details.sl_class]}</div>
         <div class="chip green">${tag[data.details.sl_subject]}</div>
         <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
         </div>
         `
+      }else{
+        empty = false;
+        examlist.innerHTML += `
+        <a href="#!/view_exam/${doc.id}"><div class="list_exam">
+        <div class="list_name">${data.details.exam_name} <span class="lock"><i class="icofont-lock"></i></span></div> 
+        <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
+        <div  class="timer"><i class="icofont-ui-clock"></i> Remaining: <span id="${doc.id}">${countDownTimer(data.details.end_date, doc.id)}</span></div>
+        <div class="chip red">${tag[data.details.sl_class]}</div>
+        <div class="chip green">${tag[data.details.sl_subject]}</div>
+        <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
+        </div></a>
+        `
       }
     }
+  }else if(params.id==="upcoming"){
+    $('#all_t').html(`<i class="icofont-history"></i> Upcoming`)
+      if(new Date(data.details.start_date) > new Date()){
+        empty = false;
+        if(data.details.password === ""){
+          examlist.innerHTML += `
+          <div class="list_exam with_pass">
+          <div class="list_name">${data.details.exam_name}</div>
+          <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
+          <div  class="timer"><i class="icofont-ui-clock"></i> Starting: <span id="${doc.id}">${countDownTimer(data.details.start_date, doc.id)}</span></div>
+          <div class="chip red">${tag[data.details.sl_class]}</div>
+          <div class="chip green">${tag[data.details.sl_subject]}</div>
+          <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
+          </div>
+          `
+        }else{
+          empty = false;
+          examlist.innerHTML += `
+          <a href="#!/view_exam/${doc.id}"><div class="list_exam">
+          <div class="list_name">${data.details.exam_name} <span class="lock"><i class="icofont-lock"></i></span></div>
+          <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
+          <div  class="timer"><i class="icofont-ui-clock"></i> Starting: <span id="${doc.id}">${countDownTimer(data.details.end_date, doc.id)}</span></div>
+          <div class="chip red">${tag[data.details.sl_class]}</div>
+          <div class="chip green">${tag[data.details.sl_subject]}</div>
+          <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
+          </div></a>
+          `
+        }
+      }
+    }
+
   });
   
   if(empty){
     examlist.innerHTML = `
-    
     <center><h3>No Exam</h3></center>
-    
     `
   }
 
@@ -90,13 +158,8 @@ router.on(function() {
   })
 
 
- })
-
-}).resolve();
-
-
-
-router.on({
+ });
+  },
   "/rank" : function(){
     $('.footer').show();
   $('.footertext').hide();
@@ -104,7 +167,7 @@ router.on({
   if($('.rnk')[0].classList[3] === undefined){
     $('.rnk').addClass('footerIconActive');
     $($($('.rnk')[0].parentNode)[0].lastElementChild).show();
-    $('.top_logo').html(`<span class="animate__animated animate__fadeInLeft">Rank</span>`);
+    $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Rank</div>`);
   }
 
   },
@@ -117,7 +180,7 @@ router.on({
     $('.crt').addClass('footerIconActive');
     $($($('.crt')[0].parentNode)[0].lastElementChild).show();
   }
-  $('.top_logo').html(`<span class="animate__animated animate__fadeInLeft">Create</span>`);
+  $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Create</div>`);
   db.ref('app/users/'+user.uid+'/create').on('value', snap=>{
     $('.app_loader').hide();
   if(snap.val().history.status===false){
@@ -335,8 +398,28 @@ app.innerHTML = `
 $('.publish').click(function(){
   //console.log('clicked')
    let exam = snap.val().history;
-   //console.log(exam);
-   store.collection("public_exams").add({details: snap.val().history.details, questions: snap.val().history.questions, publish_date: (new Date()).toString()});
+
+   Swal.fire({
+    title: 'Are you sure?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      store.collection("public_exams").add({details: snap.val().history.details, questions: snap.val().history.questions, publish_date: (new Date()).toString()});
+      Swal.fire(
+        'Published',
+        'Exam has been published!',
+        'success'
+      ).then(rs=> {
+        if(rs.isConfirmed){
+        }
+      })
+    }
+  });
+
 });
 
 
@@ -379,7 +462,7 @@ question_form.addEventListener('submit', e=> {
   $('.footer').show();
   $('.footertext').hide();
     $('.footerIcon').removeClass('footerIconActive');
-    $('.top_logo').html(`<span class="animate__animated animate__fadeInLeft">Edit</span>`);
+    $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Edit</div>`);
     app.innerHTML= `
     <div class="details_view"></div>
     <div class="questions_view"></div>
@@ -442,7 +525,7 @@ question_form.addEventListener('submit', e=> {
               }
             })
           }
-        })
+        });
        
       })
       var ans = [];
@@ -511,7 +594,7 @@ question_form.addEventListener('submit', e=> {
     $('.footer').show();
     $('.footertext').hide();
       $('.footerIcon').removeClass('footerIconActive');
-      $('.top_logo').html(`<span class="animate__animated animate__fadeInLeft">Edit</span>`);
+      $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Edit Question</div>`);
   db.ref('app/users/'+user.uid+'/create/history/questions/'+params.id).on('value', snap=>{
     $('.app_loader').hide();
     app.innerHTML = `
@@ -597,7 +680,7 @@ question_form.addEventListener('submit', e=> {
         if($('.dnt')[0].classList[3] === undefined){
     $('.dnt').addClass('footerIconActive');
     $($($('.dnt')[0].parentNode)[0].lastElementChild).show();
-    $('.top_logo').html(`<span class="animate__animated animate__fadeInLeft">Donate</span>`)
+    $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Donate</div>`);
     }
 
   },
@@ -609,7 +692,7 @@ question_form.addEventListener('submit', e=> {
       $('.modal').modal();
       $('#modal1').modal('close');
 });
-    $('.top_logo').html(`<span class="animate__animated animate__fadeInLeft">Profile</span>`)
+$('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Profile</div>`);
    app.innerHTML=`
    <center><div class="headlines">প্রোফাইল</div>
    <div class="imagexbig"><img src="${user.photoURL}"/></div>
