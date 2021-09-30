@@ -1,4 +1,3 @@
-
 var router = new Navigo(null, true, '#!');
 var app = document.querySelector("#app");
 $(document).ready(function(){
@@ -19,6 +18,7 @@ $('.logout').click(function(){
   firebase.auth().signOut();
   window.location.reload()
 });
+
 
 $('.deleteAc').click(function(){
   window.location.reload()
@@ -73,9 +73,7 @@ router.on(function() {
         </div>
         `
       }
-    
     }
-    
   });
   
   if(empty){
@@ -385,6 +383,7 @@ question_form.addEventListener('submit', e=> {
     app.innerHTML= `
     <div class="details_view"></div>
     <div class="questions_view"></div>
+    <center><div style="display: none;" class="btn dlt_history red">Delete</div></center>
     `
     const details_view = document.querySelector('.details_view');
     const question_view = document.querySelector('.questions_view');
@@ -401,8 +400,52 @@ question_form.addEventListener('submit', e=> {
          <div class="chip green">${tag[dt.details.sl_subject]}</div>
          <div class="chip orange">${tag[dt.details.sl_exam_type]}</div>
          </div>
+         <a href="#modal2" class="modal-trigger btn-floating  waves-effect waves-light red"><i class="material-icons">edit</i></a>
       `
-      let ans=[];
+      const edit_det = document.querySelector('#edit_det');
+      edit_det.edit_name.value = dt.details.exam_name;
+      let sdate = dt.details.start_date;
+      sdate = sdate.split(' ');
+      edit_det.edit_start.value = sdate[1] + " " + sdate[2] + " " + sdate[3] + " " +sdate[4];
+      
+      sdate = dt.details.end_date;
+      sdate = sdate.split(' ');
+      edit_det.edit_end.value = sdate[1] + " " + sdate[2] + " " + sdate[3] + " " +sdate[4];
+     
+      edit_det.addEventListener('submit', e=>{
+        e.preventDefault();
+        data = {
+          exam_name: edit_det.edit_name.value,
+          start_date : (new Date(edit_det.edit_start.value)).toString(),
+          end_date : (new Date(edit_det.edit_end.value)).toString(),
+        }
+        Swal.fire({
+          title: 'Are you sure?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            db.ref("app/users/"+user.uid+"/create/history/details").update(data);
+            Swal.fire(
+              'Saved',
+              'Your data has been saved.',
+              'success'
+            ).then(rs=> {
+              if(rs.isConfirmed){
+                $(document).ready(function(){
+                  $('.modal').modal();
+                  $('#modal2').modal('close');
+            });
+              }
+            })
+          }
+        })
+       
+      })
+      var ans = [];
       for(let i=0; i<dt.questions.length; i++){
         ans.push(parseInt(dt.questions[i].ans)+i*4);
         question_view.innerHTML += `
@@ -423,7 +466,41 @@ question_form.addEventListener('submit', e=> {
       for(let a=0; a<ans.length; a++){
            $("#" + ans[a] + " .st").addClass("cr");
          }
+
+         $('.dlt_history').show();
+         $('.dlt_history').off().click(function(){
+          Swal.fire({
+            title: 'Are you sure?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              db.ref('app/users/'+user.uid+'/create/history').update({status: false});
+           db.ref('app/users/'+user.uid+'/create/history/details').remove();
+           db.ref('app/users/'+user.uid+'/create/history/questions').remove();
+           window.history.back();
+              Swal.fire(
+                'Deleted',
+                'All questions have been deleted from your history.',
+                'success'
+              ).then(rs=> {
+                if(rs.isConfirmed){
+              //     $(document).ready(function(){
+              //       $('.modal').modal();
+              //       $('#modal2').modal('close');
+              // });
+                }
+              })
+            }
+          })
+
+           
+         })
 });  
+
 },
 
 "edit_details" : function(){

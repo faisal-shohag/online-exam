@@ -240,7 +240,7 @@ textarea{
 }
 
 #question_form textarea{
-    font-family: 'Kalpurush';
+    font-family: 'SolaimanLipi';
     background: #fff;
     color: #000;
     padding: 7px;
@@ -320,10 +320,9 @@ textarea{
 
 
 .questions{
-    position: relative;
+    /* position: relative; */
     margin-bottom: 30px;
 }
-
 
 
 .q-wrap{
@@ -334,17 +333,18 @@ textarea{
     background: rgb(255, 254, 254);
     
 }
+
  .question{
     /* font-weight: bold; */
     padding: 5px;
     font-size: 20px;
-    font-family: 'Kalpurush', Noto Sans; 
+    font-family: 'SolaimanLipi';
 }
 
 
 .option{
     margin-top: 20px;
-    font-family:'Kalpurush', Noto Sans; 
+    font-family: 'SolaimanLipi'; 
 }
 
 .explanation{
@@ -361,7 +361,7 @@ textarea{
     margin: 5px 2px; 
     border: 2px solid var(--success);
     background: #5ad4429f;
-    font-family:'Kalpurush', Noto Sans; 
+    font-family: 'SolaimanLipi';
 }
 
 .opt{

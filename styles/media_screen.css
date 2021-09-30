@@ -1,0 +1,22 @@
+@media (min-width: 760px) {
+
+    main{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #app{
+        width: 60%;
+    }
+    .dtp_modal-content {
+     left: 15%;
+     right: 15%;
+     top: 10%
+    }
+
+    .dtp_modal-cell-date{
+     margin-left: 25%;
+     margin-right: 20%;
+    }
+}
