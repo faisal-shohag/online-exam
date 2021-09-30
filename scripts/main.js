@@ -134,7 +134,7 @@ router.on({
           <a href="#!/view_exam/${doc.id}"><div class="list_exam">
           <div class="list_name">${data.details.exam_name} <span class="lock"><i class="icofont-lock"></i></span></div>
           <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
-          <div  class="timer"><i class="icofont-ui-clock"></i> Starting: <span id="${doc.id}">${countDownTimer(data.details.end_date, doc.id)}</span></div>
+          <div  class="timer"><i class="icofont-ui-clock"></i> Starting: <span id="${doc.id}">${countDownTimer(data.details.start_date, doc.id)}</span></div>
           <div class="chip red">${tag[data.details.sl_class]}</div>
           <div class="chip green">${tag[data.details.sl_subject]}</div>
           <div class="chip orange">${tag[data.details.sl_exam_type]}</div>

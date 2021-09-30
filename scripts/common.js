@@ -553,10 +553,13 @@ timer = setInterval(function() {
   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  if(hours===0 && minutes !== 0){
+  if(days!==0){
+    $('#'+element).html( `${days} day ${hours} hr ${minutes} min ${seconds} sec`);
+  }
+ else if(hours===0 && minutes !== 0){
     $('#'+element).html( `${minutes} min ${seconds} sec`);
   }else if(hours===0 && minutes===0){
-    $('#'+element).html( `<div class="">${seconds}</div>`);
+    $('#'+element).html( `${seconds}`);
   }else{
     $('#'+element).html( `${hours} hr ${minutes} min ${seconds} sec`);
   }
