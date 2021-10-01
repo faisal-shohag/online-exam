@@ -571,4 +571,3 @@ timer = setInterval(function() {
 }, 1000);
 }
 
-

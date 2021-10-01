@@ -470,3 +470,7 @@ label,
   -webkit-text-fill-color: transparent;
   text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
 }
+
+.exam_desc{
+  text-align: left;
+}

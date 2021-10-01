@@ -78,7 +78,8 @@ router.on({
  const examlist = document.querySelector('.examlist');
 
  store.collection('public_exams').orderBy("publish_date", 'desc').limit(20).get().then(snap=> {
-   clearInterval(timer);
+
+   //clearInterval(timer);
    $('.app_loader').hide();
    let empty = true;
   snap.forEach(doc=> {
@@ -90,7 +91,7 @@ router.on({
       empty = false;
       if(data.details.password == ""){
         examlist.innerHTML += `
-        <div class="list_exam with_pass">
+        <div class="list_exam no_password">
         <div class="list_name">${data.details.exam_name}</div>
         <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
         <div class="timer"><i class="icofont-ui-clock"></i> Remaining: <span id="${doc.id}"> ${countDownTimer(data.details.end_date, doc.id)}</span></div>
@@ -102,14 +103,14 @@ router.on({
       }else{
         empty = false;
         examlist.innerHTML += `
-        <a href="#!/view_exam/${doc.id}"><div class="list_exam">
+        <div id="${doc.id}+p" class="list_exam with_pass">
         <div class="list_name">${data.details.exam_name} <span class="lock"><i class="icofont-lock"></i></span></div> 
         <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
         <div  class="timer"><i class="icofont-ui-clock"></i> Remaining: <span id="${doc.id}">${countDownTimer(data.details.end_date, doc.id)}</span></div>
         <div class="chip red">${tag[data.details.sl_class]}</div>
         <div class="chip green">${tag[data.details.sl_subject]}</div>
         <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
-        </div></a>
+        </div>
         `
       }
     }
@@ -119,7 +120,7 @@ router.on({
         empty = false;
         if(data.details.password === ""){
           examlist.innerHTML += `
-          <div class="list_exam with_pass">
+          <div class="list_exam">
           <div class="list_name">${data.details.exam_name}</div>
           <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
           <div  class="timer"><i class="icofont-ui-clock"></i> Starting: <span id="${doc.id}">${countDownTimer(data.details.start_date, doc.id)}</span></div>
@@ -131,20 +132,67 @@ router.on({
         }else{
           empty = false;
           examlist.innerHTML += `
-          <a href="#!/view_exam/${doc.id}"><div class="list_exam">
+          <div class="list_exam">
           <div class="list_name">${data.details.exam_name} <span class="lock"><i class="icofont-lock"></i></span></div>
           <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
           <div  class="timer"><i class="icofont-ui-clock"></i> Starting: <span id="${doc.id}">${countDownTimer(data.details.start_date, doc.id)}</span></div>
           <div class="chip red">${tag[data.details.sl_class]}</div>
           <div class="chip green">${tag[data.details.sl_subject]}</div>
           <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
-          </div></a>
+          </div>
           `
         }
       }
     }
 
   });
+
+  $('.no_password').click(function(){
+    
+  })
+
+  $('.with_pass').click(function(){
+    let key = ($(this)[0].id).split('+');
+    key = key[0];
+    Swal.fire({
+      title: 'Password',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Submit',
+      showLoaderOnConfirm: true,
+      preConfirm: (login) => {
+       return store.collection('public_exams').doc(key).get().then(doc=>{
+            if(login !== doc.data().details.password) throw new Error("Password Incorrect");
+            return doc.data().details;
+        }).catch(error => {
+            Swal.showValidationMessage(
+              `Request failed: ${error}`
+            )
+          })
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      console.log(result);
+      if (result.isConfirmed) {
+          Swal.fire({
+            title: '<i class="icofont-hand"></i> Know Before Exam',
+            html: `<div class="exam_desc">
+            <ol>
+            <li>You can access this exam only once.</li>
+            <li>Your score will sum with previous score.</li>
+            <li>This exam will be responsible for your rank value.</li>
+            <li>Do not try to be dishonest.</li>
+            <li>Auto sumission will happen without any notice when time up.</li>
+            </ol>
+            </div>`,
+            confirmButtonText: 'Start'
+          });
+      }
+    }).then(result={})
+  })
   
   if(empty){
     examlist.innerHTML = `
@@ -153,13 +201,14 @@ router.on({
   }
 
 
-  $('.with_pass').click(function(){
-    
-  })
+
 
 
  });
   },
+ "exam_notice/:id": function(params){
+           
+ },
   "/rank" : function(){
     $('.footer').show();
   $('.footertext').hide();
