@@ -456,6 +456,9 @@ var tag = {
   "chapter" : "অধ্যায় ভিত্তিক",
   "subjec_final" : "সাবজেক্ট ফাইনাল",
   "model_test" : "মডেল টেস্ট",
+  "public": "Public",
+  "live": "Live",
+  "admission" : "admission",
   "b1" : "বাংলা প্রথম পত্র",
   "b2" : "বাংলা দ্বিতীয় পত্র",
   "e" : "ইংরেজী",
@@ -499,6 +502,7 @@ var optionsTag = {
 }
 
 function date_formatter(date){
+    //console.log(date);
   let d = date.split(" ");
    let months = {
      "Jan" : "জানুয়ারি",
@@ -524,6 +528,7 @@ function date_formatter(date){
      "Wed" : "বুধ",
      "Thu" : "বৃহস্পতি"
    }
+
   let time = d[4].split(":");
   
   if(parseInt(time[0]) > 12){
@@ -581,4 +586,27 @@ function shuffleArray(array) {
     }
     return array;
   }
+
+  var myData;
   
+  firebase.auth().onAuthStateChanged((user)=>{
+    $('.loading').hide();
+    if(user){
+        db.ref('app/users/'+user.uid).on('value', snap=>{
+           myData = {
+            totalCorrect : snap.val().scores.totalCorrect,
+            totalEmpt : snap.val().scores.totalEmpt,
+            totalScore : snap.val().scores.totalScore,
+            totalWrong : snap.val().scores.totalWrong,
+            admission : snap.val().exams.admission,
+            daily : snap.val().exams.daily,
+            live : snap.val().exams.live,
+            model : snap.val().exams.model,
+            public : snap.val().exams.public,
+            weekly : snap.val().exams.weekly,
+            totalExams : snap.val().exams.total,
+            createPermission: snap.val().createPermission
+           }
+        });
+    }
+});

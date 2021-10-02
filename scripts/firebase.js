@@ -25,7 +25,7 @@
                     total: 0, bn: 0,en:0,bio: 0,mt:0,ph:0,ch:0,eco:0,ci:0,is:0,totalScore: 0, totalWrong:0, totalEmpt: 0, totalCorrect: 0
                   },
                   exams: {
-                    total: 0, model:0,weekly:0,daily:0
+                    total: 0, model:0,weekly:0,daily:0, public: 0, addmission: 0, live:0
                   },
                   examList: "",
                   details: false,
@@ -40,8 +40,7 @@
 
               }
               db.ref("app/users/"+authResult.user.uid).update(data);
-              //console.log(authResult.additionalUserInfo);
-
+              store.collection('globalScore').doc(authResult.user.uid).set({id: authResult.user.uid, name: authResult.user.displayName, inst: "", score: 0});
 
           }
           if (authResult.additionalUserInfo) {

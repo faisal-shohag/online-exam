@@ -67,9 +67,8 @@ let rncount = 0, upcount=0;
 
 
 router.on({
-  "/all_exam/:id": function(params){
+"/all_exam/:id": function(params){
   $('.footer').show();
-    console.log(params.id);
     $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Public Exams</div>`);
     $('.app_loader').show();
   
@@ -98,6 +97,7 @@ router.on({
         <div class="list_name">${data.details.exam_name}</div>
         <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
         <div class="timer"><i class="icofont-ui-clock"></i> Remaining: <span id="${doc.id}"> ${countDownTimer(data.details.end_date, doc.id)}</span></div>
+        <div class="maker"><b>Prepared by:</b>  <span>${data.details.maker}</span></div>
         <div class="chip red">${tag[data.details.sl_class]}</div>
         <div class="chip green">${tag[data.details.sl_subject]}</div>
         <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
@@ -110,6 +110,7 @@ router.on({
         <div class="list_name">${data.details.exam_name} <span class="lock"><i class="icofont-lock"></i></span></div> 
         <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
         <div  class="timer"><i class="icofont-ui-clock"></i> Remaining: <span id="${doc.id}">${countDownTimer(data.details.end_date, doc.id)}</span></div>
+        <div class="maker"><b>Prepared by:</b>  <span>${data.details.maker}</span></div>
         <div class="chip red">${tag[data.details.sl_class]}</div>
         <div class="chip green">${tag[data.details.sl_subject]}</div>
         <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
@@ -127,6 +128,7 @@ router.on({
           <div class="list_name">${data.details.exam_name}</div>
           <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
           <div  class="timer"><i class="icofont-ui-clock"></i> Starting: <span id="${doc.id}">${countDownTimer(data.details.start_date, doc.id)}</span></div>
+          <div class="maker"><b>Prepared by:</b>  <span>${data.details.maker}</span></div>
           <div class="chip red">${tag[data.details.sl_class]}</div>
           <div class="chip green">${tag[data.details.sl_subject]}</div>
           <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
@@ -139,6 +141,7 @@ router.on({
           <div class="list_name">${data.details.exam_name} <span class="lock"><i class="icofont-lock"></i></span></div>
           <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
           <div  class="timer"><i class="icofont-ui-clock"></i> Starting: <span id="${doc.id}">${countDownTimer(data.details.start_date, doc.id)}</span></div>
+          <div class="maker"><b>Prepared by:</b>  <span>${data.details.maker}</span></div>
           <div class="chip red">${tag[data.details.sl_class]}</div>
           <div class="chip green">${tag[data.details.sl_subject]}</div>
           <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
@@ -197,7 +200,6 @@ router.on({
       },
       allowOutsideClick: () => !Swal.isLoading()
     }).then((result) => {
-      console.log(result);
       if (result.isConfirmed) {
           Swal.fire({
             title: '<i class="icofont-hand"></i> Know Before Exam',
@@ -227,13 +229,15 @@ router.on({
     `
   }
  });
-  },
- "exam/:id": function(params){
+},
+
+"exam/:id": function(params){
   $('.footer').hide();
   $('.app_loader').show();
   $('.top_logo').html(`<div class="animate__animated animate__fadeInRight top_app_title"> </div>`);
         store.collection('public_exams').doc(params.id).get().then(doc=>{
           $('.app_loader').hide();
+          $('.countdown').show();
           let myexam = doc.data();
           app.innerHTML = `
               <div class="exam-container">
@@ -284,7 +288,6 @@ router.on({
             na = 0,
             neg = parseFloat(myexam.details.negative_mark);
           questions = shuffleArray(myexam.questions);
-
           $(".exam-nb").html(`${myexam.details.notice}`);
 
            for (let q = 0; q <questions.length; q++) {
@@ -317,7 +320,6 @@ router.on({
                `;
           }
 
-      console.log(ans);
           $(".opt").on("click", function () {
             userAns.push(parseInt($(this)[0].id));
             $($(this)[0].parentNode.children[0]).off("click");
@@ -347,7 +349,6 @@ router.on({
 
             if (minute <= 0 && sec <= 0) {
               $("#submit").click();
-              //$(".header .title").html(`<small>সময় শেষ!</small>`);
               clearInterval(timer);
             } else {
               $(".countdown").html(
@@ -365,9 +366,6 @@ router.on({
             }
           });
 
-          //MathJax.typeset();
-
-      
           $("#submit")
             .off()
             .click(function () {
@@ -395,7 +393,6 @@ router.on({
                           `<b style="color: green;">Solution:</b><br>${exp[k]}`
                         );
                         // $('#'+ans[k]).css({'background': 'var(--success)', 'color': 'var(--light)'});
-                        console.log()
                         $("#" + ans[k] + " .st").addClass("cr");
                         $(
                           $($($("#" + ans[k])[0].parentNode)[0].parentNode)[0]
@@ -466,32 +463,39 @@ router.on({
                       `)                  
                      
               
-                      let data = {
-                        score: score-(wrong*neg),
-                        cr: score,
-                        duration: myexam.details.duration,
-                        questions: questions,
-                        name: myexam.details.name,
-                        myans: userAns,
-                        type: myexam.details.type,
-                        totalQ: questions.length,
-                        wrong: wrong,
-                        na: questions.length - (score + wrong),
-                        time: {
-                          min: initialMin - 1 - minute,
-                          sec: 60 - sec,
-                        }
-                      }
-                    
-
-                     
-
-                      
-                      
-                   
-
-                   
-
+                      // let data = {
+                      //   score: score-(wrong*neg),
+                      //   cr: score,
+                      //   duration: myexam.details.duration,
+                      //   questions: questions,
+                      //   name: myexam.details.name,
+                      //   myans: userAns,
+                      //   type: myexam.details.type,
+                      //   totalQ: questions.length,
+                      //   wrong: wrong,
+                      //   na: questions.length - (score + wrong),
+                      //   time: {
+                      //     min: initialMin - 1 - minute,
+                      //     sec: 60 - sec,
+                      //   }
+                      // }
+                       
+                      let type = new Object();
+                      type[myexam.details.sl_exam_type] = myData[myexam.details.sl_exam_type]+1;
+                      let myScores = {
+                        totalCorrect: myData.totalCorrect + score,
+                        totalEmpt: myData.totalEmpt + questions.length - (score + wrong),
+                        totalScore: myData.totalScore +  (score-(wrong*neg)),
+                        totalWrong: myData.totalWrong + wrong, 
+                      } 
+                      db.ref('app/users/'+user.uid+'/exams').update(type);
+                      db.ref('app/users/'+user.uid+'/scores').update(myScores);
+                      db.ref('app/users'+user.uid+'/allExams/'+myexam.details.sl_exam_type).push({
+                          userAns: userAns.join('-'),
+                          examID: params.id                         
+                      });
+                      //store.collection('public_exams').doc(params.id).collection('leaderboard').add();
+                      store.collection('globalScore').doc(user.uid).update({id: user.uid, username: user.displayName, inst: "", score: myData.totalScore +  (score-(wrong*neg))});
 
                       Swal.fire("সাবমিট হয়েছে!", "", "success");
                       
@@ -499,9 +503,13 @@ router.on({
                   
             });
         })
+      }).catch(err=> {
+        console.log(err)
+        Swal.fire("Error", "error");
       });
- },
-  "/rank" : function(){
+},
+
+ "/rank" : function(){
     $('.footer').show();
   $('.footertext').hide();
   $('.footerIcon').removeClass('footerIconActive');
@@ -510,8 +518,11 @@ router.on({
     $($($('.rnk')[0].parentNode)[0].lastElementChild).show();
     $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Rank</div>`);
   }
+  app.innerHTML = `
+  <center><h4>This section is under construction!</h4>
+  `
+},
 
-  },
   "/create" : function(){
     $('.app_loader').show();
     $('.footer').show();
@@ -522,6 +533,13 @@ router.on({
     $($($('.crt')[0].parentNode)[0].lastElementChild).show();
   }
   $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Create</div>`);
+  
+  if(myData.createPermission === false || myData.createPermission === undefined){
+    $('.app_loader').hide();
+app.innerHTML = `
+<div class="warn">You have no permission to create exam!</div>
+`
+  }else{
   db.ref('app/users/'+user.uid+'/create').on('value', snap=>{
     $('.app_loader').hide();
   if(snap.val().history.status===false){
@@ -540,6 +558,10 @@ router.on({
     <option value="chapter">Particular Chapter</option>
     <option value="subject_final">Subject Final</option>
     <option value="model_test">Model Test</option>
+    <option value="model_test">Model Test</option>
+    <option value="public">Public</option>
+    <option value="live">Live</option>
+    <option value="admission">Admission</option>
   </select>
 </div>
 
@@ -749,7 +771,7 @@ $('.publish').click(function(){
     confirmButtonText: 'Yes'
   }).then((result) => {
     if (result.isConfirmed) {
-      store.collection("public_exams").add({details: snap.val().history.details, questions: snap.val().history.questions, publish_date: (new Date()).toString()});
+      store.collection("exams/").doc(snap.val().history.details.sl_exam_type).collection('exams').add({details: snap.val().history.details, questions: snap.val().history.questions, publish_date: (new Date()).toString()});
       Swal.fire(
         'Published',
         'Exam has been published!',
@@ -795,9 +817,11 @@ question_form.addEventListener('submit', e=> {
 });
 
 }
-})
+});
+  }
   
 },
+
 "edit_exam":function(){
   $('.app_loader').show();
   $('.footer').show();
@@ -887,7 +911,6 @@ question_form.addEventListener('submit', e=> {
     <center><a href="#!/edit_q/${i}"><button class="btn green">Edit</button></a></center>
 </div>`
   }
-  console.log(ans)
       for(let a=0; a<ans.length; a++){
            $("#" + ans[a] + " .st").addClass("cr");
          }
@@ -931,6 +954,7 @@ question_form.addEventListener('submit', e=> {
 "edit_details" : function(){
 
 },
+
 "/edit_q/:id" : function(params){
   $('.app_loader').show();
     $('.footer').show();
@@ -1013,9 +1037,9 @@ question_form.addEventListener('submit', e=> {
   
 
 });
-    },
+},
 
-  "/donate" : function(){
+"/donate" : function(){
     $('.footer').show();
   $('.footertext').hide();
     $('.footerIcon').removeClass('footerIconActive');
@@ -1024,16 +1048,17 @@ question_form.addEventListener('submit', e=> {
     $($($('.dnt')[0].parentNode)[0].lastElementChild).show();
     $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Donate</div>`);
     }
+    app.innerHTML = `
+    <center><h4>This section is under construction!</h4>
+    `
+},
 
-  },
-
-
-  "/myprofile" : function (){
+"/myprofile" : function (){
     $('.footer').show();
     $(document).ready(function(){
       $('.modal').modal();
       $('#modal1').modal('close');
-});
+    });
 $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Profile</div>`);
    app.innerHTML=`
    <center><div class="headlines">প্রোফাইল</div>
@@ -1051,78 +1076,23 @@ $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animat
    <div class="text"><i class="icofont-clip-board"></i> পরীক্ষা</div>
    </div>
 
-   <div class="score cardXmed col s4 purple darken-2 white-text">
+   <div class="myscore cardXmed col s4 purple darken-2 white-text">
    <div class="number">...</div>
    <div class="text white-text"><i class="icofont-star-shape"></i> স্কোর</div>
    </div>
    </div>
-   <div id="donut-chart" class="card-panel grey darken-3">
-   <center>   <div class="preloader-wrapper big active">
-   <div class="spinner-layer spinner-blue">
-     <div class="circle-clipper left">
-       <div class="circle"></div>
-     </div><div class="gap-patch">
-       <div class="circle"></div>
-     </div><div class="circle-clipper right">
-       <div class="circle"></div>
-     </div>
-   </div></center>
+   <div class="card-panel grey darken-3">
    </div>
    </center>
-   
    `;
 
 db.ref("app/users/"+user.uid).on('value', snap=>{
   $(".exam .number").text(snap.val().exams.total);
-  $(".score .number").text(snap.val().scores.totalScore);
+  $(".myscore .number").text(snap.val().scores.totalScore);
   var ser = [snap.val().scores.totalCorrect, snap.val().scores.totalEmpt, snap.val().scores.totalWrong];
-  console.log(ser);
-    window.ApexCharts && (new ApexCharts(document.getElementById('donut-chart'), {
-      chart: {
-        type: "donut",
-        fontFamily: 'inherit',
-        foreColor: "white",
-        height: 200,
-        sparkline: {
-          enabled: true
-        },
-        animations: {
-          enabled: false
-        },
-      },
-      fill: {
-        opacity: 1,
-      },
-      series: ser,
-      labels: ["সঠিক", "ফাঁকা", "ভুল"],
-      grid: {
-        strokeDashArray: 4,
-      },
-      colors: ["#1a7a37", "#ffa500", "rgb(221, 64, 64)"],
-      legend: {
-        show: false,
-      },
-      tooltip: {
-        fillSeriesColor: false
-      },
-      legend: {
-        show: true,
-        position: 'bottom',
-        height: 32,
-        offsetY: 8,
-        markers: {
-          width: 8,
-          height: 8,
-          radius: 100,
-        },
-        itemMargin: {
-          horizontal: 8,
-        },
-      },
-    })).render();
   });
+}
 
-  }
 }).resolve();
 
 
@@ -1149,7 +1119,7 @@ db.ref("app/users/"+user.uid).on('value', snap=>{
     var key = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var keyLen = key.length;
     for(let i=0; i<len; i++){
-      r += key.charAt(Math.floor(Math.random()*keyLen));
+      id += key.charAt(Math.floor(Math.random()*keyLen));
     }
     return id;
   }

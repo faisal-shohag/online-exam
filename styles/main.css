@@ -47,8 +47,11 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background: rgb(73, 72, 72);
+  background: linear-gradient(45deg, #39165a, #12128b);
   z-index: 9999999;
+  color: #fff;
+  font-size: 20px;
+  font-family: Hind Siliguri;
 }
 
 .top {
@@ -64,6 +67,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-family: Hind Siliguri;
   
 }
 
@@ -97,7 +101,7 @@ main {
   margin-top: 50px;
   padding: 10px;
   margin-bottom: 55px;
-  font-family: 'SolaimanLipi';
+  /* font-family: 'SolaimanLipi'; */
 }
 
 ul,
@@ -125,6 +129,7 @@ label,
   box-shadow: 0 -2px 5px 0px rgba(0, 0, 0, 0.2);
   padding: 0px 15px;
   height: 55px;
+  font-family: Hind Siliguri;
 }
 
 .footer a {
@@ -163,7 +168,7 @@ label,
   width: 100%;
   text-align: center;
   bottom: -60%;
-  font-family: SolaimanLipi;
+  /* font-family: SolaimanLipi; */
   color: #333;
 }
 
@@ -417,6 +422,7 @@ label,
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+  font-family: Hind Siliguri;
 }
 
 .menu_items{
@@ -473,6 +479,7 @@ label,
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+  font-family: Hind Siliguri;
 }
 
 .exam_desc{
