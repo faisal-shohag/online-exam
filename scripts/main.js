@@ -490,7 +490,7 @@ router.on({
                       } 
                       db.ref('app/users/'+user.uid+'/exams').update(type);
                       db.ref('app/users/'+user.uid+'/scores').update(myScores);
-                      db.ref('app/users'+user.uid+'/allExams/'+myexam.details.sl_exam_type).push({
+                      db.ref('app/users/'+user.uid+'/allExams/'+myexam.details.sl_exam_type).push({
                           userAns: userAns.join('-'),
                           examID: params.id                         
                       });
@@ -872,7 +872,17 @@ question_form.addEventListener('submit', e=> {
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
+          cancelButtonCodiv class="card-panel grey darken-3">
+          </div>
+          </center>
+          `;
+       
+       db.ref("app/users/"+user.uid).on('value', snap=>{
+         $(".exam .number").text(snap.val().exams.total);
+         $(".myscore .number").text(snap.val().scores.totalScore);
+         var ser = [snap.val().scores.totalCorrect, snap.val().scores.totalEmpt, snap.val().scores.totalWrong];
+         });
+       }lor: '#d33',
           confirmButtonText: 'Yes'
         }).then((result) => {
           if (result.isConfirmed) {
