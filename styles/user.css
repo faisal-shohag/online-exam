@@ -324,6 +324,35 @@ textarea{
     margin-bottom: 30px;
 }
 
+.exam_top{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 10px 0px;
+    border-radius: 5px;
+    /* background:#ffff; */
+}
+
+.exam-title{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.exam-nb{
+    background: #fff;
+    border-radius: 5px;
+    margin:5px;
+}
+.courseName{
+    font-size: 20px;
+    font-weight: bold;
+    background: -webkit-linear-gradient(45deg, rgb(21, 46, 116), rgb(88, 159, 201));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  font-family: Hind Siliguri;
+}
+
 
 .q-wrap{
     margin-bottom: 20px;
@@ -500,3 +529,12 @@ textarea{
     align-items: center;
     justify-content: center;
 }
+
+.countdown{
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
+    color: #222;
+    font-weight: bold;
+}
+

@@ -27,6 +27,7 @@ $('.deleteAc').click(function(){
 
 
 router.on(function() {
+  $('.footer').show();
   $('.app_loader').show();
   $('.footer').show();
   $('.footertext').hide();
@@ -67,9 +68,11 @@ let rncount = 0, upcount=0;
 
 router.on({
   "/all_exam/:id": function(params){
+  $('.footer').show();
     console.log(params.id);
     $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Public Exams</div>`);
     $('.app_loader').show();
+  
     app.innerHTML = `
     <div class="menu_title" id="all_t"></div>
   <div class="examlist">
@@ -91,7 +94,7 @@ router.on({
       empty = false;
       if(data.details.password == ""){
         examlist.innerHTML += `
-        <div class="list_exam no_password">
+        <div id="${doc.id}+p" class="list_exam no_password">
         <div class="list_name">${data.details.exam_name}</div>
         <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
         <div class="timer"><i class="icofont-ui-clock"></i> Remaining: <span id="${doc.id}"> ${countDownTimer(data.details.end_date, doc.id)}</span></div>
@@ -148,7 +151,26 @@ router.on({
   });
 
   $('.no_password').click(function(){
-    
+    let key = ($(this)[0].id).split('+');
+    key = key[0];
+    Swal.fire({
+      title: '<i class="icofont-hand"></i> Know Before Exam',
+      html: `<div class="exam_desc">
+      <ol>
+      <li>You can access this exam only once.</li>
+      <li>Your score will sum with previous score.</li>
+      <li>This exam will be responsible for your rank value.</li>
+      <li>Do not try to be dishonest.</li>
+      <li>Auto sumission will happen without any notice when time up.</li>
+      </ol>
+      </div>`,
+      confirmButtonText: 'Start',
+      showCancelButton: true,
+    }).then(result=>{
+      if(result.isConfirmed){
+        router.navigate('exam/'+key);
+       }
+    });
   })
 
   $('.with_pass').click(function(){
@@ -188,10 +210,15 @@ router.on({
             <li>Auto sumission will happen without any notice when time up.</li>
             </ol>
             </div>`,
-            confirmButtonText: 'Start'
-          });
+            confirmButtonText: 'Start',
+            showCancelButton: true,
+          }).then(result=>{
+            if(result.isConfirmed){
+             router.navigate('exam/'+key);
+            }
+          })
       }
-    }).then(result={})
+    })
   })
   
   if(empty){
@@ -199,15 +226,280 @@ router.on({
     <center><h3>No Exam</h3></center>
     `
   }
-
-
-
-
-
  });
   },
- "exam_notice/:id": function(params){
-           
+ "exam/:id": function(params){
+  $('.footer').hide();
+  $('.app_loader').show();
+  $('.top_logo').html(`<div class="animate__animated animate__fadeInRight top_app_title"> </div>`);
+        store.collection('public_exams').doc(params.id).get().then(doc=>{
+          $('.app_loader').hide();
+          let myexam = doc.data();
+          app.innerHTML = `
+              <div class="exam-container">
+             <div class="exam_top">
+              <div class="exam-title">
+              <div class="courseName">Britto Exam</div>
+              ${myexam.details.exam_name}<br><small>সময়ঃ ${myexam.details.sl_duration}মিনিট | প্রশ্নঃ ${myexam.questions.length}টি</small></div>
+              <small>by ${myexam.details.maker}</small>
+              <div style="display: none;" class="score">
+              <div class="mark"></div>
+              <div class="score-wa"></div>
+              <div class="score-na"></div>
+              <div class="score-time"></div>
+              </div>
+              <div class="exam-nb"></div>
+             </div>
+             <div class="parc">
+             <div>
+             Obtained
+             <div class="parcentage" id="correctP"></div>
+             </div>
+             <div>
+             Wrong
+             <div class="parcentage" id="wrongP"></div>
+             </div>
+             <div>
+             Negative
+             <div class="parcentage" id="negativeP"></div>
+             </div>
+             <div>
+             Answered
+             <div class="parcentage" id="answeredP"></div>
+             </div>
+             </div>
+          
+              <div class="questions"></div>
+             
+             <center> <div class="submit btn red" id="submit">সাবমিট করো! </div></center>
+             
+              </div>
+          `;
+          $('.parc').hide();
+          var ans = [],
+            exp = [],
+            userAns = [],
+            score = 0,
+            wrong = 0,
+            na = 0,
+            neg = parseFloat(myexam.details.negative_mark);
+          questions = shuffleArray(myexam.questions);
+
+          $(".exam-nb").html(`${myexam.details.notice}`);
+
+           for (let q = 0; q <questions.length; q++) {
+            $(".score").hide();
+            ans.push(parseInt(questions[q].ans)+q*4);
+            exp.push(questions[q].ex);
+            var elem = document.querySelector(".exam-container .questions");
+            document.querySelector(".exam-container .questions").innerHTML += `
+               <div class="q-wrap">
+                      <div class="q-logo"></div>
+                  <div class="question">
+                     ${q + 1}. ${questions[q].q}
+                  </div>
+                  <div class="option">
+                      <div class="opt" id="${
+                        q + 1 + q * 3
+                      }"><div class="st"></div>${questions[q].opt[0]}</div>
+                      <div class="opt" id="${
+                        q + 2 + q * 3
+                      }"><div class="st"></div>${questions[q].opt[1]}</div>
+                      <div class="opt" id="${
+                        q + 3 + q * 3
+                      }"><div class="st"></div>${questions[q].opt[2]}</div>
+                      <div class="opt" id="${
+                        q + 4 + q * 3
+                      }"><div class="st"></div>${questions[q].opt[3]}</div>
+                  </div>
+                  <div class="explanation" id="exp-${q}"></div>
+              </div>
+               `;
+          }
+
+      console.log(ans);
+          $(".opt").on("click", function () {
+            userAns.push(parseInt($(this)[0].id));
+            $($(this)[0].parentNode.children[0]).off("click");
+            $($(this)[0].parentNode.children[1]).off("click");
+            $($(this)[0].parentNode.children[2]).off("click");
+            $($(this)[0].parentNode.children[3]).off("click");
+            $($(this)[0]).css({
+              background: "#000",
+              color: "var(--light)",
+              "font-weight": "bold",
+            });
+          });
+
+          //timer
+          var sec = 0;
+          var minute = myexam.details.sl_duration;
+          var initialMin = myexam.details.sl_duration;
+          var timer = setInterval(function () {
+            if (sec === 0) {
+              minute--;
+              sec = 60;
+            }
+            sec--;
+            let min=minute, secs=sec;
+            if(minute<10) min = "0"+min;
+            if(sec<10) secs = "0"+secs;
+
+            if (minute <= 0 && sec <= 0) {
+              $("#submit").click();
+              //$(".header .title").html(`<small>সময় শেষ!</small>`);
+              clearInterval(timer);
+            } else {
+              $(".countdown").html(
+                `<i class="icofont-stopwatch"></i> ${min} : ${secs}`
+              );
+            }
+          }, 1000);
+
+          jQuery(document).ready(function ($) {
+            if (window.history && window.history.pushState) {
+              $(window).on("popstate", function () {
+                clearInterval(timer);
+                $(".countdown").hide(20);
+              });
+            }
+          });
+
+          //MathJax.typeset();
+
+      
+          $("#submit")
+            .off()
+            .click(function () {
+              $('.parc').show();
+                  Swal.fire({
+                    title: `Are you sure?`,
+                    text: `You won't undone this!`,
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      clearInterval(timer);
+                      $("html, body").animate({ scrollTop: 0 }, "slow");
+                      $("#submit").hide();
+                      let e;
+                      $(".explanation").show();
+                   
+                      let found;
+                      for (let k = 0; k < ans.length; ++k) {
+                        e = k;
+                        e = "#exp-" + e;
+                        $(e).html(
+                          `<b style="color: green;">Solution:</b><br>${exp[k]}`
+                        );
+                        // $('#'+ans[k]).css({'background': 'var(--success)', 'color': 'var(--light)'});
+                        console.log()
+                        $("#" + ans[k] + " .st").addClass("cr");
+                        $(
+                          $($($("#" + ans[k])[0].parentNode)[0].parentNode)[0]
+                            .children[0]
+                        ).html(
+                          '<div class="not-ans"> <span class="material-icons">error</span></div>'
+                        );
+                      }
+
+                      for (let i = 0; i < userAns.length; ++i) {
+                        found = true;
+                        for (let j = 0; j < ans.length; ++j) {
+                          if (parseInt(userAns[i]) === ans[j]) { 
+                            score++;
+                            $("#" + userAns[i] + " .st").addClass("cr");
+                            $(
+                              $(
+                                $($("#" + userAns[i])[0].parentNode)[0]
+                                  .parentNode
+                              )[0].children[0]
+                            ).html(
+                              '<div class="correct"> <span class="material-icons">verified</span> </div>'
+                            );
+                            found = true;
+                            break;
+                          } else found = false;
+                        }
+
+                        if (!found) {
+                          wrong++;
+                          $("#" + userAns[i] + " .st").addClass("wa");
+                          $(
+                            $(
+                              $($("#" + userAns[i])[0].parentNode)[0].parentNode
+                            )[0].children[0]
+                          ).html(
+                            '<div class="wrong"> <span class="material-icons">highlight_off</span>  </div>'
+                          );
+                        }
+                      }
+
+                      $(".score").show();
+                      $(".mark").html(
+                        `<i class="icofont-check-circled"></i><br>স্কোর</br> <small>সঠিক: ${score} </small> <br/> <span class="score-num">${score-(wrong*neg)}/${questions.length}</span>`
+                      );
+                      $(".score-wa").html(
+                        `<i class="icofont-close-circled"></i><br/>ভুল </br><small>নেগেটিভ: ${wrong*neg}</small><br/> <span class="score-num">${wrong}</span>`
+                      );
+                      $(".score-na").html(
+                        `<i class="icofont-warning-alt"></i><br />ফাঁকা </br> <span class="score-num">${
+                          questions.length - (score + wrong)
+                        }</span>`
+                      );
+                      $(".score-time").html(
+                        `<i class="icofont-ui-clock"></i><br />সময় <br> <span class="score-num">${
+                          initialMin - 1 - minute
+                        }:${60 - sec}</span>`
+                      );
+                      
+                      
+                      $('#correctP').html(`${((score/questions.length)*100).toPrecision(3)}%
+                      `)
+                      $('#wrongP').html(`${((wrong/questions.length)*100).toPrecision(3)}%
+                      `)
+                      $('#negativeP').html(`${(((wrong*0.25)/questions.length)*100).toPrecision(3)}%
+                      `)
+                      $('#answeredP').html(`${(100-(((questions.length - (score + wrong))/(questions.length))*100)).toPrecision(3)}%
+                      `)                  
+                     
+              
+                      let data = {
+                        score: score-(wrong*neg),
+                        cr: score,
+                        duration: myexam.details.duration,
+                        questions: questions,
+                        name: myexam.details.name,
+                        myans: userAns,
+                        type: myexam.details.type,
+                        totalQ: questions.length,
+                        wrong: wrong,
+                        na: questions.length - (score + wrong),
+                        time: {
+                          min: initialMin - 1 - minute,
+                          sec: 60 - sec,
+                        }
+                      }
+                    
+
+                     
+
+                      
+                      
+                   
+
+                   
+
+
+                      Swal.fire("সাবমিট হয়েছে!", "", "success");
+                      
+                    }
+                  
+            });
+        })
+      });
  },
   "/rank" : function(){
     $('.footer').show();
@@ -595,6 +887,7 @@ question_form.addEventListener('submit', e=> {
     <center><a href="#!/edit_q/${i}"><button class="btn green">Edit</button></a></center>
 </div>`
   }
+  console.log(ans)
       for(let a=0; a<ans.length; a++){
            $("#" + ans[a] + " .st").addClass("cr");
          }

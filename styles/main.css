@@ -61,6 +61,9 @@ body {
   padding: 5px;
   z-index: 99;
   height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   
 }
 
@@ -75,7 +78,8 @@ body {
   /* z-index: -1; */
   z-index: 99;
   position: absolute;
-  right: 3%;
+  right: 2%;
+  top: 10%;
 }
 
 .top .image img {
@@ -473,4 +477,115 @@ label,
 
 .exam_desc{
   text-align: left;
+}
+
+.score{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.mark, .score-wa, .score-ng, .score-na, .score-time{
+  background: #fff;
+  min-width: 65px;
+  position: relative;
+}
+
+#mark{
+  background: rgba(54, 170, 54, 0.205);
+}
+
+#wrong{
+  background: rgba(248, 2, 2, 0.192);
+}
+
+#timePerc{
+  background: rgba(248, 4, 126, 0.178);
+}
+
+#notAnsPerc{
+  background: rgba(4, 255, 138, 0.37);
+}
+
+.score-time{
+  color: var(--pink);
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0, .2);
+  border-top: 3px solid var(--pink);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.mark{
+  color: var(--success);
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0, .2);
+  border-top: 3px solid var(--success);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.score-wa{
+  color: var(--danger);
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0, .2);
+  border-top: 3px solid var(--danger);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+
+.score-na{
+  color: var(--teal);
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0, .2);
+  border-top: 3px solid var(--teal);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.score-ng{
+  color: var(--warning);
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0, .2);
+  border-top: 3px solid var(--warning);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.score-num{
+  font-family: Hind Siliguri;
+  font-weight: bold;
+  font-size: 18px;
+  color: #666464;
+}
+
+.parc{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+}
+
+.parcentage{
+  font-size: 27px;
+  color: var(--red);
+}
+
+#correctP{
+  color: var(--green);
+}
+
+#answeredP{
+  color: var(--green);
+}
+
+
+.q-logo .wrong{
+  color: var(--red);
+}
+
+.q-logo .not-ans{
+  color: var(--warning);
 }
