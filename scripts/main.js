@@ -40,17 +40,21 @@ router.on(function() {
   app.innerHTML= `
   <div class="div-1"></div>
   `
-let rncount = 0, upcount=0;
-  store.collection('public_exams').orderBy("publish_date", 'desc').limit(100).get().then(snap=> {
+
+  store.collection('public_exams').orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
+    let rncount = 0, upcount=0, endcount=0;
     $('.app_loader').hide();
     $('.div-1').html(`<div class="h-menu">
     <div class="menu_title"><i class="icofont-people"></i> Public Exams</div>
   <div class="menu_items">
-  <a href="#!/all_exam/running"><div class="item">
+  <a href="#!/exams/public/running"><div class="item">
   <div class="item_name">Running</div> <div id="rn_count" class="c_num">0</div>
   </div></a>
-  <a href="#!/all_exam/upcoming"><div class="item">
+  <a href="#!/exams/public/upcoming"><div class="item">
   <div class="item_name">Upcoming</div> <div id="up_count" class="c_num">0</div>
+  </div></a>
+  <a href="#!/exams/public/ended"><div class="item">
+  <div class="item_name">Ended</div> <div id="end_count" class="c_num">0</div>
   </div></a>
     </div>
     </div>`)
@@ -58,16 +62,18 @@ let rncount = 0, upcount=0;
       let data = doc.data();
       if(new Date(data.details.end_date) > new Date() && new Date(data.details.start_date) < new Date()){rncount++}
       if(new Date(data.details.start_date) > new Date()){upcount++;}
+      if(new Date(data.details.end_date) < new Date()){endcount++;}
      })
     $('#rn_count').text(rncount);
     $('#up_count').text(upcount);
+    $('#end_count').text(endcount);
   });
 }).resolve();
 
 
 
 router.on({
-"/all_exam/:id": function(params){
+"/exams/:id/:id2": function(params){
   $('.footer').show();
     $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Public Exams</div>`);
     $('.app_loader').show();
@@ -78,25 +84,24 @@ router.on({
   </div>
   `;
  const examlist = document.querySelector('.examlist');
-
- store.collection('public_exams').orderBy("publish_date", 'desc').limit(20).get().then(snap=> {
-
-   //clearInterval(timer);
+ store.collection(params.id+'_exams').orderBy("publish_date", 'desc').limit(20).onSnapshot(snap=> {
+  examlist.innerHTML = "";
+   clearInterval(timer);
    $('.app_loader').hide();
    let empty = true;
   snap.forEach(doc=> {
     let data = doc.data();
 
-    if(params.id==="running"){
+    if(params.id2==="running"){
     $('#all_t').html(`<i class="icofont-hand-drag1"></i> Running`)
     if(new Date(data.details.end_date) > new Date() && new Date(data.details.start_date) < new Date()){
       empty = false;
       if(data.details.password == ""){
         examlist.innerHTML += `
-        <div id="${doc.id}+p" class="list_exam no_password">
+        <div id="${doc.id}+p" class="list_exam no_password ${doc.id}">
         <div class="list_name">${data.details.exam_name}</div>
         <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
-        <div class="timer"><i class="icofont-ui-clock"></i> Remaining: <span id="${doc.id}"> ${countDownTimer(data.details.end_date, doc.id)}</span></div>
+        <div class="timer"><i class="icofont-ui-clock"></i> Remaining: <span id="${doc.id}"> ${countDownTimer(data.details.end_date, doc.id, doc.id+"+p")}</span></div>
         <div class="maker"><b>Prepared by:</b>  <span>${data.details.maker}</span></div>
         <div class="chip red">${tag[data.details.sl_class]}</div>
         <div class="chip green">${tag[data.details.sl_subject]}</div>
@@ -106,10 +111,10 @@ router.on({
       }else{
         empty = false;
         examlist.innerHTML += `
-        <div id="${doc.id}+p" class="list_exam with_pass">
+        <div id="${doc.id}+p" class="list_exam with_pass ${doc.id}">
         <div class="list_name">${data.details.exam_name} <span class="lock"><i class="icofont-lock"></i></span></div> 
         <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
-        <div  class="timer"><i class="icofont-ui-clock"></i> Remaining: <span id="${doc.id}">${countDownTimer(data.details.end_date, doc.id)}</span></div>
+        <div  class="timer"><i class="icofont-ui-clock"></i> Remaining: <span id="${doc.id}">${countDownTimer(data.details.end_date, doc.id, doc.id+"+p")}</span></div>
         <div class="maker"><b>Prepared by:</b>  <span>${data.details.maker}</span></div>
         <div class="chip red">${tag[data.details.sl_class]}</div>
         <div class="chip green">${tag[data.details.sl_subject]}</div>
@@ -118,7 +123,7 @@ router.on({
         `
       }
     }
-  }else if(params.id==="upcoming"){
+  }else if(params.id2==="upcoming"){
     $('#all_t').html(`<i class="icofont-history"></i> Upcoming`)
       if(new Date(data.details.start_date) > new Date()){
         empty = false;
@@ -149,8 +154,21 @@ router.on({
           `
         }
       }
+    }else{
+        $('#all_t').html(`<i class="icofont-ui-check"></i> Ended`)
+          if(new Date(data.details.end_date) < new Date()){
+            empty = false;
+              examlist.innerHTML += `
+              <div class="list_exam">
+              <div class="list_name">${data.details.exam_name}</div>
+              <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
+              <div class="maker"><b>Prepared by:</b>  <span>${data.details.maker}</span></div>
+              <div class="chip red">${tag[data.details.sl_class]}</div>
+              <div class="chip green">${tag[data.details.sl_subject]}</div>
+              <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
+              </div>  `
+          }
     }
-
   });
 
   $('.no_password').click(function(){
@@ -480,6 +498,7 @@ router.on({
                       //   }
                       // }
                        
+                      store.collection('globalScore').doc(user.uid).update({id: user.uid, username: user.displayName, inst: "", score: myData.totalScore +  (score-(wrong*neg))});
                       let type = new Object();
                       type[myexam.details.sl_exam_type] = myData[myexam.details.sl_exam_type]+1;
                       let myScores = {
@@ -495,7 +514,6 @@ router.on({
                           examID: params.id                         
                       });
                       //store.collection('public_exams').doc(params.id).collection('leaderboard').add();
-                      store.collection('globalScore').doc(user.uid).update({id: user.uid, username: user.displayName, inst: "", score: myData.totalScore +  (score-(wrong*neg))});
 
                       Swal.fire("সাবমিট হয়েছে!", "", "success");
                       
@@ -759,9 +777,7 @@ app.innerHTML = `
 `
 
 $('.publish').click(function(){
-  //console.log('clicked')
    let exam = snap.val().history;
-
    Swal.fire({
     title: 'Are you sure?',
     icon: 'warning',
@@ -771,7 +787,7 @@ $('.publish').click(function(){
     confirmButtonText: 'Yes'
   }).then((result) => {
     if (result.isConfirmed) {
-      store.collection("exams/").doc(snap.val().history.details.sl_exam_type).collection('exams').add({details: snap.val().history.details, questions: snap.val().history.questions, publish_date: (new Date()).toString()});
+      store.collection(snap.val().history.details.sl_exam_type+'_exams').add({details: snap.val().history.details, questions: snap.val().history.questions, publish_date: (new Date()).toString()});
       Swal.fire(
         'Published',
         'Exam has been published!',
@@ -779,10 +795,9 @@ $('.publish').click(function(){
       ).then(rs=> {
         if(rs.isConfirmed){
         }
-      })
+      });
     }
   });
-
 });
 
 

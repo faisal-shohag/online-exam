@@ -549,7 +549,7 @@ var negativeTag  ={
 
 var timer;
 
-function countDownTimer(time,element){
+function countDownTimer(time,element, parentNode){
 var countDownDate = new Date(time).getTime();
 timer = setInterval(function() {
   var now = new Date().getTime();
@@ -570,8 +570,9 @@ timer = setInterval(function() {
   }
  
   if (distance < 0) {
-    clearInterval(x);
-    $('#'+element).html("---");
+    clearInterval(timer);
+//    $($('#'+element)[0].parentNode).hide(200);
+   $('.'+element).hide(50);
   }
 }, 1000);
 }

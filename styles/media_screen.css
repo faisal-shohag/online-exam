@@ -19,4 +19,19 @@
      margin-left: 25%;
      margin-right: 20%;
     }
+
+    .menu_title{
+        font-size: 26px;
+    }
+
+    .item{
+        padding: 10px 20px;
+        height: 50px;
+        font-size: 17px;
+        
+      }
+      .c_num{
+        height: 30px;
+        width: 30px;
+      }
 }
