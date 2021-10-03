@@ -460,8 +460,8 @@ label,
   font-weight: bold;
   font-family: Google Sans;
   background: #fff;
-  min-height: 20px;
-  min-width: 20px;
+  height: 20px;
+  width: 20px;
   border-radius: 50%;
   color: #000;
   display: flex;
