@@ -158,14 +158,14 @@ router.on({
           if(new Date(data.details.end_date) < new Date()){
             empty = false;
               examlist.innerHTML += `
-              <div class="list_exam" no_password>
+             <a href="#!/exam/public/${doc.id}"> <div class="list_exam">
               <div class="list_name">${data.details.exam_name}</div>
               <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
               <div class="maker"><b>Prepared by:</b>  <span>${data.details.maker}</span></div>
               <div class="chip red">${tag[data.details.sl_class]}</div>
               <div class="chip green">${tag[data.details.sl_subject]}</div>
               <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
-              </div>  `
+              </div>  </a>`
           }
     }
   });
