@@ -40,7 +40,6 @@ router.on(function() {
   app.innerHTML= `
   <div class="div-1"></div>
   `
-
   store.collection('public_exams').orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
     let rncount = 0, upcount=0, endcount=0;
     $('.app_loader').hide();
@@ -189,7 +188,7 @@ router.on({
       showCancelButton: true,
     }).then(result=>{
       if(result.isConfirmed){
-        router.navigate('exam/'+key);
+        router.navigate('/exam/public/'+key);
        }
     });
   })
@@ -234,7 +233,7 @@ router.on({
             showCancelButton: true,
           }).then(result=>{
             if(result.isConfirmed){
-             router.navigate('exam/'+key);
+             router.navigate('/exam/public/'+key);
             }
           })
       }
@@ -249,41 +248,36 @@ router.on({
  });
 },
 
-"exam/:id": function(params){
+"/exam/:ida/:id": function(params){
   $('.footer').hide();
   $('.app_loader').show();
   $('.top_logo').html(`<div class="animate__animated animate__fadeInRight top_app_title"> </div>`);
-  store.collection('public_exams').doc(params.id).collection('leaderboard').orderBy("score", 'desc').onSnapshot(snap=> {
+  store.collection(params.ida+'_exams').doc(params.id).collection('leaderboard').orderBy("score", 'desc').onSnapshot(snap=> {
     $('.app_loader').hide();
     let taken = false;
     let pos = 0;
+    let mtime = 0;
     let ladder = [];
     snap.forEach(l=>{
       ladder.push(l.data());
       if(l.data().id === user.uid){
+       mtime =  l.data().time;
         taken = true;
       }
     });
 
     if(taken){
+      $('.footer').show();
       app.innerHTML = `
       <div class="ladder">
       <div class="menu_title"> <i class="icofont-people"></i> Leaderboard</div>
+      <a href="#!/answersheet/${params.ida}/${params.id}|${mtime}"><div class="btn green">See Your Answer sheet</div>
       <div class="my_pos"><i class="icofont-focus"></i> Your Position: <span id="pos"></span></div>
-      <div class="btn green">See Answer sheet</div>
       <div id="board" class="board"></div>
       <div id="page"></div>
       </div>
-      
       `
-      for(let i=0; i<ladder.length; i++){
-         if(ladder[i].id === user.id){
-           pos = i;
-           break;
-         }
-      }
-      $('#pos').text(pos+1);
-      //console.log(ladder);
+      
       let k = 0;
       $('#page').pagination({
         dataSource: ladder,
@@ -296,21 +290,26 @@ router.on({
             let min = parseInt(time/60);
             let sec = ('0' + time%60).slice(-2); 
             if(item.id === user.uid){
+              $('#pos').text(k);
               html += `
               <div class="l" style="background-color: crimson; color:#fff; font-weight: bold;">
+              <div class="pandn">
               <div class="u-pos">${k}</div>
               <div class="l-name">${item.username}</div>
+              </div>
               <div class="sandt">
-              <div class="l-score">${item.score}</div>
-              <divname class="l-time">${min}:${sec}</div>
+              <div class="l-score" style="color: #fff">${item.score}</div>
+              <divname style="color: #fff" class="l-time">${min}:${sec}</div>
               </div>
               </div>
               `
             }else{
               html += `
               <div class="l">
+              <div class="pandn">
               <div class="u-pos">${k}</div>
               <div class="l-name">${item.username}</div>
+              </div>
               <div class="sandt">
               <div class="l-score">${item.score}</div>
               <divname class="l-time">${min}:${sec}</div>
@@ -324,9 +323,11 @@ router.on({
       });
       
     }else{
-        store.collection('public_exams').doc(params.id).get().then(doc=>{
+        store.collection(params.ida+'_exams').doc(params.id).get().then(doc=>{
           $('.countdown').show();
           let myexam = doc.data();
+         if(new Date(myexam.details.end_date) > new Date() && new Date(myexam.details.start_date) < new Date()){
+         
           app.innerHTML = `
               <div class="exam-container">
              <div class="exam_top">
@@ -592,18 +593,279 @@ router.on({
                         time: ((initialMin-1-minute)*60) + (60-sec)
                       });
                       Swal.fire("সাবমিট হয়েছে!", "", "success");
+                    
                     }
             });
+        
         })
+      }else{
+        $('.footer').show();
+        app.innerHTML = `
+        <div class="ladder">
+        <div class="menu_title"> <i class="icofont-people"></i> Leaderboard</div>
+        <a class="btn green" href="#!/solutions/${params.ida}/${params.id}">See Questions & Solutions</a>
+        <div class="my_pos" style="background: crimson; color: #fff; font-weigth: bold;"> <i class="icofont-ban"></i> Your didn't participated in this exam!</div>
+        <div id="board" class="board"></div>
+        <div id="page"></div>
+        </div>
+        `
+        let k = 0;
+        $('#page').pagination({
+          dataSource: ladder,
+          pageSize: 20,
+          callback: function(data, pagination) {
+              var html = "";
+              data.forEach(item=>{
+                k++;
+              let time = item.time;
+              let min = parseInt(time/60);
+              let sec = ('0' + time%60).slice(-2); 
+                html += `
+                <div class="l">
+                <div class="pandn">
+                <div class="u-pos">${k}</div>
+                <div class="l-name">${item.username}</div>
+                </div>
+                <div class="sandt">
+                <div class="l-score">${item.score}</div>
+                <divname class="l-time">${min}:${sec}</div>
+                </div>
+                </div>
+                `
+              });
+              $('#board').html(html);
+      }
+    })
+  }
+  
       }).catch(err=> {
         console.log(err)
         Swal.fire("Error", "error");
       });
+    
 
     }
   });
 },
+"/answersheet/:ida/:id": function(params) {
+  $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Answersheet</div>`);
+  $('.app_loader').show();
+  let ref = (params.id).split('|');
+  let time = parseInt(ref[1]);
+  let min = parseInt(time/60);
+  let sec = ('0' + time%60).slice(-2); 
+  store.collection(params.ida+'_exams').doc(ref[0]).onSnapshot(doc=>{
+    db.ref('app/users/'+user.uid+'/allExams/'+params.ida+'/'+ref[0]).once('value', snap=>{  
+      $('.app_loader').hide();
+    let myexam = doc.data();
+    console.log(myexam);
+    app.innerHTML = `
+        <div class="exam-container">
+       <div class="exam_top">
+        <div class="exam-title">
+        <div class="courseName">Britto Exam</div>
+        ${myexam.details.exam_name}<br><small>সময়ঃ ${myexam.details.sl_duration}মিনিট | প্রশ্নঃ ${myexam.questions.length}টি</small></div>
+        <small>by ${myexam.details.maker}</small>
+        <div style="display: none;" class="score">
+        <div class="mark"></div>
+        <div class="score-wa"></div>
+        <div class="score-na"></div>
+        <div class="score-time"></div>
+        </div>
+        <div class="exam-nb"></div>
+       </div>
+       <div class="parc">
+       <div>
+       Obtained
+       <div class="parcentage" id="correctP"></div>
+       </div>
+       <div>
+       Wrong
+       <div class="parcentage" id="wrongP"></div>
+       </div>
+       <div>
+       Negative
+       <div class="parcentage" id="negativeP"></div>
+       </div>
+       <div>
+       Answered
+       <div class="parcentage" id="answeredP"></div>
+       </div>
+       </div
+      </div>
+      <div id="questions"></div>
+    `;
+    var ans = [],
+      exp = [],
+      userAns = (snap.val().userAns).split('-').map(Number),
+      score = 0,
+      wrong = 0,
+      na = 0,
+      neg = parseFloat(myexam.details.negative_mark);
 
+    questions = shuffleArray(myexam.questions);
+    $(".exam-nb").html(`${myexam.details.notice}`);
+    var elem = "";
+     for (let q = 0; q <questions.length; q++) {
+      $(".score").hide();
+      ans.push(parseInt(questions[q].ans)+q*4);
+      exp.push(questions[q].ex);
+     
+      elem+= `
+         <div class="q-wrap">
+                <div class="q-logo"></div>
+            <div class="question">
+               ${q + 1}. ${questions[q].q}
+            </div>
+            <div class="option">
+                <div class="opt" id="${
+                  q + 1 + q * 3
+                }"><div class="st"></div>${questions[q].opt[0]}</div>
+                <div class="opt" id="${
+                  q + 2 + q * 3
+                }"><div class="st"></div>${questions[q].opt[1]}</div>
+                <div class="opt" id="${
+                  q + 3 + q * 3
+                }"><div class="st"></div>${questions[q].opt[2]}</div>
+                <div class="opt" id="${
+                  q + 4 + q * 3
+                }"><div class="st"></div>${questions[q].opt[3]}</div>
+            </div>
+            <div class="explanation" id="exp-${q}"></div>
+        </div>
+         `;
+    }
+    $('#questions').html(elem);
+
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+                let e;
+                $(".explanation").show();
+             
+                let found;
+                for (let k = 0; k < ans.length; ++k) {
+                  e = k;
+                  e = "#exp-" + e;
+                  $(e).html(
+                    `<b style="color: green;">Solution:</b><br>${exp[k]}`
+                  );
+                  // $('#'+ans[k]).css({'background': 'var(--success)', 'color': 'var(--light)'});
+                  $("#" + ans[k] + " .st").addClass("cr");
+                  $(
+                    $($($("#" + ans[k])[0].parentNode)[0].parentNode)[0]
+                      .children[0]
+                  ).html(
+                    '<div class="not-ans"> <span class="material-icons">error</span></div>'
+                  );
+                }
+
+                for (let i = 0; i < userAns.length; ++i) {
+                  found = true;
+                  for (let j = 0; j < ans.length; ++j) {
+                    if (parseInt(userAns[i]) === ans[j]) { 
+                      score++;
+                      $("#" + userAns[i] + " .st").addClass("cr");
+                      $(
+                        $(
+                          $($("#" + userAns[i])[0].parentNode)[0]
+                            .parentNode
+                        )[0].children[0]
+                      ).html(
+                        '<div class="correct"> <span class="material-icons">verified</span> </div>'
+                      );
+                      found = true;
+                      break;
+                    } else found = false;
+                  }
+
+                  if (!found) {
+                    wrong++;
+                    $("#" + userAns[i] + " .st").addClass("wa");
+                    $(
+                      $(
+                        $($("#" + userAns[i])[0].parentNode)[0].parentNode
+                      )[0].children[0]
+                    ).html(
+                      '<div class="wrong"> <span class="material-icons">highlight_off</span>  </div>'
+                    );
+                  }
+                }
+
+                $(".score").show();
+                $(".mark").html(
+                  `<i class="icofont-check-circled"></i><br>স্কোর</br> <small>সঠিক: ${score} </small> <br/> <span class="score-num">${score-(wrong*neg)}/${questions.length}</span>`
+                );
+                $(".score-wa").html(
+                  `<i class="icofont-close-circled"></i><br/>ভুল </br><small>নেগেটিভ: ${wrong*neg}</small><br/> <span class="score-num">${wrong}</span>`
+                );
+                $(".score-na").html(
+                  `<i class="icofont-warning-alt"></i><br />ফাঁকা </br> <span class="score-num">${
+                    questions.length - (score + wrong)
+                  }</span>`
+                );
+                $(".score-time").html(
+                  `<i class="icofont-ui-clock"></i><br />সময় <br> <span class="score-num">${
+                    min
+                  }:${sec}</span>`
+                );
+                
+                
+                $('#correctP').html(`${((score/questions.length)*100).toPrecision(3)}%
+                `)
+                $('#wrongP').html(`${((wrong/questions.length)*100).toPrecision(3)}%
+                `)
+                $('#negativeP').html(`${(((wrong*neg)/questions.length)*100).toPrecision(3)}%
+                `)
+                $('#answeredP').html(`${(100-(((questions.length - (score + wrong))/(questions.length))*100)).toPrecision(3)}%
+                `)                                        
+              });
+}, (err) => {
+  console.log(err)
+  Swal.fire("Error", "error");
+})
+ 
+},
+
+"/solutions/:ida/:id": function (params) {
+  $('.footer').show();
+  $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Solutions</div>`);
+  $('.app_loader').show();
+  store.collection(params.ida + '_exams').doc(params.id).onSnapshot(doc=>{
+  $('.app_loader').hide();
+  var myexam = doc.data();
+  app.innerHTML=`
+  <div class="exam_top">
+  <div class="exam-title">
+  <div class="courseName">Britto Exam</div>
+  ${myexam.details.exam_name}<br><small>সময়ঃ ${myexam.details.sl_duration}মিনিট | প্রশ্নঃ ${myexam.questions.length}টি</small></div>
+  <small>by ${myexam.details.maker}</small>
+  </div>
+  <div class="questions"></div>
+  `
+  
+  var ans = [];
+  for(let i=0; i<myexam.questions.length; i++){
+    ans.push(parseInt(myexam.questions[i].ans)+i*4);
+    document.querySelector('.questions').innerHTML += `
+    <div class="q-wrap">
+<div class="question">
+   ${i+1}. ${myexam.questions[i].q}
+</div>
+<div class="option">
+    <div class="opt" id="${i+1+i*3}"><div class="st"></div>${myexam.questions[i].opt[0]}</div>
+    <div class="opt" id="${i+2+i*3}"><div class="st"></div>${myexam.questions[i].opt[1]}</div>
+    <div class="opt" id="${i+3+i*3}"><div class="st"></div>${myexam.questions[i].opt[2]}</div>
+    <div class="opt" id="${i+4+i*3}"><div class="st"></div>${myexam.questions[i].opt[3]}</div>
+</div>
+<div class="solution"><b>Solution:</b></br> ${myexam.questions[i].ex}</div>
+<center><a href="#!/edit_q/${i}"><button class="btn green">Edit</button></a></center>
+</div>`
+}
+  for(let a=0; a<ans.length; a++){
+       $("#" + ans[a] + " .st").addClass("cr");
+     }
+  
+})
+},
  "/rank" : function(){
     $('.footer').show();
   $('.footertext').hide();

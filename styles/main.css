@@ -671,8 +671,27 @@ align-items: center;
 color: #fff;
 }
 
+.l-score{
+  /* font-size: 10px; */
+  color: crimson;
+  font-weight: bold;
+}
+
+.l-time{
+  color: #129e19;
+  font-weight: bold;
+}
+
 .sandt{
  display: flex;
  justify-content: space-between;
  width: 30%;
+ align-items: center;
+ margin-right: 5px;
+}
+
+.pandn{
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
