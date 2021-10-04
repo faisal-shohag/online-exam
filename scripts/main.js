@@ -158,7 +158,7 @@ router.on({
           if(new Date(data.details.end_date) < new Date()){
             empty = false;
               examlist.innerHTML += `
-              <div class="list_exam">
+              <div class="list_exam" no_password>
               <div class="list_name">${data.details.exam_name}</div>
               <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
               <div class="maker"><b>Prepared by:</b>  <span>${data.details.maker}</span></div>
@@ -658,7 +658,6 @@ router.on({
     db.ref('app/users/'+user.uid+'/allExams/'+params.ida+'/'+ref[0]).once('value', snap=>{  
       $('.app_loader').hide();
     let myexam = doc.data();
-    console.log(myexam);
     app.innerHTML = `
         <div class="exam-container">
        <div class="exam_top">
