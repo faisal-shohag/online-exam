@@ -287,6 +287,7 @@ router.on({
       let k = 0;
       $('#page').pagination({
         dataSource: ladder,
+        pageSize: 20,
         callback: function(data, pagination) {
             var html = "";
             data.forEach(item=>{
@@ -296,7 +297,7 @@ router.on({
             let sec = ('0' + time%60).slice(-2); 
             if(item.id === user.uid){
               html += `
-              <div class="l me">
+              <div class="l" style="background-color: crimson; color:#fff; font-weight: bold;">
               <div class="u-pos">${k}</div>
               <div class="l-name">${item.username}</div>
               <div class="sandt">

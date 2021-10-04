@@ -652,15 +652,12 @@ label,
 
 }
 
+
 .l:nth-child(2n){
   background: rgb(240, 240, 240);
 }
 
-.me{
-  background: crimson;
-  color: #fff;
-  font-weight: bold;
-}
+
 
 .u-pos{
 padding: 2px;
