@@ -253,8 +253,77 @@ router.on({
   $('.footer').hide();
   $('.app_loader').show();
   $('.top_logo').html(`<div class="animate__animated animate__fadeInRight top_app_title"> </div>`);
+  store.collection('public_exams').doc(params.id).collection('leaderboard').orderBy("score", 'desc').onSnapshot(snap=> {
+    $('.app_loader').hide();
+    let taken = false;
+    let pos = 0;
+    let ladder = [];
+    snap.forEach(l=>{
+      ladder.push(l.data());
+      if(l.data().id === user.uid){
+        taken = true;
+      }
+    });
+
+    if(taken){
+      app.innerHTML = `
+      <div class="ladder">
+      <div class="menu_title"> <i class="icofont-people"></i> Leaderboard</div>
+      <div class="my_pos"><i class="icofont-focus"></i> Your Position: <span id="pos"></span></div>
+      <div class="btn green">See Answer sheet</div>
+      <div id="board" class="board"></div>
+      <div id="page"></div>
+      </div>
+      
+      `
+      for(let i=0; i<ladder.length; i++){
+         if(ladder[i].id === user.id){
+           pos = i;
+           break;
+         }
+      }
+      $('#pos').text(pos+1);
+      //console.log(ladder);
+      let k = 0;
+      $('#page').pagination({
+        dataSource: ladder,
+        callback: function(data, pagination) {
+            var html = "";
+            data.forEach(item=>{
+              k++;
+            let time = item.time;
+            let min = parseInt(time/60);
+            let sec = ('0' + time%60).slice(-2); 
+            if(item.id === user.uid){
+              html += `
+              <div class="l me">
+              <div class="u-pos">${k}</div>
+              <div class="l-name">${item.username}</div>
+              <div class="sandt">
+              <div class="l-score">${item.score}</div>
+              <divname class="l-time">${min}:${sec}</div>
+              </div>
+              </div>
+              `
+            }else{
+              html += `
+              <div class="l">
+              <div class="u-pos">${k}</div>
+              <div class="l-name">${item.username}</div>
+              <div class="sandt">
+              <div class="l-score">${item.score}</div>
+              <divname class="l-time">${min}:${sec}</div>
+              </div>
+              </div>
+              `
+            }
+            });
+            $('#board').html(html);
+        }
+      });
+      
+    }else{
         store.collection('public_exams').doc(params.id).get().then(doc=>{
-          $('.app_loader').hide();
           $('.countdown').show();
           let myexam = doc.data();
           app.innerHTML = `
@@ -475,7 +544,7 @@ router.on({
                       `)
                       $('#wrongP').html(`${((wrong/questions.length)*100).toPrecision(3)}%
                       `)
-                      $('#negativeP').html(`${(((wrong*0.25)/questions.length)*100).toPrecision(3)}%
+                      $('#negativeP').html(`${(((wrong*neg)/questions.length)*100).toPrecision(3)}%
                       `)
                       $('#answeredP').html(`${(100-(((questions.length - (score + wrong))/(questions.length))*100)).toPrecision(3)}%
                       `)                  
@@ -501,6 +570,7 @@ router.on({
                       store.collection('globalScore').doc(user.uid).update({id: user.uid, username: user.displayName, inst: "", score: myData.totalScore +  (score-(wrong*neg))});
                       let type = new Object();
                       type[myexam.details.sl_exam_type] = myData[myexam.details.sl_exam_type]+1;
+                      type["total"] = myData["totalExams"]+1;
                       let myScores = {
                         totalCorrect: myData.totalCorrect + score,
                         totalEmpt: myData.totalEmpt + questions.length - (score + wrong),
@@ -509,22 +579,28 @@ router.on({
                       } 
                       db.ref('app/users/'+user.uid+'/exams').update(type);
                       db.ref('app/users/'+user.uid+'/scores').update(myScores);
-                      db.ref('app/users/'+user.uid+'/allExams/'+myexam.details.sl_exam_type).push({
+                      db.ref('app/users/'+user.uid+'/allExams/'+myexam.details.sl_exam_type+'/'+params.id).update({
                           userAns: userAns.join('-'),
                           examID: params.id                         
                       });
-                      //store.collection('public_exams').doc(params.id).collection('leaderboard').add();
 
+                      store.collection('public_exams').doc(params.id).collection('leaderboard').add({
+                        id: user.uid,
+                        username: user.displayName,
+                        score: score,
+                        time: ((initialMin-1-minute)*60) + (60-sec)
+                      });
                       Swal.fire("সাবমিট হয়েছে!", "", "success");
-                      
                     }
-                  
             });
         })
       }).catch(err=> {
         console.log(err)
         Swal.fire("Error", "error");
       });
+
+    }
+  });
 },
 
  "/rank" : function(){

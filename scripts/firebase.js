@@ -40,7 +40,7 @@
 
               }
               db.ref("app/users/"+authResult.user.uid).update(data);
-              store.collection('globalScore').doc(authResult.user.uid).set({id: authResult.user.uid, name: authResult.user.displayName, inst: "", score: 0});
+              store.collection('globalScore').doc(authResult.user.uid).set({id: authResult.user.uid, username: authResult.user.displayName, inst: "", score: 0});
 
           }
           if (authResult.additionalUserInfo) {
