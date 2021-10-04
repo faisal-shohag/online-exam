@@ -271,7 +271,7 @@ router.on({
       app.innerHTML = `
       <div class="ladder">
       <div class="menu_title"> <i class="icofont-people"></i> Leaderboard</div>
-      <a href="#!/answersheet/${params.ida}/${params.id}|${mtime}"><div class="btn green">See Your Answer sheet</div>
+      <a href="#!/answersheet/${params.ida}/${params.id}|${mtime}"><div class="btn green">See Your Answer sheet</div></a>
       <div class="my_pos"><i class="icofont-focus"></i> Your Position: <span id="pos"></span></div>
       <div id="board" class="board"></div>
       <div id="page"></div>
@@ -321,7 +321,6 @@ router.on({
             $('#board').html(html);
         }
       });
-      
     }else{
         store.collection(params.ida+'_exams').doc(params.id).get().then(doc=>{
           $('.countdown').show();
