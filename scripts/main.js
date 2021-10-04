@@ -873,9 +873,64 @@ router.on({
     $($($('.rnk')[0].parentNode)[0].lastElementChild).show();
     $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Rank</div>`);
   }
+  store.collection("globalScore").orderBy("score", 'desc').onSnapshot(snap=> {
   app.innerHTML = `
-  <center><h4>This section is under construction!</h4>
+  <div class="ladder">
+  <div class="my_pos"><i class="icofont-focus"></i> Your Position: <span id="pos"></span></div>
+  <div id="board" class="board"></div>
+  <div id="page"></div>
+  </div>
   `
+
+  let k = 0;
+  let ladder = [];
+  snap.forEach(l=>{
+    ladder.push(l.data());
+    if(l.data().id === user.uid){
+      taken = true;
+    }
+  });
+  $('#page').pagination({
+    dataSource: ladder,
+    pageSize: 20,
+    callback: function(data, pagination) {
+        var html = "";
+        data.forEach(item=>{
+          k++;
+        let time = item.time;
+        let min = parseInt(time/60);
+        let sec = ('0' + time%60).slice(-2); 
+        if(item.id === user.uid){
+          $('#pos').text(k);
+          html += `
+          <div class="l" style="background-color: crimson; color:#fff; font-weight: bold;">
+          <div class="pandn">
+          <div class="u-pos">${k}</div>
+          <div class="l-name">${item.username}</div>
+          </div>
+          <div class="sandt">
+          <div class="l-score" style="color: #fff">${item.score}</div>
+          </div>
+          </div>
+          `
+        }else{
+          html += `
+          <div class="l">
+          <div class="pandn">
+          <div class="u-pos">${k}</div>
+          <div class="l-name">${item.username}</div>
+          </div>
+          <div class="sandt">
+          <div class="l-score">${item.score}</div>
+          </div>
+          </div>
+          `
+        }
+        });
+        $('#board').html(html);
+    }
+  });
+});
 },
 
   "/create" : function(){
