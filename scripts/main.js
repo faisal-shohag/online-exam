@@ -569,6 +569,12 @@ router.on({
                       // }
                        
                       store.collection('globalScore').doc(user.uid).update({id: user.uid, username: user.displayName, inst: "", score: myData.totalScore +  (score-(wrong*neg))});
+                      store.collection('public_exams').doc(params.id).collection('leaderboard').add({
+                        id: user.uid,
+                        username: user.displayName,
+                        score: score,
+                        time: ((initialMin-1-minute)*60) + (60-sec)
+                      });
                       let type = new Object();
                       type[myexam.details.sl_exam_type] = myData[myexam.details.sl_exam_type]+1;
                       type["total"] = myData["totalExams"]+1;
@@ -585,12 +591,7 @@ router.on({
                           examID: params.id                         
                       });
 
-                      store.collection('public_exams').doc(params.id).collection('leaderboard').add({
-                        id: user.uid,
-                        username: user.displayName,
-                        score: score,
-                        time: ((initialMin-1-minute)*60) + (60-sec)
-                      });
+                      
                       Swal.fire("সাবমিট হয়েছে!", "", "success");
                     
                     }
