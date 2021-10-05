@@ -1473,24 +1473,24 @@ question_form.addEventListener('submit', e=> {
     });
 $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Profile</div>`);
    app.innerHTML=`
-   <center>
+   <center class="profile">
    <div class="imagexbig"><img src="${user.photoURL}"/></div>
    <div class="displayName">${user.displayName}</div>
    <div class="email"><i class="icofont-email"></i> ${user.email}</div>
-   <div class="row z-depth-3 card">
-   <div class="rank cardXmed col s4 red darken-1 white-text">
+   <div class="score_card">
+   <div class="rank cardXmed">
    <div class="number">...</div>
    <div class="text"><i class="icofont-group-students"></i> অবস্থান</div>
    </div>
 
-   <div class="exam cardXmed col s4 yellow darken-1 black-text">
+   <div class="exam cardXmed">
    <div class="number">...</div>
    <div class="text"><i class="icofont-clip-board"></i> পরীক্ষা</div>
    </div>
 
-   <div class="myscore cardXmed col s4 purple darken-2 white-text">
+   <div class="myscore cardXmed">
    <div class="number">...</div>
-   <div class="text white-text"><i class="icofont-star-shape"></i> স্কোর</div>
+   <div class="text"><i class="icofont-star-shape"></i> স্কোর</div>
    </div>
    </div>
    <div id="dash">

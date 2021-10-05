@@ -40,27 +40,7 @@
 
 }
 
-/* .cardXmed{
-  background: #fff;
-  padding: 5px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-  min-width: 90px;
-  text-align: left;
-  /* border-radius: 5%; */
-/* }  */
 
-/* .rank{
-    color: #fff;
-    background: #EC3F45;
-}
-
-.exam{
-    background: #f5cb40;
-}
-
-.score{
-    background: #478AC9;
-} */
 
 .number{
 font-weight: bold;
@@ -71,11 +51,7 @@ font-size: 20px;
     color: #fff;
 }
 
-.text{
-    font-size: 15px;
-    color: rgb(11, 11, 12);
-    
-}
+
 
 
 .firebaseui-list-item {
@@ -541,3 +517,49 @@ textarea{
     font-weight: bold;
 }
 
+
+ .cardXmed{
+  background: #fff;
+  padding: 2px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  min-width: 90px;
+  text-align: left;
+  text-align: center;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 3px;
+ }
+
+
+
+.score_card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-family: Hind Siliguri;
+}
+
+.score_card .rank{
+  background: crimson;
+  color: #ece8e8;
+  text-shadow: 0 2px 3px rgb(0,0,0,.2);
+}
+
+.score_card .exam{
+    background: rgb(92, 91, 190);
+    color: #ece8e8;
+    text-shadow: 0 2px 3px rgb(0,0,0,.2);
+}
+
+.score_card .myscore{
+    background: rgb(150, 38, 184);
+    color: #ece8e8;
+    text-shadow: 0 2px 3px rgb(0,0,0,.2);
+}
+
+.profile{
+    font-family: Hind Siliguri
+}
