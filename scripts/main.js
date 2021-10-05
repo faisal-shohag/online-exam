@@ -1499,6 +1499,7 @@ $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animat
    `;
 
 db.ref("app/users/"+user.uid).on('value', snap=>{
+  $('#dash').html("");
   $(".exam .number").text(snap.val().exams.total);
   $(".myscore .number").text(snap.val().scores.totalScore);
   var ser = [snap.val().scores.totalCorrect, snap.val().scores.totalEmpt, snap.val().scores.totalWrong];
