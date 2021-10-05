@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css" integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fir-ui-demo-84a6c.firebaseapp.com/dist/firebaseui.css">
     <link rel="stylesheet" href="./styles/charty.css">
     <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="./styles/login.css">
@@ -126,6 +127,7 @@ MathJax = {
 
 <div class="sign">
     <div id="container">
+      <div id="loading">Loading...</div>
         <div id="loaded" class="hidden">
           <div id="main">
             <div id="user-signed-in" class="hidden">
@@ -135,7 +137,7 @@ MathJax = {
               </p>
             </div>
             <div id="user-signed-out" class="hidden">
-              <center><h4>বৃত্ত</h4></center>
+             <div class="top_app_title"><i class="icofont-focus"></i> বৃত্ত</div>
               <div id="firebaseui-spa">
                 <div id="firebaseui-container"></div>
               </div>
