@@ -194,6 +194,14 @@ MathJax = {
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-storage.js"></script>
+  
+  <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/firebase-messaging-sw.js');
+        });
+      }
+  </script>
 
   <script>
 const firebaseConfig = {
@@ -216,55 +224,39 @@ var CLIENT_ID = '612135243639-14ma717s4im15i0ks2psjpam93k0nk48.apps.googleuserco
     var storage = firebase.storage();
     const messaging=firebase.messaging();
     
+    function getStartToken(){
+messaging.getToken({vapidKey: "BLmr_FVY8kFvdgvkXCE2xngWFDA9TNNoly2MbJJhG1q4wzPo1_Y5wh1UTtUysX8KFbl9KLbk_n0sBHDER9xzDBY"}).then((currentToken) => {
+if (currentToken) {
+  console.log(currentToken);
+sendTokenToServer(currentToken);
+} 
+else {
+// Show permission request.
+RequestPermission();
+setTokenSentToServer(false);
+}
+}).catch((err) => {
+setTokenSentToServer(false);
+});
+}
 
-
-
-  function InitializeFirebaseMessaging(){
-    messaging.requestPermission().then(function(){
-      console.log("Notification Permission.");
-      return messaging.getToken();
-    }).then(function(token){
-      console.log("Teken: " + token);
-
-    }).catch(err=>{
-      console.log(err);
-    })
-  }
-
-  messaging.onMessage(function(payload){
-    console.log(payload);
-  })
-
-  messaging.onTokenRefresh(()=>{
-    messaging.getToken()
-    .then((newtoken)=>{
-      console.log(newtoken);
-    })
-    .catch(err=>{
-      console.log(err);
-    })
-  })
-
-  InitializeFirebaseMessaging();
-
-
-
-
-
-
-
-
+function RequestPermission(){
+messaging.requestPermission()
+.then(function(permission){
+if (permission === 'granted') {
+console.log("have Permission");
+//calls method again and to sent token to server
+getStartToken();
+ }else{console.log("Permission Denied");}
+}).catch(function(err){
+console.log(err);
+})
+}
   </script>
   <script src="./scripts/common.js"></script>
   <script src="./scripts/firebaseui.js"></script>
     <script src="./scripts/main.js"></script>
     <script src="./scripts/firebase.js"></script>
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/firebase-messaging-sw.js');
-        });
-      }
-  </script>
+
 </body>
 </html>

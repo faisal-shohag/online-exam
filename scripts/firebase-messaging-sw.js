@@ -1,5 +1,5 @@
-importScripts('https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/7.14.4/firebase-messaging.js');
+importScripts('https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/7.18.0/firebase-messaging.js');
 // Your web app's Firebase configuration
     var firebaseConfig = {
         apiKey: "AIzaSyAzby1MLn75SBPBdD2aPvJvmvvfIjgvr0Y",
@@ -13,14 +13,7 @@ importScripts('https://www.gstatic.com/firebasejs/7.14.4/firebase-messaging.js')
 };
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
-
-
 messaging.usePublicVapidKey("BLmr_FVY8kFvdgvkXCE2xngWFDA9TNNoly2MbJJhG1q4wzPo1_Y5wh1UTtUysX8KFbl9KLbk_n0sBHDER9xzDBY");
-
-messaging.setBackgroundMessageHandler(function(payload) {
-  console.log(payload);
-});
-/*
 messaging.onBackgroundMessage(function(payload) {
 const notificationTitle = payload.data.title;
 const notificationOptions = {
@@ -51,4 +44,3 @@ return clients.openWindow(url);
 })
 );
 });
-*/
