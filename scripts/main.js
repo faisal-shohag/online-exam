@@ -1473,7 +1473,7 @@ question_form.addEventListener('submit', e=> {
     });
 $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Profile</div>`);
    app.innerHTML=`
-   <center><div class="headlines">প্রোফাইল</div>
+   <center>
    <div class="imagexbig"><img src="${user.photoURL}"/></div>
    <div class="displayName">${user.displayName}</div>
    <div class="email"><i class="icofont-email"></i> ${user.email}</div>
