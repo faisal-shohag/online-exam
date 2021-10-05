@@ -128,7 +128,7 @@ label,
   width: 100%;
   bottom: 0;
   z-index: 99;
-  background: rgb(235, 232, 232);
+  background: linear-gradient(45deg, rgba(88, 30, 182, 0.933), rgba(117, 99, 201, 0.933));
   box-shadow: 0 -2px 5px 0px rgba(0, 0, 0, 0.2);
   padding: 0px 15px;
   height: 55px;
@@ -136,7 +136,7 @@ label,
 }
 
 .footer a {
-  color: #585151;
+  color: #e4dede;
 }
 
 .footerMenu {
@@ -172,14 +172,14 @@ label,
   text-align: center;
   bottom: -60%;
   /* font-family: SolaimanLipi; */
-  color: #333;
+  color: rgb(241, 226, 226);
 }
 
 .footerIconActive {
   font-size: 30px;
   font-weight: bold;
   transition: 0.1s;
-  color: #222;
+  color: rgb(214, 205, 205);
 }
 
 .page1 {
@@ -695,3 +695,4 @@ color: #fff;
   gap: 10px;
   align-items: center;
 }
+
