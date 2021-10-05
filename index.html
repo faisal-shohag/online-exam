@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fir-ui-demo-84a6c.firebaseapp.com/dist/firebaseui.css">
-    <link rel="stylesheet" href="./styles/charty.css">
     <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="./styles/login.css">
     <link rel="stylesheet" href="./styles/user.css">
@@ -34,7 +33,6 @@ MathJax = {
   </script>
 
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
-<script src="./scripts/charty.js"></script>
 <title>Britto Exam | </title>
 </head>
 <body>
@@ -190,12 +188,13 @@ MathJax = {
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.all.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-storage.js"></script>
-  
+
   <script>
 const firebaseConfig = {
          apiKey: "AIzaSyAzby1MLn75SBPBdD2aPvJvmvvfIjgvr0Y",
@@ -215,10 +214,57 @@ var CLIENT_ID = '612135243639-14ma717s4im15i0ks2psjpam93k0nk48.apps.googleuserco
     var store = firebase.firestore();
     var db = firebase.database();
     var storage = firebase.storage();
+    const messaging=firebase.messaging();
+    
+
+
+
+  function InitializeFirebaseMessaging(){
+    messaging.requestPermission().then(function(){
+      console.log("Notification Permission.");
+      return messaging.getToken();
+    }).then(function(token){
+      console.log("Teken: " + token);
+
+    }).catch(err=>{
+      console.log(err);
+    })
+  }
+
+  messaging.onMessage(function(payload){
+    console.log(payload);
+  })
+
+  messaging.onTokenRefresh(()=>{
+    messaging.getToken()
+    .then((newtoken)=>{
+      console.log(newtoken);
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  })
+
+  InitializeFirebaseMessaging();
+
+
+
+
+
+
+
+
   </script>
   <script src="./scripts/common.js"></script>
   <script src="./scripts/firebaseui.js"></script>
     <script src="./scripts/main.js"></script>
     <script src="./scripts/firebase.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/firebase-messaging-sw.js');
+        });
+      }
+  </script>
 </body>
 </html>

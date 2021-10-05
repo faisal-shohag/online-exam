@@ -1493,8 +1493,7 @@ $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animat
    <div class="text"><i class="icofont-star-shape"></i> স্কোর</div>
    </div>
    </div>
-   <div id="dash">
-   </div>
+
    </center>
    `;
 
@@ -1502,18 +1501,7 @@ db.ref("app/users/"+user.uid).on('value', snap=>{
   $('#dash').html("");
   $(".exam .number").text(snap.val().exams.total);
   $(".myscore .number").text(snap.val().scores.totalScore);
-  var ser = [snap.val().scores.totalCorrect, snap.val().scores.totalEmpt, snap.val().scores.totalWrong];
-  const chart = new Charty({ 		//With options, everyone is optional except data
-      title: 'Dashboard',			//The title of the chart
-      chartType: 'circle',		//The type of chart, circle(donut) or pie
-      data: [						//An array of objects int he format name/value
-          {Correct: snap.val().scores.totalCorrect},			//{Name: Value}
-          {Wrong: snap.val().scores.totalWrong},
-          {Empty: snap.val().scores.totalEmpt},
-      ],
-      precision: false,		//If the data chart have decimal numbers(just two)
-      selector: '#dash'		//Where the chart will be inserted, must be a valid css selector (default to body)
-  })
+
   
   });
 
