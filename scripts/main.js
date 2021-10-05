@@ -870,8 +870,8 @@ router.on({
 })
 },
  "/rank" : function(){
-   $('.app_loader').show();
-    $('.footer').show();
+  $('.app_loader').show();
+  $('.footer').show();
   $('.footertext').hide();
   $('.footerIcon').removeClass('footerIconActive');
   if($('.rnk')[0].classList[3] === undefined){
@@ -893,9 +893,6 @@ router.on({
   let ladder = [];
   snap.forEach(l=>{
     ladder.push(l.data());
-    if(l.data().id === user.uid){
-      taken = true;
-    }
   });
   $('#page').pagination({
     dataSource: ladder,
@@ -941,7 +938,7 @@ router.on({
 });
 },
 
-  "/create" : function(){
+"/create" : function(){
     $('.app_loader').show();
     $('.footer').show();
   $('.footertext').hide();
@@ -1468,6 +1465,7 @@ question_form.addEventListener('submit', e=> {
 },
 
 "/myprofile" : function (){
+  $('.app_loader').show();
     $('.footer').show();
     $(document).ready(function(){
       $('.modal').modal();
@@ -1495,7 +1493,7 @@ $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animat
    <div class="text white-text"><i class="icofont-star-shape"></i> স্কোর</div>
    </div>
    </div>
-   <div class="card-panel grey darken-3">
+   <div id="dash">
    </div>
    </center>
    `;
@@ -1504,6 +1502,28 @@ db.ref("app/users/"+user.uid).on('value', snap=>{
   $(".exam .number").text(snap.val().exams.total);
   $(".myscore .number").text(snap.val().scores.totalScore);
   var ser = [snap.val().scores.totalCorrect, snap.val().scores.totalEmpt, snap.val().scores.totalWrong];
+  const chart = new Charty({ 		//With options, everyone is optional except data
+      title: 'Dashboard',			//The title of the chart
+      chartType: 'circle',		//The type of chart, circle(donut) or pie
+      data: [						//An array of objects int he format name/value
+          {Correct: snap.val().scores.totalCorrect},			//{Name: Value}
+          {Wrong: snap.val().scores.totalWrong},
+          {Empty: snap.val().scores.totalEmpt},
+      ],
+      precision: false,		//If the data chart have decimal numbers(just two)
+      selector: '#dash'		//Where the chart will be inserted, must be a valid css selector (default to body)
+  })
+  
+  });
+
+
+  store.collection("globalScore").orderBy("score", 'desc').onSnapshot(snap=> {
+    $('.app_loader').hide();
+    let i=0;
+    snap.forEach(p=>{
+      i++;
+      if(p.data().id===user.uid) $('.rank .number').text(i);
+    })
   });
 }
 

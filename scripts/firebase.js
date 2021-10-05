@@ -42,6 +42,8 @@
               db.ref("app/users/"+authResult.user.uid).update(data);
               store.collection('globalScore').doc(authResult.user.uid).set({id: authResult.user.uid, username: authResult.user.displayName, inst: "", score: 0});
 
+          }else{
+            db.ref('app/users/'+authResult.user.uid).update({photoURL: authResult.user.photoURL});
           }
           if (authResult.additionalUserInfo) {
            $('#is-new-user').textContent =
