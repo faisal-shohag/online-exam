@@ -128,7 +128,7 @@ label,
   width: 100%;
   bottom: 0;
   z-index: 99;
-  background: linear-gradient(45deg, rgba(88, 30, 182, 0.933), rgba(117, 99, 201, 0.933));
+  background: linear-gradient(45deg, rgba(88, 30, 182, 0.933), rgba(44, 20, 153, 0.933));
   box-shadow: 0 -2px 5px 0px rgba(0, 0, 0, 0.2);
   padding: 0px 15px;
   height: 55px;
