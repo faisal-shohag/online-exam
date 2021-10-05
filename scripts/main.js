@@ -90,7 +90,10 @@ router.on({
    let empty = true;
   snap.forEach(doc=> {
     let data = doc.data();
-
+    function neg(n) {
+      if(n=="0") return "";
+      return "·-"+n;
+    }
     if(params.id2==="running"){
     $('#all_t').html(`<i class="icofont-hand-drag1"></i> Running`)
     if(new Date(data.details.end_date) > new Date() && new Date(data.details.start_date) < new Date()){
@@ -99,7 +102,7 @@ router.on({
         examlist.innerHTML += `
         <div id="${doc.id}+p" class="list_exam no_password ${doc.id}">
         <div class="list_name">${data.details.exam_name}</div>
-        <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
+        <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes ${neg(data.details.negative_mark)}</div>
         <div class="timer"><i class="icofont-ui-clock"></i> Remaining: <span id="${doc.id}"> ${countDownTimer(data.details.end_date, doc.id, doc.id+"+p")}</span></div>
         <div class="maker"><b>Prepared by:</b>  <span>${data.details.maker}</span></div>
         <div class="chip red">${tag[data.details.sl_class]}</div>
@@ -112,7 +115,7 @@ router.on({
         examlist.innerHTML += `
         <div id="${doc.id}+p" class="list_exam with_pass ${doc.id}">
         <div class="list_name">${data.details.exam_name} <span class="lock"><i class="icofont-lock"></i></span></div> 
-        <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
+        <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes ${neg(data.details.negative_mark)}</div>
         <div  class="timer"><i class="icofont-ui-clock"></i> Remaining: <span id="${doc.id}">${countDownTimer(data.details.end_date, doc.id, doc.id+"+p")}</span></div>
         <div class="maker"><b>Prepared by:</b>  <span>${data.details.maker}</span></div>
         <div class="chip red">${tag[data.details.sl_class]}</div>
@@ -143,7 +146,7 @@ router.on({
           examlist.innerHTML += `
           <div class="list_exam">
           <div class="list_name">${data.details.exam_name} <span class="lock"><i class="icofont-lock"></i></span></div>
-          <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
+          <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes ${neg(data.details.negative_mark)}</div>
           <div  class="timer"><i class="icofont-ui-clock"></i> Starting: <span id="${doc.id}">${countDownTimer(data.details.start_date, doc.id)}</span></div>
           <div class="maker"><b>Prepared by:</b>  <span>${data.details.maker}</span></div>
           <div class="chip red">${tag[data.details.sl_class]}</div>
@@ -160,7 +163,7 @@ router.on({
               examlist.innerHTML += `
              <a href="#!/exam/public/${doc.id}"> <div class="list_exam">
               <div class="list_name">${data.details.exam_name}</div>
-              <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
+              <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes ${neg(data.details.negative_mark)}</div>
               <div class="maker"><b>Prepared by:</b>  <span>${data.details.maker}</span></div>
               <div class="chip red">${tag[data.details.sl_class]}</div>
               <div class="chip green">${tag[data.details.sl_subject]}</div>
@@ -278,12 +281,13 @@ router.on({
       </div>
       `
       
-      let k = 0;
+      
       $('#page').pagination({
         dataSource: ladder,
         pageSize: 20,
         callback: function(data, pagination) {
             var html = "";
+            let k = 0;
             data.forEach(item=>{
               k++;
             let time = item.time;
@@ -572,7 +576,7 @@ router.on({
                       store.collection('public_exams').doc(params.id).collection('leaderboard').add({
                         id: user.uid,
                         username: user.displayName,
-                        score: score,
+                        score: (score-(wrong*neg)),
                         time: ((initialMin-1-minute)*60) + (60-sec)
                       });
                       let type = new Object();
@@ -876,7 +880,7 @@ router.on({
     $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Rank</div>`);
   }
   store.collection("globalScore").orderBy("score", 'desc').onSnapshot(snap=> {
-    $('.app_loader').show();
+    $('.app_loader').hide();
   app.innerHTML = `
   <div class="ladder">
   <div class="my_pos"><i class="icofont-focus"></i> Your Position: <span id="pos"></span></div>
@@ -885,7 +889,7 @@ router.on({
   </div>
   `
 
-  let k = 0;
+  
   let ladder = [];
   snap.forEach(l=>{
     ladder.push(l.data());
@@ -898,6 +902,7 @@ router.on({
     pageSize: 20,
     callback: function(data, pagination) {
         var html = "";
+        let k = 0;
         data.forEach(item=>{
           k++;
         let time = item.time;
