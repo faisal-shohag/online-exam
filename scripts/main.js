@@ -375,7 +375,7 @@ router.on({
             wrong = 0,
             na = 0,
             neg = parseFloat(myexam.details.negative_mark);
-          questions = shuffleArray(myexam.questions);
+          questions = myexam.questions;
           $(".exam-nb").html(`${myexam.details.notice}`);
 
            for (let q = 0; q <questions.length; q++) {
@@ -700,8 +700,8 @@ router.on({
       wrong = 0,
       na = 0,
       neg = parseFloat(myexam.details.negative_mark);
-
-    questions = shuffleArray(myexam.questions);
+      console.log(userAns);
+    questions = myexam.questions;
     $(".exam-nb").html(`${myexam.details.notice}`);
     var elem = "";
      for (let q = 0; q <questions.length; q++) {
@@ -865,6 +865,7 @@ router.on({
 })
 },
  "/rank" : function(){
+   $('.app_loader').show();
     $('.footer').show();
   $('.footertext').hide();
   $('.footerIcon').removeClass('footerIconActive');
@@ -874,6 +875,7 @@ router.on({
     $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Rank</div>`);
   }
   store.collection("globalScore").orderBy("score", 'desc').onSnapshot(snap=> {
+    $('.app_loader').show();
   app.innerHTML = `
   <div class="ladder">
   <div class="my_pos"><i class="icofont-focus"></i> Your Position: <span id="pos"></span></div>
