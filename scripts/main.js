@@ -716,7 +716,7 @@ router.on({
                       store.collection('globalScore').doc(user.uid).update({id: user.uid, username: user.displayName, inst: "", score: myData.totalScore +  (score-(wrong*neg))});
                       store.collection('public_exams').doc(params.id).collection('leaderboard').add({
                         id: user.uid,
-                        username: user.displayName,
+                        username: myData.nickName,
                         score: (score-(wrong*neg)),
                         time: ((initialMin-1-minute)*60) + (60-sec)
                       });
