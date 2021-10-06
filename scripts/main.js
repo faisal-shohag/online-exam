@@ -952,8 +952,10 @@ router.on({
     $('.app_loader').hide();
 app.innerHTML = `
 <div class="warn">
-<div class="icon animate__bounceIn"><i class="icofont-warning"></i></div>
+<div>
+<div class="warn-icon animate__bounceIn"><i class="icofont-warning"></i></div>
 You have no permission to create exam!
+</div>
 </div>
 `
   }else{
