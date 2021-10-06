@@ -746,6 +746,10 @@ color: rgb(17, 98, 248);
   text-align: center;
   border-radius: 3px;
   cursor: pointer;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
