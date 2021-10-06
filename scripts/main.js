@@ -882,7 +882,7 @@ router.on({
     $('.app_loader').hide();
   app.innerHTML = `
   <div class="ladder">
-  <div class="top3content">\
+  <div class="top3content">
   <center>
   <div class="preloader-wrapper big active">
   <div class="spinner-layer spinner-blue">
@@ -897,16 +897,21 @@ router.on({
 </center>
 
   </div>
+  <div class="my_pos"><i class="icofont-focus"></i> Your Position: <span id="pos"></span>/<span class="tp"></span></div>
   <div id="board" class="board"></div>
   <div id="page"></div>
   </div>
   `
 
-  
+  let i=0;
   let ladder = [];
   snap.forEach(l=>{
+    i++;
     ladder.push(l.data());
+    if(l.data().id === user.uid) $('#pos').text(i);
   })
+
+  $('.tp').text(i);
 
 
 db.ref('app/users').on('value', data=>{
@@ -922,7 +927,7 @@ db.ref('app/users').on('value', data=>{
     dataSource: ladder,
     pageSize: 20,
     callback: function(data, pagination) {
-       board.innerHTML = `<div class="my_pos"><i class="icofont-focus"></i> Your Position: <span id="pos"></span></div>`;
+       board.innerHTML = ``;
         let k = 0;
         data.forEach(item=>{
           k++;
@@ -930,7 +935,6 @@ db.ref('app/users').on('value', data=>{
         let min = parseInt(time/60);
         let sec = ('0' + time%60).slice(-2); 
         if(item.id === user.uid){
-          $('#pos').text(k);
           board.innerHTML += `
           <div class="l" style="background-color: crimson; color:#fff; font-weight: bold;">
           <div class="pandn">
