@@ -24,6 +24,104 @@ $('.deleteAc').click(function(){
   window.location.reload()
 });
 
+db.ref('app/users/'+user.uid).on('value', p=>{
+  if(p.val().details == false){
+    $('.details_form').show();
+    $('.details_form').html(`
+    <form id="get_info">
+    <div class="get_info_title">Your Information</div>
+
+    <div class="input_field">
+    <input name="nick" type="text" placeholder="Nick Name" required/>
+    </div>
+    
+    <div class="input-field col s12">
+    <select name="sl_group_info" required>
+      <option value="" disabled selected>Select Group</option>
+      <option value="sci">Science</option>
+      <option value="com">Commerce</option>
+      <option value="hum">Humanity</option>
+      <option value="none">Other/None</option>
+      </select>
+      </div>
+
+      <div class="input_field">
+      <input name="inst" type="text" placeholder="Institution" required/>
+      </div>
+     <div class="dist_list"></div>
+
+     <div class="input_field">
+     <input name="phone" type="number" placeholder="Phone" required/>
+     </div>
+
+     <div class="input_field">
+     <input name="bio" type="text" placeholder="Bio" required/>
+     </div>
+<center><button type="submit" class="btn green">Submit</button></center>
+  </form>
+    `);
+
+    fetch('./scripts/districts.json')
+    .then(res=>res.json())
+    .then(data=>{
+      let html = `<div class="input-field col s12"><select name="sl_dist_info" required><option value="" disabled selected>জেলা</option>`;
+      for(let i=0; i<data.districts.length; i++){
+        html+=`
+        <option value="${data.districts[i].bn_name}">${data.districts[i].bn_name}</option>
+        `
+      }
+      html += ` </select></div>`;
+
+      $('.dist_list').html(html);
+      $(document).ready(function () {
+        $("select").formSelect();
+      });
+    })
+
+    $(document).ready(function () {
+      $("select").formSelect();
+    });
+
+
+ const gi = document.getElementById('get_info');
+
+ gi.addEventListener('submit', e=>{
+   e.preventDefault();
+   var data = {
+     nickName: gi.nick.value,
+     group: gi.sl_group_info.value,
+     inst: gi.inst.value,
+     district: gi.sl_dist_info.value,
+     phone: gi.phone.value,
+     bio: gi.bio.value,
+     details: true
+   }
+   Swal.fire({
+    title: 'Do you want to save the changes?',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: 'Save',
+    denyButtonText: `Don't save`,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      Swal.fire('Saved!', '', 'success');
+      db.ref('app/users/'+user.uid).update(data);
+      store.collection('globalScore').doc(user.uid).update({
+        username: data.nickName,
+        inst: data.inst +"|"+data.group
+      });
+    } else if (result.isDenied) {
+      Swal.fire('Changes are not saved', '', 'info')
+    }
+  })
+   
+ })
+
+  }else{
+    $('.details_form').hide();
+  }
+})
 
 
 router.on(function() {
@@ -1564,8 +1662,9 @@ $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animat
    app.innerHTML=`
    <center class="profile">
    <div class="imagexbig"><img src="${user.photoURL}"/></div>
-   <div class="displayName">${user.displayName}</div>
-   <div class="email"><i class="icofont-email"></i> ${user.email}</div>
+   <div class="displayName">${user.displayName}<span class="nick"></span></div>
+   <div class="inst"> </div>
+   <div class="dist"></div>
    <div class="score_card">
    <div class="rank cardXmed">
    <div class="number">...</div>
@@ -1590,8 +1689,9 @@ db.ref("app/users/"+user.uid).on('value', snap=>{
   $('#dash').html("");
   $(".exam .number").text(snap.val().exams.total);
   $(".myscore .number").text(snap.val().scores.totalScore);
-
-  
+  $('.nick').text("("+snap.val().nickName+")");
+  $('.inst').html(`<i class="icofont-institution"></i> ${snap.val().inst}`)
+  $('.dist').html(`<i class="icofont-building-alt"></i> ${snap.val().district}`)
   });
 
 

@@ -36,7 +36,13 @@
                     history: {
                       status: false,
                     }
-                  }
+                  },
+                  bio: "",
+                  nickName: "",
+                  group: "",
+                  district: "",
+                  inst: "",
+                  phone: ""
 
               }
               db.ref("app/users/"+authResult.user.uid).update(data);

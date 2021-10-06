@@ -665,3 +665,37 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
     color: goldenrod;
     font-size: 25px;
 }
+
+.details_form{
+    position: fixed;
+    background: #ffff;
+    top: 5%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+    font-family: Hind Siliguri;
+    padding: 10px;
+    display: none;
+
+}
+
+.get_info_title{
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    background: -webkit-linear-gradient(45deg, rgb(21, 46, 116), rgb(88, 159, 201));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+#get_info{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+::placeholder{
+    color: rgba(175, 60, 83, 0.685);
+}
