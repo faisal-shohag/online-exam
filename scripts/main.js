@@ -860,7 +860,6 @@ router.on({
     <div class="opt" id="${i+4+i*3}"><div class="st"></div>${myexam.questions[i].opt[3]}</div>
 </div>
 <div class="solution"><b>Solution:</b></br> ${myexam.questions[i].ex}</div>
-<center><a href="#!/edit_q/${i}"><button class="btn green">Edit</button></a></center>
 </div>`
 }
   for(let a=0; a<ans.length; a++){

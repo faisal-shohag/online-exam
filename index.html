@@ -195,13 +195,13 @@ MathJax = {
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-storage.js"></script>
   
-  <script>
+  <!-- <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/firebase-messaging-sw.js');
         });
       }
-  </script>
+  </script> -->
 
   <script>
 const firebaseConfig = {
@@ -223,8 +223,8 @@ var CLIENT_ID = '612135243639-14ma717s4im15i0ks2psjpam93k0nk48.apps.googleuserco
     var db = firebase.database();
     var storage = firebase.storage();
     const messaging=firebase.messaging();
-    
-    function getStartToken(){
+ /*   
+function getStartToken(){
 messaging.getToken({vapidKey: "BLmr_FVY8kFvdgvkXCE2xngWFDA9TNNoly2MbJJhG1q4wzPo1_Y5wh1UTtUysX8KFbl9KLbk_n0sBHDER9xzDBY"}).then((currentToken) => {
 if (currentToken) {
   console.log(currentToken);
@@ -252,6 +252,7 @@ getStartToken();
 console.log(err);
 })
 }
+*/
   </script>
   <script src="./scripts/common.js"></script>
   <script src="./scripts/firebaseui.js"></script>
