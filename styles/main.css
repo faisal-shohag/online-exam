@@ -104,6 +104,7 @@ main {
   margin-top: 50px;
   padding: 10px;
   margin-bottom: 55px;
+  /* height: 100%; */
   /* font-family: 'SolaimanLipi'; */
 }
 
@@ -699,6 +700,8 @@ color: rgb(17, 98, 248);
 
 .recent_list{
   margin-top: 30px;
+  background: #fff;
+  padding: 5px;
 }
 
 .title-n{
@@ -742,7 +745,7 @@ color: rgb(17, 98, 248);
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   padding: 0px 5px;
-  min-width: 100px;
+  min-width: 125px;
   text-align: center;
   border-radius: 3px;
   cursor: pointer;
@@ -763,3 +766,8 @@ color: rgb(17, 98, 248);
   padding: 0px 10px;
 }
 
+
+
+.div-1{
+  background: #fff;
+}

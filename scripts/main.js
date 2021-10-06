@@ -141,8 +141,8 @@ router.on(function() {
   <div class="recent_list">
   <div class="title-n">Recent Participation</div>
 <div class="r-tab">
-  <div id="public" class="tab_item r-tab-active">Public</div>
-  <div id="live" class="tab_item">Live</div>
+  <div id="public" class="tab_item">Public</div>
+  <div id="board" class="tab_item">Board Exam Prep.</div>
   <div id="admission" class="tab_item">Admission</div>
   <div id="special" class="tab_item">Special</div>
   <div id="daily" class="tab_item">Daily</div>
@@ -154,7 +154,7 @@ router.on(function() {
   </div>
   `
   const list = document.querySelector('.r-list');
-  let ids= ['public', 'live', 'admission', 'special', 'daily', 'weekly', 'monthly', 'model'];
+  let ids= ['public', 'board', 'admission', 'special', 'daily', 'weekly', 'monthly', 'model'];
   $(document).ready(function() {
     $('#public').trigger('click');
   })
@@ -1163,6 +1163,7 @@ You have no permission to create exam!
     <option value="model_test">Model Test</option>
     <option value="public">Public</option>
     <option value="live">Live</option>
+    <option value="board">Board Exam Preparation</option>
     <option value="admission">Admission</option>
   </select>
 </div>
