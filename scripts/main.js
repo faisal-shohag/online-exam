@@ -948,10 +948,13 @@ router.on({
   }
   $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Create</div>`);
   
-  if(myData.createPermission === false || myData.createPermission === undefined){
+  if(myData.createPermission == false || myData.createPermission == undefined){
     $('.app_loader').hide();
 app.innerHTML = `
-<div class="warn">You have no permission to create exam!</div>
+<div class="warn">
+<div class="icon animate__bounceIn"><i class="icofont-warning"></i></div>
+You have no permission to create exam!
+</div>
 `
   }else{
   db.ref('app/users/'+user.uid+'/create').on('value', snap=>{
