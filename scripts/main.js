@@ -131,7 +131,7 @@ router.on({
         empty = false;
         if(data.details.password === ""){
           examlist.innerHTML += `
-          <div class="list_exam">
+          <div class="list_exam ${doc.id}">
           <div class="list_name">${data.details.exam_name}</div>
           <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes</div>
           <div  class="timer"><i class="icofont-ui-clock"></i> Starting: <span id="${doc.id}">${countDownTimer(data.details.start_date, doc.id)}</span></div>
@@ -144,7 +144,7 @@ router.on({
         }else{
           empty = false;
           examlist.innerHTML += `
-          <div class="list_exam">
+          <div class="list_exam ${doc.id}">
           <div class="list_name">${data.details.exam_name} <span class="lock"><i class="icofont-lock"></i></span></div>
           <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes ${neg(data.details.negative_mark)}</div>
           <div  class="timer"><i class="icofont-ui-clock"></i> Starting: <span id="${doc.id}">${countDownTimer(data.details.start_date, doc.id)}</span></div>
@@ -934,7 +934,20 @@ db.ref('app/users').on('value', data=>{
         let time = item.time;
         let min = parseInt(time/60);
         let sec = ('0' + time%60).slice(-2); 
-        if(item.id === user.uid){
+        if(k===1){
+          board.innerHTML += `
+          <div class="l">
+          <div class="pandn">
+          <div class="top-pos"><i class="icofont-award"></i></div>
+          <div class="l-name">${item.username}</div>
+          </div>
+          <div class="sandt">
+          <div class="l-score" >${item.score}</div>
+          </div>
+          </div>
+          `
+        }
+        else if(item.id === user.uid){
           board.innerHTML += `
           <div class="l" style="background-color: crimson; color:#fff; font-weight: bold;">
           <div class="pandn">

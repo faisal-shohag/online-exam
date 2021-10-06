@@ -661,14 +661,14 @@ label,
 
 .u-pos{
 padding: 2px;
-background: rgb(12, 12, 12);
+background: rgb(255, 255, 255);
 min-width: 25px;
 text-align: center;
 border-radius: 3px;
 display: flex;
 justify-content: center;
 align-items: center;
-color: #fff;
+color: rgb(17, 98, 248);
 }
 
 .l-score{
