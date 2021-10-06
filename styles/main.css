@@ -696,3 +696,65 @@ color: rgb(17, 98, 248);
   align-items: center;
 }
 
+
+.recent_list{
+  margin-top: 30px;
+}
+
+.title-n{
+  font-family: Hind Siliguri;
+  font-size: 25px;
+  font-weight: bold;
+  color: #706e6e;
+  border-bottom: 2px solid #706e6e;
+}
+
+.r-item{
+  padding: 5px;
+  margin-top: 10px;
+  background: #ffff;
+  font-size: 15px;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  color: #0855a8;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.r-tab{
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  gap: 10px;
+  margin: 10px 10px;
+  background: rgb(216, 206, 208);
+  padding: 5px;
+  overflow-x: scroll;
+  border-radius: 3px;
+}
+
+
+.r-tab .tab_item{
+  font-size: 15px;
+  font-family: Hind Siliguri;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  padding: 0px 5px;
+  min-width: 100px;
+  text-align: center;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+
+.r-tab-active{
+  background-color: crimson !important;
+  font-weight: bold;
+  color: #ffff;
+}
+
+.r-list{
+  padding: 0px 10px;
+}

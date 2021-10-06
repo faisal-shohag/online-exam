@@ -37,9 +37,52 @@ router.on(function() {
     $($($('.hm')[0].parentNode)[0].lastElementChild).show();
   }
   $('.top_logo').html(`<div class="animate__animated animate__fadeInLeft top_app_title"><i class="icofont-focus"></i> বৃত্ত</div>`);
+
   app.innerHTML= `
   <div class="div-1"></div>
+  <div class="recent_list">
+  <div class="title-n">Recent Participation</div>
+<div class="r-tab">
+  <div id="public" class="tab_item r-tab-active">Public</div>
+  <div id="live" class="tab_item">Live</div>
+  <div id="admission" class="tab_item">Admission</div>
+  <div id="special" class="tab_item">Special</div>
+  <div id="daily" class="tab_item">Daily</div>
+  <div id="weekly" class="tab_item">Weekly</div>
+  <div id="monthly" class="tab_item">Monthly</div>
+  <div id="model" class="tab_item">Model Test</div>
+  </div>
+  <div class="r-list"></div>
+  </div>
   `
+  const list = document.querySelector('.r-list');
+  let ids= ['public', 'live', 'admission', 'special', 'daily', 'weekly', 'monthly', 'model'];
+  $(document).ready(function() {
+    $('#public').trigger('click');
+  })
+  $('.tab_item').click(function() {
+    let id = $(this)[0].id;
+    for(let i=0; i<ids.length; i++){
+      if($('#'+ids[i])[0].classList[1] === "r-tab-active"){
+        $('#'+ids[i]).removeClass("r-tab-active");
+      }
+    }
+    $('#'+id).addClass('r-tab-active');
+
+  db.ref('app/users/'+user.uid+'/allExams/'+id).on('value', ex=>{
+    list.innerHTML = "";
+    if(ex.val() === null) list.innerHTML = "<center>No Exam</center>";
+  ex.forEach(item=>{
+      list.innerHTML += `
+      <a href="#!/exam/public/${item.val().examID}"><div class="r-item">${item.val().name}</div></href>
+      `
+    })
+
+  })
+
+  })
+
+  
   store.collection('public_exams').orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
     let rncount = 0, upcount=0, endcount=0;
     $('.app_loader').hide();
@@ -592,7 +635,8 @@ router.on({
                       db.ref('app/users/'+user.uid+'/scores').update(myScores);
                       db.ref('app/users/'+user.uid+'/allExams/'+myexam.details.sl_exam_type+'/'+params.id).update({
                           userAns: userAns.join('-'),
-                          examID: params.id                         
+                          examID: params.id,
+                          name: myexam.details.exam_name                      
                       });
 
                       
