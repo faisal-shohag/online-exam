@@ -882,7 +882,21 @@ router.on({
     $('.app_loader').hide();
   app.innerHTML = `
   <div class="ladder">
-  <div class="my_pos"><i class="icofont-focus"></i> Your Position: <span id="pos"></span></div>
+  <div class="top3content">\
+  <center>
+  <div class="preloader-wrapper big active">
+  <div class="spinner-layer spinner-blue">
+    <div class="circle-clipper left">
+      <div class="circle"></div>
+    </div><div class="gap-patch">
+      <div class="circle"></div>
+    </div><div class="circle-clipper right">
+      <div class="circle"></div>
+    </div>
+  </div>
+</center>
+
+  </div>
   <div id="board" class="board"></div>
   <div id="page"></div>
   </div>
@@ -892,12 +906,23 @@ router.on({
   let ladder = [];
   snap.forEach(l=>{
     ladder.push(l.data());
-  });
+  })
+
+
+db.ref('app/users').on('value', data=>{
+  $('.top3content').html(`
+  <div class="twrap"><div class="top2"><img src="${data.val()[ladder[1].id].photoURL}"></div> <div class="topName">${data.val()[ladder[1].id].name}</div></div>
+  <div class="twrap"><div class="top1"><img src="${data.val()[ladder[0].id].photoURL}"></div> <div class="topName">${data.val()[ladder[0].id].name}</div></div>
+  <div class="twrap"><div class="top3"><img src="${data.val()[ladder[2].id].photoURL}"></div> <div class="topName">${data.val()[ladder[2].id].name}</div></div>
+  `)
+ });
+
+  let board = document.getElementById('board');
   $('#page').pagination({
     dataSource: ladder,
     pageSize: 20,
     callback: function(data, pagination) {
-        var html = "";
+       board.innerHTML = `<div class="my_pos"><i class="icofont-focus"></i> Your Position: <span id="pos"></span></div>`;
         let k = 0;
         data.forEach(item=>{
           k++;
@@ -906,7 +931,7 @@ router.on({
         let sec = ('0' + time%60).slice(-2); 
         if(item.id === user.uid){
           $('#pos').text(k);
-          html += `
+          board.innerHTML += `
           <div class="l" style="background-color: crimson; color:#fff; font-weight: bold;">
           <div class="pandn">
           <div class="u-pos">${k}</div>
@@ -918,7 +943,7 @@ router.on({
           </div>
           `
         }else{
-          html += `
+          board.innerHTML += `
           <div class="l">
           <div class="pandn">
           <div class="u-pos">${k}</div>
@@ -931,7 +956,6 @@ router.on({
           `
         }
         });
-        $('#board').html(html);
     }
   });
 });

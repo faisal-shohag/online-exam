@@ -582,5 +582,81 @@ textarea{
     text-align: center;
     font-size: 50px;
     color: rgb(243, 31, 31);
-    
+}
+
+.top3content{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    background: #fff;
+    padding: 10px 0px;
+    align-items: center;
+   border-radius: 2px;
+}
+
+.twrap{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    padding: 0;
+    align-items: center;
+}
+
+.topName{
+text-align: center;
+width: 100%;
+display: flex;
+justify-content: center;
+font-size: 12px;
+font-weight: bold;
+color: rgb(22, 19, 6);
+margin-top: 5px;
+text-shadow: 0 1px 2px rgb(0,0,0,.2);
+}
+
+.top1, .top2, .top3{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.top1{
+    height: 80px;
+    width: 80px;
+    overflow: hidden;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    border: 3px solid rgb(223, 191, 52);
+    margin: 0;
+}
+
+.top2{
+    border: 3px solid rgb(25, 38, 219);
+}
+
+.top3{
+    border: 3px solid rgb(189, 15, 180);
+}
+.top2, .top3{
+    height: 70px;
+    width: 70px;
+    overflow: hidden;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.top1 img{
+    height: 80px;
+    width: 80px;
+}
+
+.top2 img{
+    height: 70px;
+    width: 70px;
+}
+.top3 img{
+    height: 70px;
+    width: 70px;
 }
