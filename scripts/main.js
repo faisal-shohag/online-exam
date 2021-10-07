@@ -1746,7 +1746,7 @@ $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animat
    app.innerHTML=`
    <center class="profile">
    <div class="imagexbig"></div>
-   <div class="displayName"><span class="nick"></span></div>
+   <div class="displayName"><span class="name"></span><span class="nick"></span></div>
    <div class="bio"></div>
    <div class="inst"> </div>
    <div class="dist"></div>
@@ -1777,7 +1777,7 @@ db.ref("app/users/"+params.id).on('value', snap=>{
   $('.inst').html(`<i class="icofont-institution"></i> ${snap.val().inst}`);
   $('.dist').html(`<i class="icofont-building-alt"></i> ${snap.val().district}`);
   $('.imagexbig').html(`<img src="${snap.val().photoURL}"/>`);
-  $('.displayName').html(`${snap.val().name}`);
+  $('.name').html(`${snap.val().name}`);
   $('#prof_name').text(snap.val().name);
   $('.bio').text(snap.val().bio);
   $('.nick').text("("+snap.val().nickName+")");
