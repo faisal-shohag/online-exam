@@ -1045,7 +1045,9 @@ db.ref('app/users').on('value', data=>{
           <div class="instName">${inst[0]}</div>
           </div>
           </div>
+      
           <div class="sandt">
+          <div></div>
           <div class="l-score" >${item.score}</div>
           </div>
           </div>
@@ -1062,6 +1064,7 @@ db.ref('app/users').on('value', data=>{
           </div>
           </div>
           <div class="sandt">
+          <div></div>
           <div class="l-score" style="color: #fff">${item.score}</div>
           </div>
           </div>
@@ -1077,6 +1080,7 @@ db.ref('app/users').on('value', data=>{
           </div>
           </div>
           <div class="sandt">
+          <div></div>
           <div class="l-score">${item.score}</div>
           </div>
           </div>
