@@ -771,3 +771,10 @@ color: rgb(17, 98, 248);
 .div-1{
   background: #fff;
 }
+
+.l-name{
+  text-align: left;
+}
+.instName{
+  font-size: 10px;
+}

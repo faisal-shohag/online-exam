@@ -138,47 +138,8 @@ router.on(function() {
 
   app.innerHTML= `
   <div class="div-1"></div>
-  <div class="recent_list">
-  <div class="title-n">Recent Participation</div>
-<div class="r-tab">
-  <div id="public" class="tab_item">Public</div>
-  <div id="board" class="tab_item">Board Exam Prep.</div>
-  <div id="admission" class="tab_item">Admission</div>
-  <div id="special" class="tab_item">Special</div>
-  <div id="daily" class="tab_item">Daily</div>
-  <div id="weekly" class="tab_item">Weekly</div>
-  <div id="monthly" class="tab_item">Monthly</div>
-  <div id="model" class="tab_item">Model Test</div>
-  </div>
-  <div class="r-list"></div>
-  </div>
+ 
   `
-  const list = document.querySelector('.r-list');
-  let ids= ['public', 'board', 'admission', 'special', 'daily', 'weekly', 'monthly', 'model'];
-  $(document).ready(function() {
-    $('#public').trigger('click');
-  })
-  $('.tab_item').click(function() {
-    let id = $(this)[0].id;
-    for(let i=0; i<ids.length; i++){
-      if($('#'+ids[i])[0].classList[1] === "r-tab-active"){
-        $('#'+ids[i]).removeClass("r-tab-active");
-      }
-    }
-    $('#'+id).addClass('r-tab-active');
-
-  db.ref('app/users/'+user.uid+'/allExams/'+id).on('value', ex=>{
-    list.innerHTML = "";
-    if(ex.val() === null) list.innerHTML = "<center>No Exam</center>";
-  ex.forEach(item=>{
-      list.innerHTML += `
-      <a href="#!/exam/public/${item.val().examID}"><div class="r-item">${item.val().name}</div></href>
-      `
-    })
-
-  })
-
-  })
 
   
   store.collection('public_exams').orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
@@ -1072,16 +1033,17 @@ db.ref('app/users').on('value', data=>{
        board.innerHTML = ``;
         let k = 0;
         data.forEach(item=>{
+          let inst = (item.inst).split('|');
           k++;
-        let time = item.time;
-        let min = parseInt(time/60);
-        let sec = ('0' + time%60).slice(-2); 
         if(k===1){
           board.innerHTML += `
           <div class="l">
           <div class="pandn">
           <div class="top-pos"><i class="icofont-award"></i></div>
+          <div>
           <div class="l-name">${item.username}</div>
+          <div class="instName">${inst[0]}</div>
+          </div>
           </div>
           <div class="sandt">
           <div class="l-score" >${item.score}</div>
@@ -1094,7 +1056,10 @@ db.ref('app/users').on('value', data=>{
           <div class="l" style="background-color: crimson; color:#fff; font-weight: bold;">
           <div class="pandn">
           <div class="u-pos">${k}</div>
+          <div>
           <div class="l-name">${item.username}</div>
+          <div class="instName">${inst[0]}</div>
+          </div>
           </div>
           <div class="sandt">
           <div class="l-score" style="color: #fff">${item.score}</div>
@@ -1106,7 +1071,10 @@ db.ref('app/users').on('value', data=>{
           <div class="l">
           <div class="pandn">
           <div class="u-pos">${k}</div>
+          <div>
           <div class="l-name">${item.username}</div>
+          <div class="instName">${inst[0]}</div>
+          </div>
           </div>
           <div class="sandt">
           <div class="l-score">${item.score}</div>
@@ -1655,10 +1623,6 @@ question_form.addEventListener('submit', e=> {
 "/myprofile" : function (){
   $('.app_loader').show();
     $('.footer').show();
-    $(document).ready(function(){
-      $('.modal').modal();
-      $('#modal1').modal('close');
-    });
 $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Profile</div>`);
    app.innerHTML=`
    <center class="profile">
@@ -1684,6 +1648,20 @@ $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animat
    </div>
 
    </center>
+   <div class="recent_list">
+   <div class="title-n">Recent Participation</div>
+ <div class="r-tab">
+   <div id="public" class="tab_item">Public</div>
+   <div id="board" class="tab_item">Board Exam Prep.</div>
+   <div id="admission" class="tab_item">Admission</div>
+   <div id="special" class="tab_item">Special</div>
+   <div id="daily" class="tab_item">Daily</div>
+   <div id="weekly" class="tab_item">Weekly</div>
+   <div id="monthly" class="tab_item">Monthly</div>
+   <div id="model" class="tab_item">Model Test</div>
+   </div>
+   <div class="r-list"></div>
+   </div>
    `;
 
 db.ref("app/users/"+user.uid).on('value', snap=>{
@@ -1703,6 +1681,34 @@ db.ref("app/users/"+user.uid).on('value', snap=>{
       i++;
       if(p.data().id===user.uid) $('.rank .number').text(i);
     })
+  });
+
+
+  const list = document.querySelector('.r-list');
+  let ids= ['public', 'board', 'admission', 'special', 'daily', 'weekly', 'monthly', 'model'];
+  $(document).ready(function() {
+    $('#public').trigger('click');
+  })
+  $('.tab_item').click(function() {
+    let id = $(this)[0].id;
+    for(let i=0; i<ids.length; i++){
+      if($('#'+ids[i])[0].classList[1] === "r-tab-active"){
+        $('#'+ids[i]).removeClass("r-tab-active");
+      }
+    }
+    $('#'+id).addClass('r-tab-active');
+
+  db.ref('app/users/'+user.uid+'/allExams/'+id).on('value', ex=>{
+    list.innerHTML = "";
+    if(ex.val() === null) list.innerHTML = "<center>No Exam</center>";
+  ex.forEach(item=>{
+      list.innerHTML += `
+      <a href="#!/exam/public/${item.val().examID}"><div class="r-item">${item.val().name}</div></href>
+      `
+    })
+
+  })
+
   });
 }
 

@@ -607,7 +607,8 @@ function shuffleArray(array) {
             weekly : snap.val().exams.weekly,
             totalExams : snap.val().exams.total,
             createPermission: snap.val().createPermission,
-            nickName: snap.val().nickName
+            nickName: snap.val().nickName,
+            group: snap.val().group
            }
         });
     }
