@@ -360,6 +360,8 @@ router.on({
   $('.footer').hide();
   $('.app_loader').show();
   $('.top_logo').html(`<div class="animate__animated animate__fadeInRight top_app_title"> </div>`);
+  app.innerHTML=`<span class="exam-doc"></div>`;
+  
   store.collection(params.ida+'_exams').doc(params.id).collection('leaderboard').orderBy("score", 'desc').onSnapshot(snap=> {
     $('.app_loader').hide();
     let taken = false;
@@ -376,7 +378,7 @@ router.on({
 
     if(taken){
       $('.footer').show();
-      app.innerHTML = `
+      $('.exam-doc').html(`
       <div class="ladder">
       <div class="menu_title"> <i class="icofont-people"></i> Leaderboard</div>
       <a href="#!/answersheet/${params.ida}/${params.id}|${mtime}"><div class="btn green">See Your Answer sheet</div></a>
@@ -384,7 +386,7 @@ router.on({
       <div id="board" class="board"></div>
       <div id="page"></div>
       </div>
-      `
+      `);
       
       
       $('#page').pagination({
@@ -436,7 +438,7 @@ router.on({
           let myexam = doc.data();
          if(new Date(myexam.details.end_date) > new Date() && new Date(myexam.details.start_date) < new Date()){
          
-          app.innerHTML = `
+          $('.exam-doc').html(`
               <div class="exam-container">
              <div class="exam_top">
               <div class="exam-title">
@@ -475,7 +477,7 @@ router.on({
              <center> <div class="submit btn red" id="submit">সাবমিট করো! </div></center>
              
               </div>
-          `;
+          `);
           $('.parc').hide();
           var ans = [],
             exp = [],
@@ -534,7 +536,7 @@ router.on({
           //timer
           var sec = 0;
           var minute = myexam.details.sl_duration;
-          var initialMin = myexam.details.duration;
+          var initialMin = myexam.details.sl_duration
          // console.log("exam: "+minute);
           // if(localStorage.getItem('sec') != null) sec = parseInt(localStorage.getItem('sec'));
           // if(localStorage.getItem('min') != null) minute = parseInt(localStorage.getItem('min'));
@@ -997,9 +999,11 @@ router.on({
     $($($('.rnk')[0].parentNode)[0].lastElementChild).show();
     $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Rank</div>`);
   }
+
+  app.innerHTML = `<span class="rank-doc"></div>`;
   store.collection("globalScore").orderBy("score", 'desc').onSnapshot(snap=> {
     $('.app_loader').hide();
-  app.innerHTML = `
+ $('.rank-doc').html(`
   <div class="ladder">
   <div class="top3content">
   <center>
@@ -1020,7 +1024,7 @@ router.on({
   <div id="board" class="board"></div>
   <div id="page"></div>
   </div>
-  `
+ `);
 
   let i=0;
   let ladder = [];
@@ -1118,22 +1122,22 @@ db.ref('app/users').on('value', data=>{
     $($($('.crt')[0].parentNode)[0].lastElementChild).show();
   }
   $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Create</div>`);
-  
+  app.innerHTML = `<span class="create-doc"></div>`;
   if(myData.createPermission == false || myData.createPermission == undefined){
     $('.app_loader').hide();
-app.innerHTML = `
+$('.create-doc').html(`
 <div class="warn">
 <div>
 <div class="warn-icon animate__bounceIn"><i class="icofont-warning"></i></div>
 You have no permission to create exam!
 </div>
 </div>
-`
+`)
   }else{
   db.ref('app/users/'+user.uid+'/create').on('value', snap=>{
     $('.app_loader').hide();
   if(snap.val().history.status===false){
-  app.innerHTML = `
+  $('.create-doc').html(`
   <div class="page1">
   <form id="details_form">
   <div class="input-field">
@@ -1275,7 +1279,7 @@ Select Expire Date:
   <center><button class="btn green" type="submit">Next</button></center>
   </form>
   </div>
-  `
+  `);
 const detalisform = document.querySelector('#details_form');
   $(document).ready( function () {
     $('#picker').dateTimePicker();
@@ -1548,9 +1552,10 @@ question_form.addEventListener('submit', e=> {
     $('.footertext').hide();
       $('.footerIcon').removeClass('footerIconActive');
       $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Edit Question</div>`);
+      app.innerHTML = `<span class="edit-q-doc"></span>`
   db.ref('app/users/'+user.uid+'/create/history/questions/'+params.id).on('value', snap=>{
     $('.app_loader').hide();
-    app.innerHTML = `
+    $('.edit-q-doc').html(`
     <div class="page1">
 <form id="question_form">
 <div class="input-field create-q" style="display: flex;">
@@ -1581,7 +1586,7 @@ question_form.addEventListener('submit', e=> {
 <center><button type="submit" class="btn red">Save</button><center>
 </form>
 </div>
-    `
+    `);
     $(document).ready(function () {
       $("select").formSelect();
     });
