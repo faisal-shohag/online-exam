@@ -137,6 +137,9 @@ router.on(function() {
   $('.top_logo').html(`<div class="animate__animated animate__fadeInLeft top_app_title"><i class="icofont-focus"></i> বৃত্ত</div>`);
 
   app.innerHTML= `
+  <div class="banner">
+  <img src="./images/banners/banner01.png"/>
+  </div>
   <div class="div-1"></div>
  
   `
