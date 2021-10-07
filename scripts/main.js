@@ -526,11 +526,15 @@ router.on({
               "font-weight": "bold",
             });
           });
+         
 
           //timer
           var sec = 0;
           var minute = myexam.details.sl_duration;
-          var initialMin = myexam.details.sl_duration;
+         // console.log("exam: "+minute);
+          // if(localStorage.getItem('sec') != null) sec = parseInt(localStorage.getItem('sec'));
+          // if(localStorage.getItem('min') != null) minute = parseInt(localStorage.getItem('min'));
+         // console.log("local: "+minute);
           var timer = setInterval(function () {
             if (sec === 0) {
               minute--;
@@ -543,8 +547,14 @@ router.on({
 
             if (minute <= 0 && sec <= 0) {
               $("#submit").click();
+              // localStorage.removeItem('sec');
+              // localStorage.removeItem('min');
               clearInterval(timer);
+              
             } else {
+              // localStorage.setItem('sec', sec);
+              // localStorage.setItem('min', min);
+              // console.log(localStorage.getItem('sec'))
               $(".countdown").html(
                 `<i class="icofont-stopwatch"></i> ${min} : ${secs}`
               );
@@ -563,6 +573,8 @@ router.on({
           $("#submit")
             .off()
             .click(function () {
+              // localStorage.removeItem('sec');
+              // localStorage.removeItem('min');
               $('.parc').show();
                   Swal.fire({
                     title: `Are you sure?`,
