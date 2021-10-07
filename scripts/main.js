@@ -1049,7 +1049,7 @@ db.ref('app/users').on('value', data=>{
           k++;
         if(k===1){
           board.innerHTML += `
-          <div class="l">
+          <a href="#!/profile/${item.id}"><div class="l">
           <div class="pandn">
           <div class="top-pos"><i class="icofont-award"></i></div>
           <div>
@@ -1062,12 +1062,12 @@ db.ref('app/users').on('value', data=>{
           <div></div>
           <div class="l-score" >${item.score}</div>
           </div>
-          </div>
+          </div></a>
           `
         }
         else if(item.id === user.uid){
           board.innerHTML += `
-          <div class="l" style="background-color: crimson; color:#fff; font-weight: bold;">
+          <a href="#!/profile/${item.id}"><div class="l" style="background-color: crimson; color:#fff; font-weight: bold;">
           <div class="pandn">
           <div class="u-pos">${k}</div>
           <div>
@@ -1079,11 +1079,11 @@ db.ref('app/users').on('value', data=>{
           <div></div>
           <div class="l-score" style="color: #fff">${item.score}</div>
           </div>
-          </div>
+          </div></a>
           `
         }else{
           board.innerHTML += `
-          <div class="l">
+          <a href="#!/profile/${item.id}"><div class="l">
           <div class="pandn">
           <div class="u-pos">${k}</div>
           <div>
@@ -1095,7 +1095,7 @@ db.ref('app/users').on('value', data=>{
           <div></div>
           <div class="l-score">${item.score}</div>
           </div>
-          </div>
+          </div></a>
           `
         }
         });
@@ -1644,6 +1644,7 @@ $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animat
    <center class="profile">
    <div class="imagexbig"><img src="${user.photoURL}"/></div>
    <div class="displayName">${user.displayName}<span class="nick"></span></div>
+   <div class="bio"></div>
    <div class="inst"> </div>
    <div class="dist"></div>
    <div class="score_card">
@@ -1686,7 +1687,8 @@ db.ref("app/users/"+user.uid).on('value', snap=>{
   $(".myscore .number").text(snap.val().scores.totalScore);
   $('.nick').text("("+snap.val().nickName+")");
   $('.inst').html(`<i class="icofont-institution"></i> ${snap.val().inst}`)
-  $('.dist').html(`<i class="icofont-building-alt"></i> ${snap.val().district}`)
+  $('.dist').html(`<i class="icofont-building-alt"></i> ${snap.val().district}`);
+  $('.bio').text(snap.val().bio);
   });
 
 
@@ -1726,7 +1728,64 @@ db.ref("app/users/"+user.uid).on('value', snap=>{
   })
 
   });
+},
+
+"/profile/:id" : function (params){
+  $('.app_loader').show();
+    $('.footer').show();
+$('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> <span id="prof_name">Profile</span></div>`);
+   app.innerHTML=`
+   <center class="profile">
+   <div class="imagexbig"></div>
+   <div class="displayName"><span class="nick"></span></div>
+   <div class="bio"></div>
+   <div class="inst"> </div>
+   <div class="dist"></div>
+   <div class="score_card">
+   <div class="rank cardXmed">   
+   <div class="number">...</div>
+   <div class="text"><i class="icofont-group-students"></i> অবস্থান</div>
+   </div>
+
+   <div class="exam cardXmed">
+   <div class="number">...</div>
+   <div class="text"><i class="icofont-clip-board"></i> পরীক্ষা</div>
+   </div>
+
+   <div class="myscore cardXmed">
+   <div class="number">...</div>
+   <div class="text"><i class="icofont-star-shape"></i> স্কোর</div>
+   </div>
+   </div>
+   </center>
+   `;
+
+db.ref("app/users/"+params.id).on('value', snap=>{
+  $('#dash').html("");
+  $(".exam .number").text(snap.val().exams.total);
+  $(".myscore .number").text(snap.val().scores.totalScore);
+  $('.nick').text("("+snap.val().nickName+")");
+  $('.inst').html(`<i class="icofont-institution"></i> ${snap.val().inst}`);
+  $('.dist').html(`<i class="icofont-building-alt"></i> ${snap.val().district}`);
+  $('.imagexbig').html(`<img src="${snap.val().photoURL}"/>`);
+  $('.displayName').html(`${snap.val().name}`);
+  $('#prof_name').text(snap.val().name);
+  $('.bio').text(snap.val().bio);
+  $('.nick').text("("+snap.val().nickName+")");
+  });
+
+
+  store.collection("globalScore").orderBy("score", 'desc').onSnapshot(snap=> {
+    $('.app_loader').hide();
+    let i=0;
+    snap.forEach(p=>{
+      i++;
+      if(p.data().id===params.id) $('.rank .number').text(i);
+    })
+  });
+
 }
+
 
 }).resolve();
 
