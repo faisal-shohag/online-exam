@@ -534,6 +534,7 @@ router.on({
           //timer
           var sec = 0;
           var minute = myexam.details.sl_duration;
+          var initialMin = myexam.details.duration;
          // console.log("exam: "+minute);
           // if(localStorage.getItem('sec') != null) sec = parseInt(localStorage.getItem('sec'));
           // if(localStorage.getItem('min') != null) minute = parseInt(localStorage.getItem('min'));
