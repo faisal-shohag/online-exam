@@ -613,4 +613,3 @@ function shuffleArray(array) {
         });
     }
 });
-

@@ -1067,7 +1067,7 @@ db.ref('app/users').on('value', data=>{
         }
         else if(item.id === user.uid){
           board.innerHTML += `
-          <a href="#!/profile/${item.id}"><div class="l" style="background-color: crimson; color:#fff; font-weight: bold;">
+          <a href="#!/myprofile"><div class="l" style="background-color: crimson; color:#fff; font-weight: bold;">
           <div class="pandn">
           <div class="u-pos">${k}</div>
           <div>
