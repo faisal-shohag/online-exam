@@ -610,6 +610,8 @@ function shuffleArray(array) {
             nickName: snap.val().nickName,
             group: snap.val().group
            }
+           localStorage.setItem('group', snap.val().group);
         });
+        
     }
 });

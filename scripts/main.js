@@ -156,8 +156,10 @@ router.on(function() {
       setTimeout(autoplay, 9000);
     }
   });
-  
-  store.collection('public_exams').orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
+  if(localStorage.getItem('group') === null){
+    window.document.reload();
+  }
+  store.collection('public_exams').where('details.sl_group', '==', localStorage.getItem('group')).orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
     let rncount = 0, upcount=0, endcount=0;
     $('.app_loader').hide();
     $('.div-1').html(`<div class="h-menu">
