@@ -150,11 +150,11 @@ router.on(function() {
       indicators: true,
       fullWidth: true,
     });
-    autoplay();
-    function autoplay() {
-      $('.carousel').carousel('next');
-      setTimeout(autoplay, 9000);
-    }
+    // autoplay();
+    // function autoplay() {
+    //   $('.carousel').carousel('next');
+    //   setTimeout(autoplay, 9000);
+    // }
   });
   if(localStorage.getItem('group') === null){
     window.location.reload();
