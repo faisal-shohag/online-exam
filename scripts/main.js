@@ -150,11 +150,11 @@ router.on(function() {
       indicators: true,
       fullWidth: true,
     });
-    // autoplay();
-    // function autoplay() {
-    //   $('.carousel').carousel('next');
-    //   setTimeout(autoplay, 4500);
-    // }
+    autoplay();
+    function autoplay() {
+      $('.carousel').carousel('next');
+      setTimeout(autoplay, 9000);
+    }
   });
   
   store.collection('public_exams').orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
