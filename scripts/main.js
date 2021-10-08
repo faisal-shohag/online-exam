@@ -122,7 +122,7 @@ db.ref('app/users/'+user.uid).on('value', p=>{
   }else{
     $('.details_form').hide();
   }
-})
+});
 
 
 router.on(function() {
@@ -157,11 +157,24 @@ router.on(function() {
     //   setTimeout(autoplay, 9000);
     // }
   });
-  // if(localStorage.getItem('group') === null){
-  //   window.location.reload();
-  // }
-  store.collection('public_exams').where('details.sl_group', '==', localStorage.getItem('group')).orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
-    let rncount = 0, upcount=0, endcount=0;
+
+  
+  function waitUntillVariable() {
+    return new Promise(resolve => {
+      var data = myData;
+     var st = setInterval(() => {
+        data = myData;
+        if(data != ''){
+         clearInterval(st);
+         resolve(data);
+        }
+      }, 1000);
+    })
+  }
+  (async()=>{
+    await waitUntillVariable();
+  store.collection('public_exams').where('details.sl_group', '==', myData.group).orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
+    let rncount = 0, upcount=0, endcount=0 
     $('.app_loader').hide();
     $('.div-1').html(`<div class="h-menu">
     <div class="menu_title"><i class="icofont-people"></i> Public Exams</div>
@@ -187,6 +200,7 @@ router.on(function() {
     $('#up_count').text(upcount);
     $('#end_count').text(endcount);
   });
+})();
 }).resolve();
 
 

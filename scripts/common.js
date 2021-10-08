@@ -588,7 +588,7 @@ function shuffleArray(array) {
     return array;
   }
 
-  var myData;
+  var myData = '';
   
   firebase.auth().onAuthStateChanged((user)=>{
     $('.loading').hide();
