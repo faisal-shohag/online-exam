@@ -397,10 +397,10 @@ router.on({
     });
 
     if(taken){
+      $('.top_logo').html(`<div class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-people"></i>  Leaderboard</div>`);
       $('.footer').show();
       $('.exam-doc').html(`
       <div class="ladder">
-      <div class="menu_title"> <i class="icofont-people"></i> Leaderboard</div>
       <a href="#!/answersheet/${params.ida}/${params.id}|${mtime}"><div class="btn green">See Your Answer sheet</div></a>
       <div class="my_pos"><i class="icofont-focus"></i> Your Position: <span id="pos"></span></div>
       <div id="board" class="board"></div>
@@ -792,6 +792,8 @@ router.on({
     }
   });
 },
+
+
 "/answersheet/:ida/:id": function(params) {
   $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Answersheet</div>`);
   $('.app_loader').show();
@@ -1937,6 +1939,7 @@ if (result.isConfirmed) {
 })
 
 },
+
 
 
 
