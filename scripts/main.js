@@ -7,6 +7,7 @@ $(document).ready(function(){
 
 firebase.auth().onAuthStateChanged((user)=>{
   $('.loading').hide();
+
   if(user){
     $('.top').show();
     $('.image').html(`<img src="${user.photoURL}"/>`)
