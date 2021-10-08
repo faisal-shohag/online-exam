@@ -157,9 +157,9 @@ router.on(function() {
     //   setTimeout(autoplay, 9000);
     // }
   });
-  if(localStorage.getItem('group') === null){
-    window.location.reload();
-  }
+  // if(localStorage.getItem('group') === null){
+  //   window.location.reload();
+  // }
   store.collection('public_exams').where('details.sl_group', '==', localStorage.getItem('group')).orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
     let rncount = 0, upcount=0, endcount=0;
     $('.app_loader').hide();
