@@ -5,9 +5,8 @@ $(document).ready(function(){
 });
 
 
-firebase.auth().onAuthStateChanged((user)=>{
-  $('.loading').hide();
 
+firebase.auth().onAuthStateChanged((user)=>{
   if(user){
     $('.top').show();
     $('.image').html(`<img src="${user.photoURL}"/>`)
@@ -123,8 +122,19 @@ db.ref('app/users/'+user.uid).on('value', p=>{
     $('.details_form').hide();
   }
 });
-
-
+$('.app_loader').show();
+(async()=>{
+  console.log('Waiting....');
+  await new Promise(resolve=>{
+    let st = setInterval(()=>{
+      let data = myData;
+      if(data != ''){
+        clearInterval(st);
+        resolve();
+      }
+    }, 500);
+  })
+  $('.app_loader').hide();
 router.on(function() {
   $('.footer').show();
   $('.app_loader').show();
@@ -151,28 +161,9 @@ router.on(function() {
       indicators: true,
       fullWidth: true,
     });
-    // autoplay();
-    // function autoplay() {
-    //   $('.carousel').carousel('next');
-    //   setTimeout(autoplay, 9000);
-    // }
   });
 
   
-  function waitUntillVariable() {
-    return new Promise(resolve => {
-      var data = myData;
-     var st = setInterval(() => {
-        data = myData;
-        if(data != ''){
-         clearInterval(st);
-         resolve(data);
-        }
-      }, 1000);
-    })
-  }
-  (async()=>{
-    await waitUntillVariable();
   store.collection('public_exams').where('details.sl_group', '==', myData.group).orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
     let rncount = 0, upcount=0, endcount=0 
     $('.app_loader').hide();
@@ -200,7 +191,6 @@ router.on(function() {
     $('#up_count').text(upcount);
     $('#end_count').text(endcount);
   });
-})();
 }).resolve();
 
 
@@ -228,8 +218,6 @@ router.on({
       if(n=="0") return "";
       return "·-"+n;
     }
-    console.log(data.details.sl_group);
-    //if(data..deatails.sl_group == myData.group){
     if(params.id2==="running"){
     $('#all_t').html(`<i class="icofont-hand-drag1"></i> Running`)
     if(new Date(data.details.end_date) > new Date() && new Date(data.details.start_date) < new Date()){
@@ -1156,22 +1144,6 @@ db.ref('app/users').on('value', data=>{
   $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Create</div>`);
   app.innerHTML = `<span class="create-doc"></div>`;
    
-   function Resolve() {
-    return new Promise(resolve=>{
-     let st = setInterval(()=>{
-       data = myData;
-       if(data != ''){
-         clearInterval(st);
-         resolve();
-       }
-     }, 1000);
-    });
-   }
-
-  (async()=>{
-    console.log('waiting');
-    await Resolve();
-    console.log('found')
   if(myData.createPermission == false){
     $('.app_loader').hide();
 $('.create-doc').html(`
@@ -1462,8 +1434,6 @@ question_form.addEventListener('submit', e=> {
 }
 });
 }
-})();
-  
 },
 
 "edit_exam":function(){
@@ -2000,6 +1970,7 @@ if (result.isConfirmed) {
     }
     return id;
   }
+})();
 
 }else{
   $('.footer').hide();
