@@ -200,7 +200,7 @@ router.on({
   </div>
   `;
  const examlist = document.querySelector('.examlist');
- store.collection(params.id+'_exams').orderBy("publish_date", 'desc').limit(20).onSnapshot(snap=> {
+ store.collection(params.id+'_exams').where('details.sl_group', '==', myData.group).orderBy("publish_date", 'desc').limit(20).onSnapshot(snap=> {
   examlist.innerHTML = "";
    clearInterval(timer);
    $('.app_loader').hide();
@@ -211,6 +211,8 @@ router.on({
       if(n=="0") return "";
       return "·-"+n;
     }
+    console.log(data.details.sl_group);
+    //if(data..deatails.sl_group == myData.group){
     if(params.id2==="running"){
     $('#all_t').html(`<i class="icofont-hand-drag1"></i> Running`)
     if(new Date(data.details.end_date) > new Date() && new Date(data.details.start_date) < new Date()){
@@ -288,6 +290,7 @@ router.on({
               </div>  </a>`
           }
     }
+  //}
   });
 
   $('.no_password').click(function(){
