@@ -1155,7 +1155,24 @@ db.ref('app/users').on('value', data=>{
   }
   $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Create</div>`);
   app.innerHTML = `<span class="create-doc"></div>`;
-  if(myData.createPermission == false || myData.createPermission == undefined){
+   
+   function Resolve() {
+    return new Promise(resolve=>{
+     let st = setInterval(()=>{
+       data = myData;
+       if(data != ''){
+         clearInterval(st);
+         resolve();
+       }
+     }, 1000);
+    });
+   }
+
+  (async()=>{
+    console.log('waiting');
+    await Resolve();
+    console.log('found')
+  if(myData.createPermission == false){
     $('.app_loader').hide();
 $('.create-doc').html(`
 <div class="warn">
@@ -1312,6 +1329,7 @@ Select Expire Date:
   </form>
   </div>
   `);
+
 const detalisform = document.querySelector('#details_form');
   $(document).ready( function () {
     $('#picker').dateTimePicker();
@@ -1347,7 +1365,7 @@ detalisform.addEventListener('submit', e=>{
     $("select").formSelect();
   });
 }else{
-app.innerHTML = `
+  $('.create-doc').html( `
 <div class="head1">
 <button class="btn red publish" id="publish_exam red"><i class="icofont-ui-clip-board left"></i></i> Publish</button>
 <div class="cnt"><div class="counter">0</div> <div id="confirm" class="animate__animated animate__fadeIn"><div class="confirm"><i class="icofont-ui-check"></i></div></div></div>
@@ -1383,7 +1401,8 @@ app.innerHTML = `
 <center><button type="submit" class="btn red">Add Question</button><center>
 </form>
 </div>
-`
+`)
+
 
 $('.publish').click(function(){
    let exam = snap.val().history;
@@ -1442,7 +1461,8 @@ question_form.addEventListener('submit', e=> {
 
 }
 });
-  }
+}
+})();
   
 },
 
