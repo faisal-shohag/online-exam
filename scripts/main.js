@@ -157,7 +157,7 @@ router.on(function() {
     }
   });
   if(localStorage.getItem('group') === null){
-    window.document.reload();
+    window.location.reload();
   }
   store.collection('public_exams').where('details.sl_group', '==', localStorage.getItem('group')).orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
     let rncount = 0, upcount=0, endcount=0;
@@ -1669,7 +1669,7 @@ $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animat
    app.innerHTML=`
    <center class="profile">
    <a href="#!/edit_profile"><div class="prof-edit-icon animate__animated animate__backInRight animte__faster"><i class="icofont-pencil-alt-3"></i></div></a>
-   <div class="imagexbig"><img src="${user.photoURL}"/></div>
+   <div class="img"><div class="grp">${tag[myData.group]}</div><div class="imagexbig"><img src="${user.photoURL}"/></div></div>
    <div class="displayName">${user.displayName}<span class="nick"></span></div>
    <div class="bio"></div>
    <div class="inst"> </div>
@@ -1763,7 +1763,7 @@ db.ref("app/users/"+user.uid).on('value', snap=>{
 $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> <span id="prof_name">Profile</span></div>`);
    app.innerHTML=`
    <center class="profile">
-   <div class="imagexbig"></div>
+   <div class="img"><div class="grp"></div><div class="imagexbig"></div></div>
    <div class="displayName"><span class="name"></span><span class="nick"></span></div>
    <div class="bio"></div>
    <div class="inst"> </div>
@@ -1799,6 +1799,7 @@ db.ref("app/users/"+params.id).on('value', snap=>{
   $('#prof_name').text(snap.val().name);
   $('.bio').text(snap.val().bio);
   $('.nick').text("("+snap.val().nickName+")");
+  $('.grp').html(`${tag[snap.val().group]}`);
   });
 
 

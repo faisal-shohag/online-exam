@@ -799,5 +799,23 @@ color: rgb(17, 98, 248);
 }
 
 .carousel img{
-  height: 174.844px;
+  height: 160.844px;
+}
+
+.img{
+  position: relative;
+  height: 80px;
+  width: 80px;
+}
+.grp{
+ position: absolute;
+ bottom: -5%;
+ text-align: center;
+ width: 100%;
+ background: rgb(247, 244, 245);
+ color: #462ca3;
+ font-weight: bold;
+ border-radius: 3px;
+ box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+ font-size: 10px;
 }
