@@ -1674,6 +1674,7 @@ $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animat
    <div class="bio"></div>
    <div class="inst"> </div>
    <div class="dist"></div>
+   <div class="line"></div>
    <div class="score_card">
    <div class="rank cardXmed">
    <div class="number">...</div>
@@ -1768,6 +1769,7 @@ $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animat
    <div class="bio"></div>
    <div class="inst"> </div>
    <div class="dist"></div>
+   <div class="line"></div>
    <div class="score_card">
    <div class="rank cardXmed">   
    <div class="number">...</div>

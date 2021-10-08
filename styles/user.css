@@ -759,3 +759,12 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
     color: rgb(150, 147, 144);
     line-height: 0.1px;
 }
+
+.line{
+    /* border: 0.2px solid  #dad6d6; */
+    margin-top: 5px;
+    height: 1px;
+    width: 100%;
+    background:  #bdbcbc;
+    border-radius: 2px;
+}
