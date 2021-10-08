@@ -793,3 +793,7 @@ color: rgb(17, 98, 248);
   min-height: 150px;
   width: 100%;
 }
+
+.carousel{
+  height: 174.844px !important;
+}
