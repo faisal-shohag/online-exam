@@ -4,6 +4,16 @@ body {
    
 }
 
+body:fullscreen {
+  background-color: #fff;
+}
+body:-webkit-full-screen {
+  background-color: #fff;
+}
+body:-moz-full-screen {
+  background-color: #fff;
+}
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;

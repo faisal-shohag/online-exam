@@ -47,13 +47,14 @@ MathJax = {
   <div class="top_logo"><i class="icofont-focus"></i> </div>
   <div class="countdown"></div>
 <div class="wrap">
-  <div class="btn" onlclick="requestFullScreen()">Full Screen</div>
+  <div class="btn" onclick="requestFullScreen()">Full Screen</div>
   <a  href="#!/myprofile"><div class="image"></div></a>
 </div>
 
 <script>
-  var elem = document.querySelector('body');
-    function requestFullScreen(elem) {
+  var element = document.documentElement;
+    function requestFullScreen() {
+      console.log('clicked')
     // Supports most browsers and their versions.
     var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
 
