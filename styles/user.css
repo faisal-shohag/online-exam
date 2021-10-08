@@ -726,3 +726,36 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
     font-size: 20px;
     font-weight: normal;
 }
+
+.prof-edit-icon{
+    position: fixed;
+    right: 10%;
+    top: 10%;
+    background: #fff;
+    font-size: 20px;
+    padding: 5px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    color: #e23131;
+
+}
+
+.prof-edit-icon::after{
+    content: 'Edit';
+    position: absolute;
+    font-size: 10px;
+    bottom: -55%;
+    font-weight: bold;
+    color: #a8a2a2;
+}
+
+#edit_profile small{
+    color: rgb(150, 147, 144);
+    line-height: 0.1px;
+}

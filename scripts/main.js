@@ -1651,6 +1651,7 @@ question_form.addEventListener('submit', e=> {
 $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Profile</div>`);
    app.innerHTML=`
    <center class="profile">
+   <a href="#!/edit_profile"><div class="prof-edit-icon animate__animated animate__backInRight animte__faster"><i class="icofont-pencil-alt-3"></i></div></a>
    <div class="imagexbig"><img src="${user.photoURL}"/></div>
    <div class="displayName">${user.displayName}<span class="nick"></span></div>
    <div class="bio"></div>
@@ -1793,7 +1794,125 @@ db.ref("app/users/"+params.id).on('value', snap=>{
     })
   });
 
+},
+
+"edit_profile": function(params) {
+  $('.app_loader').show();
+  $('.footer').show();
+$('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> <span id="prof_name">Edit Profile</span></div>`);
+app.innerHTML = `
+<br>
+<form id="edit_profile">
+<small>Nick name</small>
+<div class="input_field">
+<input name="nick" type="text" placeholder="Nick Name" required/>
+</div>
+
+<div class="input-field col s12">
+<small>Group</small>
+<select name="sl_group_info" required>
+  <option value="" disabled selected>Select Group</option>
+  <option value="sci">Science</option>
+  <option value="com">Commerce</option>
+  <option value="hum">Humanity</option>
+  <option value="none">Other/None</option>
+  </select>
+  </div>
+  <small>Educational Institute</small>
+  <div class="input_field">
+  <input name="inst" type="text" placeholder="Institution" required/>
+  </div>
+ <div class="dist_list"></div>
+ <small>Phone</small>
+ <div class="input_field">
+ <input name="phone" type="number" placeholder="Phone" required/>
+ </div>
+ <small>Bio</small>
+ <div class="input_field">
+ <input name="bio" type="text" placeholder="Bio" required/>
+ </div>
+<center><button type="submit" class="btn green">Edit</button></center>
+</form>
+`;
+const gi = document.getElementById('edit_profile');
+
+db.ref('app/users/'+user.uid).on('value', p=>{
+  gi.nick.value = p.val().nickName;
+  gi.sl_group_info.value = p.val().group;
+ gi.inst.value = p.val().inst;
+ gi.phone.value = p.val().phone;
+  gi.bio.value = p.val().bio;
+ 
+
+
+fetch('./scripts/districts.json')
+.then(res=>res.json())
+.then(data=>{
+  $('.app_loader').hide();
+  let html = `<div class="input-field col s12"><small>District</small><select name="sl_dist_info" required><option value="" disabled>জেলা</option>`;
+  for(let i=0; i<data.districts.length; i++){
+    if(p.val().district == data.districts[i].bn_name){
+      html+=`
+      <option value="${data.districts[i].bn_name}" selected>${data.districts[i].bn_name}</option>
+      `
+    }else{
+    html+=`
+    <option value="${data.districts[i].bn_name}">${data.districts[i].bn_name}</option>
+    `}
+  }
+  html += ` </select></div>`;
+
+  $('.dist_list').html(html);
+  $(document).ready(function () {
+    $("select").formSelect();
+  });
+})
+
+$(document).ready(function () {
+  $("select").formSelect();
+});
+
+});
+
+
+
+
+gi.addEventListener('submit', e=>{
+e.preventDefault();
+var data = {
+ nickName: gi.nick.value,
+ group: gi.sl_group_info.value,
+ inst: gi.inst.value,
+ district: gi.sl_dist_info.value,
+ phone: gi.phone.value,
+ bio: gi.bio.value,
 }
+Swal.fire({
+title: 'Do you want to save the changes?',
+showDenyButton: true,
+showCancelButton: true,
+confirmButtonText: 'Save',
+denyButtonText: `Don't save`,
+}).then((result) => {
+/* Read more about isConfirmed, isDenied below */
+if (result.isConfirmed) {
+  Swal.fire('Saved!', '', 'success');
+  db.ref('app/users/'+user.uid).update(data);
+  store.collection('globalScore').doc(user.uid).update({
+    username: data.nickName,
+    inst: data.inst +"|"+data.group
+  });
+  window.history.back();
+} else if (result.isDenied) {
+  Swal.fire('Changes are not saved', '', 'info');
+  window.history.back();
+}
+})
+
+})
+
+},
+
 
 
 }).resolve();
