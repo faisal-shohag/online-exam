@@ -137,13 +137,25 @@ router.on(function() {
   $('.top_logo').html(`<div class="animate__animated animate__fadeInLeft top_app_title"><i class="icofont-focus"></i> বৃত্ত</div>`);
 
   app.innerHTML= `
-  <div class="banner">
-  <img src="./images/banners/banner01.png"/>
+  <div class="carousel carousel-slider center">
+  <a class="carousel-item" href="#one!"><img src="./images/banners/banner01.png"></a>
+  <a class="carousel-item" href="#two!"><img src="./images/banners/banner02.png"></a>
   </div>
+
   <div class="div-1"></div>
  
   `
-
+  $(document).ready(function(){
+    $('.carousel').carousel({
+      indicators: true,
+      fullWidth: true,
+    });
+    // autoplay();
+    // function autoplay() {
+    //   $('.carousel').carousel('next');
+    //   setTimeout(autoplay, 4500);
+    // }
+  });
   
   store.collection('public_exams').orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
     let rncount = 0, upcount=0, endcount=0;
