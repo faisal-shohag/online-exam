@@ -68,7 +68,7 @@ body:-moz-full-screen {
   position: fixed;
   top: 0;
   left: 0;
-  background: #543bad46;
+  background: #543bad70;
   width: 100%;
   box-shadow: 0px 0.1px 2px rgba(0, 0, 0, 0.5);
   padding: 5px;
@@ -150,15 +150,18 @@ label,
   width: 100%;
   bottom: 0;
   z-index: 99;
-  background: linear-gradient(45deg, rgba(88, 30, 182, 0.933), rgba(44, 20, 153, 0.933));
+  background: #fff;
+  /* background: linear-gradient(45deg, rgba(88, 30, 182, 0.933), rgba(44, 20, 153, 0.933)); */
   box-shadow: 0 -2px 5px 0px rgba(0, 0, 0, 0.2);
   padding: 0px 15px;
   height: 55px;
   font-family: Hind Siliguri;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
 }
 
 .footer a {
-  color: #e4dede;
+  color: #817b7b;
 }
 
 .footerMenu {
@@ -194,14 +197,14 @@ label,
   text-align: center;
   bottom: -60%;
   /* font-family: SolaimanLipi; */
-  color: rgb(241, 226, 226);
+  color: #2f158b;
 }
 
 .footerIconActive {
   font-size: 30px;
   font-weight: bold;
   transition: 0.1s;
-  color: rgb(214, 205, 205);
+  color: #3213a1;
 }
 
 .page1 {
