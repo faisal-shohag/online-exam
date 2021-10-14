@@ -116,8 +116,8 @@ margin-right: 10px;
 .lds-roller {
     display: inline-block;
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 40px;
+    height: 40px;
   }
   .lds-roller div {
     animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
@@ -130,7 +130,7 @@ margin-right: 10px;
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: rgb(158, 68, 68);
+    background: rgb(99, 75, 187);
     margin: -4px 0 0 -4px;
   }
   .lds-roller div:nth-child(1) {
@@ -628,6 +628,7 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
 .top1, .top2, .top3{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
 .top1{
     height: 80px;
     width: 80px;
@@ -635,7 +636,7 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
     border-radius: 50%;
     display: flex;
     justify-content: center;
-    border: 3px solid rgb(255, 255, 255);
+    border: 3px solid rgb(247, 230, 187);
     margin: 0;
 }
 
@@ -742,12 +743,39 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
     height: 30px;
     width: 30px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    color: #e23131;
+    color: #49bd1b;
 
+}
+
+.logout-icon{
+    position: fixed;
+    left: 10%;
+    top: 10%;
+    background: #fff;
+    font-size: 20px;
+    padding: 5px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    color: #e23131;
 }
 
 .prof-edit-icon::after{
     content: 'Edit';
+    position: absolute;
+    font-size: 10px;
+    bottom: -55%;
+    font-weight: bold;
+    color: #a8a2a2;
+}
+
+.logout-icon::after{
+    content: 'Logout';
     position: absolute;
     font-size: 10px;
     bottom: -55%;
