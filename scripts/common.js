@@ -494,6 +494,10 @@ var tag = {
   "eng"  : "ইঞ্জিনিয়ারিং",
 };
 
+function firstLetter(str){
+  return str[0];
+}
+
 var optionsTag = {
     "1" : "A",
     "2" : "B",
@@ -577,6 +581,12 @@ timer = setInterval(function() {
 }, 1000);
 }
 
+let ansOpt = {
+    1: "A",
+    2: "B",
+    3: "C",
+    4: "D"
+}
 
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {

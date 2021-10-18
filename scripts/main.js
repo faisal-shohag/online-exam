@@ -139,20 +139,25 @@ router.on(function() {
   $('.top_logo').html(`<div class="animate__animated animate__fadeInLeft top_app_title"><i class="icofont-focus"></i> বৃত্ত</div>`);
 
   app.innerHTML= `
-  <div class="carousel carousel-slider">
-  <a class="carousel-item" href="#one!"><img src="./images/banners/banner01.png"></a>
-  <a class="carousel-item" href="#two!"><img src="./images/banners/banner02.png"></a>
-  </div>
-
   <div class="div-1"></div>
+
+  <div class="sl">
+
+  <div class="title-n"><i class="icofont-education"></i> বিষয়ভিত্তিক প্রাকটিস</div>
+
+
+  <a href="#!/practice/subject/b1"><div class="sl_menu">
+  <div class="sl_item">
+  <div class="sl_icon"><i class="icofont-book"></i></div>
+  <div class="sl_name">বাংলা ১ম পত্র</div>
+  </div></a>
+  
+
+
+</div>
+  </div>
  
   `
-  $(document).ready(function(){
-    $('.carousel').carousel({
-      indicators: true,
-      fullWidth: true,
-    });
-  });
 
   
   store.collection('public_exams').where('details.sl_group', '==', myData.group).orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
@@ -961,12 +966,357 @@ router.on({
  
 },
 
-"/practice/:id": function(params){
-  $('.footer').hide();
-  $('.app_loader').show();
-  $('.top_logo').html(`<div class="animate__animated animate__fadeInRight top_app_title"> Practice</div>`);
-
+"/practice/subject/:id": function(params){
+  // $('.footer').hide();
+  // $('.app_loader').show();
+  $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> ${tag[params.id]}</div>`);
+  app.innerHTML = `
+  <div class="chapters">
+ <a href="#!/practice/list/${params.id}/chap-1/অপরিচিতা"> <div class="chap_item"><div><div class="name_logo">অ</div></div><div><div class="chapterName">অপরিচিতা</div><div class="author">রবীন্দ্রনাথ ঠাকুর</div></div></div></a>
+  </div>
+  `
 },
+"/practice/list/:subj/:chap/:chapName": function(params){
+  // $('.footer').hide();
+  $('.app_loader').show();
+  $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> ${params.chapName}</div>`);
+  app.innerHTML = `
+  <div class="chapters" id="chaps">
+  </div>
+  `
+  store.collection('subjectExams').doc(params.subj).collection(params.chap).onSnapshot(snap=>{
+    $('.app_loader').hide();
+    const ex = document.querySelector('#chaps');
+    ex.innerHTML="";
+    
+    snap.forEach(item=>{
+      ex.innerHTML += `
+      <a href="#!/practice/nb/${params.subj}/${params.chap}/${item.id}"> <div class="chap_item"><div><div class="name_logo">${firstLetter(item.data().details.exam_name)}</div></div><div><div class="chapterName">${item.data().details.exam_name}</div><div class="author">${item.data().questions.length}টি প্রশ্ন</div></div></div></a>
+      `
+    })
+  })
+},
+
+"/practice/nb/:subj/:chap/:key": function(params){
+  // $('.footer').hide();
+  // $('.app_loader').show();
+  $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Before Exam</div>`);
+  app.innerHTML = `
+  <div class="prac_nb">
+ <div class="nb-bdy">
+ <div class="nb-t"> <i class="icofont-eye-open"></i> লক্ষ্য করো</div>
+ <ul>
+ <li>প্রাকটিস পরীক্ষার মার্ক রাঙ্ক এর সাথে যুক্ত হবে না।</li>
+ <li>প্রাকটিস পরীক্ষাগুলি যেকোনো সময় দেয়া যাবে।</li>
+ <li>প্রাকটিস পরীক্ষাগুলির সময় এবং নেগেটিভ মার্ক নিচে দেয়া অপশন থেকে নিজের মত বেঁছে নেয়া যাবে।</li>
+ <li>সময় এবং নেগেটিভ মার্ক বেঁছে না নিলে স্বয়ংক্রিয়ভাবে সময় 15 minutes এবং নেগেটিভ মার্ক 0 বলে গণ্য হবে।</li>
+ <li>পরীক্ষাগুলির জন্য আপাতত কোনো লিডারবোর্ড থাকছে না।</li>
+ </ul>
+</div>
+  </div>
+
+  <form id="chooseForm">
+  <div class="nb-t"><i class="icofont-touch"></i> বেঁছে নাওঃ (Optional)</div>
+  <div class="input_field">
+  <input name="ch_time" placeholder="Duration" type="number"></div>
+  </div>
+ 
+  <div class="input-field col s12">
+     <select name="ch_neg">
+       <option value="" disabled selected>Choose Negative Mark for each wrong answer</option>
+       <option value="0">No negative</option>
+       <option value="0.25">0.25</option>
+       <option value="0.50">0.50</option>
+       <option value="1">1</option>
+       <option value="1.25">1.25</option>
+       <option value="1.50">1.50</option>
+       <option value="1.75">1.75</option>
+       <option value="2">2</option>
+     </select>
+   </div>
+ <button id="sub" type="submit" class="btn green">শুরু করো</button>
+ </form>
+  `
+      let choose = document.getElementById('chooseForm');
+      console.log(chooseForm);
+      choose.addEventListener('submit', a=>{
+        a.preventDefault();
+        console.log('submitted');
+        let chTime = 15;
+        let chNeg = 0;
+        if(choose.ch_time.value != ""){
+         chTime = choose.ch_time.value;
+        }
+        if(choose.ch_neg.value != ""){
+          chNeg = choose.ch_neg.value;
+         }
+         router.navigate('practice/exam/'+params.subj +'/'+params.chap+'/'+params.key+'/'+chTime+'~'+chNeg);
+      });
+
+      $(document).ready(function(){
+        $('select').formSelect();
+      });
+},
+"practice/exam/:subj/:chap/:key/:choice": function(params){
+  // $('.footer').hide();
+  $('.app_loader').show();
+  $('.top_logo').html(`<div class="animate__animated animate__fadeInRight top_app_title"> </div>`);
+  app.innerHTML=`<span class="exam-doc"></div>`;
+  var ch = (params.choice).split('~');
+  store.collection('subjectExams').doc(params.subj).collection(params.chap).doc(params.key).onSnapshot(snap=> {
+    $('.app_loader').hide();
+          $('.countdown').show();
+          let myexam = snap.data();
+          $('.exam-doc').html(`
+              <div class="exam-container">
+             <div class="exam_top">
+              <div class="exam-title">
+              <div class="courseName">বৃত্ত প্রাকটিস</div>
+              ${myexam.details.exam_name}<br><small>সময়ঃ ${ch[0]}মিনিট | প্রশ্নঃ ${myexam.questions.length}টি</small></div>
+              <small>by ${myexam.details.maker}</small>
+              <div style="display: none;" class="score">
+              <div class="mark"></div>
+              <div class="score-wa"></div>
+              <div class="score-na"></div>
+              <div class="score-time"></div>
+              </div>
+              <div class="exam-nb"></div>
+             </div>
+             <div class="parc">
+             <div>
+             Obtained
+             <div class="parcentage" id="correctP"></div>
+             </div>
+             <div>
+             Wrong
+             <div class="parcentage" id="wrongP"></div>
+             </div>
+             <div>
+             Negative
+             <div class="parcentage" id="negativeP"></div>
+             </div>
+             <div>
+             Answered
+             <div class="parcentage" id="answeredP"></div>
+             </div>
+             </div>
+          
+              <div class="questions"></div>
+             
+             <center> <div class="submit btn red" id="submit">সাবমিট করো! </div></center>
+             
+              </div>
+          `);
+          $('.parc').hide();
+          var ans = [],
+            exp = [],
+            userAns = [],
+            score = 0,
+            wrong = 0,
+            na = 0,
+            neg = parseFloat(ch[1]);
+          questions = myexam.questions;
+          $(".exam-nb").html(`${myexam.details.notice}`);
+
+           for (let q = 0; q <questions.length; q++) {
+            $(".score").hide();
+            ans.push(parseInt(questions[q].ans)+q*4);
+            exp.push(questions[q].ex);
+            var elem = document.querySelector(".exam-container .questions");
+            document.querySelector(".exam-container .questions").innerHTML += `
+               <div class="q-wrap">
+                      <div class="q-logo"></div>
+                  <div class="question">
+                     ${q + 1}. ${questions[q].q}
+                  </div>
+                  <div class="option">
+                      <div class="opt" id="${
+                        q + 1 + q * 3
+                      }"><div class="st"></div>${questions[q].opt[0]}</div>
+                      <div class="opt" id="${
+                        q + 2 + q * 3
+                      }"><div class="st"></div>${questions[q].opt[1]}</div>
+                      <div class="opt" id="${
+                        q + 3 + q * 3
+                      }"><div class="st"></div>${questions[q].opt[2]}</div>
+                      <div class="opt" id="${
+                        q + 4 + q * 3
+                      }"><div class="st"></div>${questions[q].opt[3]}</div>
+                  </div>
+                  <div class="explanation" id="exp-${q}"></div>
+              </div>
+               `;
+          }
+
+          $(".opt").on("click", function () {
+            userAns.push(parseInt($(this)[0].id));
+            $($(this)[0].parentNode.children[0]).off("click");
+            $($(this)[0].parentNode.children[1]).off("click");
+            $($(this)[0].parentNode.children[2]).off("click");
+            $($(this)[0].parentNode.children[3]).off("click");
+            $($(this)[0]).css({
+              background: "#000",
+              color: "var(--light)",
+              "font-weight": "bold",
+            });
+          });
+         
+
+          //timer
+          var sec = 0;
+          var minute = parseInt(ch[0]);
+          var initialMin = parseInt(ch[0]);
+         // console.log("exam: "+minute);
+          // if(localStorage.getItem('sec') != null) sec = parseInt(localStorage.getItem('sec'));
+          // if(localStorage.getItem('min') != null) minute = parseInt(localStorage.getItem('min'));
+         // console.log("local: "+minute);
+          var timer = setInterval(function () {
+            if (sec === 0) {
+              minute--;
+              sec = 60;
+            }
+            sec--;
+            let min=minute, secs=sec;
+            if(minute<10) min = "0"+min;
+            if(sec<10) secs = "0"+secs;
+
+            if (minute <= 0 && sec <= 0) {
+              $("#submit").click();
+              // localStorage.removeItem('sec');
+              // localStorage.removeItem('min');
+              clearInterval(timer);
+              
+            } else {
+              // localStorage.setItem('sec', sec);
+              // localStorage.setItem('min', min);
+              // console.log(localStorage.getItem('sec'))
+              $(".countdown").html(
+                `<i class="icofont-stopwatch"></i> ${min} : ${secs}`
+              );
+            }
+          }, 1000);
+
+          jQuery(document).ready(function ($) {
+            if (window.history && window.history.pushState) {
+              $(window).on("popstate", function () {
+                clearInterval(timer);
+                $(".countdown").hide(20);
+              });
+            }
+          });
+
+          $("#submit")
+            .off()
+            .click(function () {
+              // localStorage.removeItem('sec');
+              // localStorage.removeItem('min');
+              $('.parc').show();
+                  Swal.fire({
+                    title: `Are you sure?`,
+                    text: `You won't undone this!`,
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      clearInterval(timer);
+                      $("html, body").animate({ scrollTop: 0 }, "slow");
+                      $("#submit").hide();
+                      let e;
+                      $(".explanation").show();
+                   
+                      let found;
+                      for (let k = 0; k < ans.length; ++k) {
+                        e = k;
+                        e = "#exp-" + e;
+                        $(e).html(
+                          `<b style="color: green;">Solution:</b><br>${exp[k]}`
+                        );
+                        // $('#'+ans[k]).css({'background': 'var(--success)', 'color': 'var(--light)'});
+                        $("#" + ans[k] + " .st").addClass("cr");
+                        $(
+                          $($($("#" + ans[k])[0].parentNode)[0].parentNode)[0]
+                            .children[0]
+                        ).html(
+                          '<div class="not-ans"> <span class="material-icons">error</span></div>'
+                        );
+                      }
+
+                      for (let i = 0; i < userAns.length; ++i) {
+                        found = true;
+                        for (let j = 0; j < ans.length; ++j) {
+                          if (parseInt(userAns[i]) === ans[j]) { 
+                            score++;
+                            $("#" + userAns[i] + " .st").addClass("cr");
+                            $(
+                              $(
+                                $($("#" + userAns[i])[0].parentNode)[0]
+                                  .parentNode
+                              )[0].children[0]
+                            ).html(
+                              '<div class="correct"> <span class="material-icons">verified</span> </div>'
+                            );
+                            found = true;
+                            break;
+                          } else found = false;
+                        }
+
+                        if (!found) {
+                          wrong++;
+                          $("#" + userAns[i] + " .st").addClass("wa");
+                          $(
+                            $(
+                              $($("#" + userAns[i])[0].parentNode)[0].parentNode
+                            )[0].children[0]
+                          ).html(
+                            '<div class="wrong"> <span class="material-icons">highlight_off</span>  </div>'
+                          );
+                        }
+                      }
+
+                      $(".score").show();
+                      $(".mark").html(
+                        `<i class="icofont-check-circled"></i><br>স্কোর</br> <small>সঠিক: ${score} </small> <br/> <span class="score-num">${score-(wrong*neg)}/${questions.length}</span>`
+                      );
+                      $(".score-wa").html(
+                        `<i class="icofont-close-circled"></i><br/>ভুল </br><small>নেগেটিভ: ${wrong*neg}</small><br/> <span class="score-num">${wrong}</span>`
+                      );
+                      $(".score-na").html(
+                        `<i class="icofont-warning-alt"></i><br />ফাঁকা </br> <span class="score-num">${
+                          questions.length - (score + wrong)
+                        }</span>`
+                      );
+                      $(".score-time").html(
+                        `<i class="icofont-ui-clock"></i><br />সময় <br> <span class="score-num">${
+                          initialMin - 1 - minute
+                        }:${60 - sec}</span>`
+                      );
+                      
+                      
+                      $('#correctP').html(`${((score/questions.length)*100).toPrecision(3)}%
+                      `)
+                      $('#wrongP').html(`${((wrong/questions.length)*100).toPrecision(3)}%
+                      `)
+                      $('#negativeP').html(`${(((wrong*neg)/questions.length)*100).toPrecision(3)}%
+                      `)
+                      $('#answeredP').html(`${(100-(((questions.length - (score + wrong))/(questions.length))*100)).toPrecision(3)}%
+                      `)                                 
+                  Swal.fire("সাবমিট হয়েছে!", "", "success");
+                    
+                    }
+            });
+        
+        })
+      
+  
+      
+    
+
+    
+  })
+},
+
 
 "/solutions/:ida/:id": function (params) {
   $('.footer').show();
@@ -1591,6 +1941,7 @@ detalisform.addEventListener('submit', e=>{
     sl_subject: detalisform.sl_subject.value,
     sl_class: detalisform.sl_class.value,
     sl_group: detalisform.sl_group.value,
+    sl_chapter: detalisform.sl_chapter.value,
     notice: detalisform.notice.value,
     makerID: user.uid,
     maker: user.displayName,
@@ -1632,7 +1983,7 @@ $('.create-doc').html( `
   </div>
 
 <div class="create-q">
-  <textarea name="explanation" id="create-ex" placeholder="ব্যাখ্যা/সমাধান" required></textarea>
+  <textarea name="explanation" id="create-ex" placeholder="ব্যাখ্যা/সমাধান"></textarea>
 </div>
 <center><button type="submit" class="btn red">Add Question</button><center>
 </form>
@@ -1651,7 +2002,7 @@ $('.publish').click(function(){
   confirmButtonText: 'Yes'
 }).then((result) => {
   if (result.isConfirmed) {
-    store.collection(snap.val().history.details.sl_exam_type+'_exams').add({details: snap.val().history.details, questions: snap.val().history.questions, publish_date: (new Date()).toString()});
+    store.collection('subjectExams').doc(snap.val().history.details.sl_subject).collection(snap.val().history.details.sl_chapter).add({details: snap.val().history.details, questions: snap.val().history.questions, publish_date: (new Date()).toString()});
     Swal.fire(
       'Published',
       'Exam has been published!',
@@ -1679,14 +2030,15 @@ $('.counter').text(count);
 const question_form = document.querySelector('#question_form');
 question_form.addEventListener('submit', e=> {
 e.preventDefault();
-
+let optArr = [question_form.a.value, question_form.b.value, question_form.c.value, question_form.d.value];
+let ansText = `${ansOpt[parseInt(question_form.select_ans.value)]}. ${optArr[parseInt(question_form.select_ans.value)-1]}<br>`;
 let question = {
     q: (question_form.question.value).replace(/(?:\r\n|\r|\n)/g, '<br>'),
     opt: [question_form.a.value, question_form.b.value, question_form.c.value, question_form.d.value],
     ans: question_form.select_ans.value,
-    ex: (question_form.explanation.value).replace(/(?:\r\n|\r|\n)/g, '<br>')
+    ex: ansText + (question_form.explanation.value).replace(/(?:\r\n|\r|\n)/g, '<br>')
 }
-  db.ref('app/users/'+user.uid+'/create/history/questions/'+count).update(question);
+  db.ref('app/users/'+user.uid+'/create2/history/questions/'+count).update(question);
   $('.counter').hide();
   $('#confirm').show();
   setTimeout(function(){
