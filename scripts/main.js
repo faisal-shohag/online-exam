@@ -1058,7 +1058,7 @@ router.on({
       });
 },
 "practice/exam/:subj/:chap/:key/:choice": function(params){
-  // $('.footer').hide();
+  $('.footer').hide();
   $('.app_loader').show();
   $('.top_logo').html(`<div class="animate__animated animate__fadeInRight top_app_title"> </div>`);
   app.innerHTML=`<span class="exam-doc"></div>`;
