@@ -972,7 +972,9 @@ router.on({
   $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> ${tag[params.id]}</div>`);
   app.innerHTML = `
   <div class="chapters">
- <a href="#!/practice/list/${params.id}/chap-1/অপরিচিতা"> <div class="chap_item"><div><div class="name_logo">অ</div></div><div><div class="chapterName">অপরিচিতা</div><div class="author">রবীন্দ্রনাথ ঠাকুর</div></div></div></a>
+ <a href="#!/practice/list/${params.id}/chap-1/অপরিচিতা"> <div class="chap_item"><div><div class="name_logo">অ</div></div><div><div class="chapterName">অপরিচিতা</div><div class="author">রবীন্দ্রনাথ ঠাকুর(১৮৬১-১৯৪১)</div></div></div></a>
+ <a href="#!/practice/list/${params.id}/chap-2/বিড়াল"> <div class="chap_item"><div><div class="name_logo">ব</div></div><div><div class="chapterName">বিড়াল</div><div class="author">বঙ্কিমচন্দ্র চট্টোপাধ্যায়(১৮৩৮-১৮৯৪)</div></div></div></a>
+ <a href="#!/practice/list/${params.id}/chap-3/চাষার দুক্ষু"> <div class="chap_item"><div><div class="name_logo">ব</div></div><div><div class="chapterName">চাষার দুক্ষু</div><div class="author">রোকেয়া সাখাওয়াত হোসেন(১৮৮০-১৯৩২)</div></div></div></a>
   </div>
   `
 },
@@ -1061,7 +1063,7 @@ router.on({
   $('.footer').hide();
   $('.app_loader').show();
   $('.top_logo').html(`<div class="animate__animated animate__fadeInRight top_app_title"> </div>`);
-  app.innerHTML=`<span class="exam-doc"></div>`;
+  app.innerHTML=`<span class="exam-doc" id="practice-exam"></div>`;
   var ch = (params.choice).split('~');
   store.collection('subjectExams').doc(params.subj).collection(params.chap).doc(params.key).onSnapshot(snap=> {
     $('.app_loader').hide();
@@ -1072,8 +1074,8 @@ router.on({
              <div class="exam_top">
               <div class="exam-title">
               <div class="courseName">বৃত্ত প্রাকটিস</div>
-              ${myexam.details.exam_name}<br><small>সময়ঃ ${ch[0]}মিনিট | প্রশ্নঃ ${myexam.questions.length}টি</small></div>
-              <small>by ${myexam.details.maker}</small>
+              <div class="exam_name">${myexam.details.exam_name}</div><small>সময়ঃ ${ch[0]} মিনিট</small>
+              </div>
               <div style="display: none;" class="score">
               <div class="mark"></div>
               <div class="score-wa"></div>
@@ -1211,15 +1213,7 @@ router.on({
               // localStorage.removeItem('sec');
               // localStorage.removeItem('min');
               $('.parc').show();
-                  Swal.fire({
-                    title: `Are you sure?`,
-                    text: `You won't undone this!`,
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Yes",
-                    cancelButtonText: "No",
-                  }).then((result) => {
-                    if (result.isConfirmed) {
+
                       clearInterval(timer);
                       $("html, body").animate({ scrollTop: 0 }, "slow");
                       $("#submit").hide();
@@ -1290,7 +1284,7 @@ router.on({
                       $(".score-time").html(
                         `<i class="icofont-ui-clock"></i><br />সময় <br> <span class="score-num">${
                           initialMin - 1 - minute
-                        }:${60 - sec}</span>`
+                        }:${59 - sec}</span>`
                       );
                       
                       
@@ -1303,17 +1297,7 @@ router.on({
                       $('#answeredP').html(`${(100-(((questions.length - (score + wrong))/(questions.length))*100)).toPrecision(3)}%
                       `)                                 
                   Swal.fire("সাবমিট হয়েছে!", "", "success");
-                    
-                    }
-            });
-        
         })
-      
-  
-      
-    
-
-    
   })
 },
 

@@ -330,6 +330,11 @@ textarea{
     background: #fff;
     border-radius: 5px;
     margin:5px;
+    font-weight: bold;
+    background: -webkit-linear-gradient(45deg, rgb(73, 115, 230), rgb(91, 132, 156));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
 }
 .courseName{
     font-size: 20px;

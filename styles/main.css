@@ -78,6 +78,7 @@ body:-moz-full-screen {
   justify-content: space-between;
   align-items: center;
   font-family: Hind Siliguri;
+  
 }
 
 .top .image {
@@ -195,6 +196,12 @@ label,
 .sl_name{
   font-size: 14px;
   font-family: Hind Siliguri;
+}
+
+.chapters{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .chap_item{
@@ -962,3 +969,6 @@ color: rgb(17, 98, 248);
 }
 
 
+#practice-exam .exam_name{
+  color: rgb(196, 37, 16);
+}
