@@ -972,11 +972,20 @@ router.on({
   $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> ${tag[params.id]}</div>`);
   app.innerHTML = `
   <div class="chapters">
- <a href="#!/practice/list/${params.id}/chap-1/অপরিচিতা"> <div class="chap_item"><div><div class="name_logo">অ</div></div><div><div class="chapterName">অপরিচিতা</div><div class="author">রবীন্দ্রনাথ ঠাকুর(১৮৬১-১৯৪১)</div></div></div></a>
- <a href="#!/practice/list/${params.id}/chap-2/বিড়াল"> <div class="chap_item"><div><div class="name_logo">ব</div></div><div><div class="chapterName">বিড়াল</div><div class="author">বঙ্কিমচন্দ্র চট্টোপাধ্যায়(১৮৩৮-১৮৯৪)</div></div></div></a>
- <a href="#!/practice/list/${params.id}/chap-3/চাষার দুক্ষু"> <div class="chap_item"><div><div class="name_logo">চ</div></div><div><div class="chapterName">চাষার দুক্ষু</div><div class="author">রোকেয়া সাখাওয়াত হোসেন(১৮৮০-১৯৩২)</div></div></div></a>
   </div>
   `
+  
+  db.ref('app/practiceRef/'+params.id).on('value', snap=>{
+    let html = ``;
+    snap.forEach(item=>{
+    html += `
+    <a href="#!/practice/list/${params.id}/${item.key}/${item.val().name}"> <div class="chap_item"><div><div class="name_logo">${firstLetter(item.val().name)}</div></div><div><div class="chapterName">${item.val().name}</div><div class="author">${item.val().author}</div></div></div></a>
+    `
+    });
+    $('.chapters').html(html);
+  })
+
+
 },
 "/practice/list/:subj/:chap/:chapName": function(params){
   // $('.footer').hide();
@@ -1015,17 +1024,18 @@ router.on({
  <li>পরীক্ষাগুলির জন্য আপাতত কোনো লিডারবোর্ড থাকছে না।</li>
  </ul>
 </div>
-  </div>
+  
 
   <form id="chooseForm">
   <div class="nb-t"><i class="icofont-touch"></i> বেঁছে নাওঃ (Optional)</div>
+ 
   <div class="input_field">
-  <input name="ch_time" placeholder="Duration" type="number"></div>
+  <input name="ch_time" placeholder="সময়" type="number">
   </div>
  
   <div class="input-field col s12">
      <select name="ch_neg">
-       <option value="" disabled selected>Choose Negative Mark for each wrong answer</option>
+       <option value="" disabled selected>ভুল উত্তরের জন্য নেগেটিভ মার্ক</option>
        <option value="0">No negative</option>
        <option value="0.25">0.25</option>
        <option value="0.50">0.50</option>
@@ -1036,14 +1046,13 @@ router.on({
        <option value="2">2</option>
      </select>
    </div>
- <button id="sub" type="submit" class="btn green">শুরু করো</button>
+ <center><button id="sub" type="submit" class="btn red">শুরু করো</button></center>
  </form>
+ </div>
   `
       let choose = document.getElementById('chooseForm');
-      console.log(chooseForm);
       choose.addEventListener('submit', a=>{
         a.preventDefault();
-        console.log('submitted');
         let chTime = 15;
         let chNeg = 0;
         if(choose.ch_time.value != ""){
@@ -1867,6 +1876,16 @@ $('.create-doc').html(`
 </select>
 </div>
 
+<div class="input-field">
+<input name="chap_name" type="text" autocomplete="off" required/>
+<label for="chap_name">Chapter Name</label>
+</div>
+
+<div class="input-field">
+<input name="auth_name" type="text" autocomplete="off" required/>
+<label for="auth_name">Author Name</label>
+</div>
+
 
 <div class="input-field col s12">
 <select name="sl_class" required>
@@ -1931,6 +1950,11 @@ detalisform.addEventListener('submit', e=>{
     maker: user.displayName,
   }
   db.ref('app/users/'+user.uid+'/create2/history').update({details: details, status: true});
+ 
+  db.ref('app/practiceRef/'+details.sl_subject+'/'+details.sl_chapter).update({
+    name: detalisform.chap_name.value,
+    author: detalisform.auth_name.value,
+   });
 });
 $(document).ready(function () {
   $("select").formSelect();
