@@ -974,7 +974,7 @@ router.on({
   <div class="chapters">
  <a href="#!/practice/list/${params.id}/chap-1/অপরিচিতা"> <div class="chap_item"><div><div class="name_logo">অ</div></div><div><div class="chapterName">অপরিচিতা</div><div class="author">রবীন্দ্রনাথ ঠাকুর(১৮৬১-১৯৪১)</div></div></div></a>
  <a href="#!/practice/list/${params.id}/chap-2/বিড়াল"> <div class="chap_item"><div><div class="name_logo">ব</div></div><div><div class="chapterName">বিড়াল</div><div class="author">বঙ্কিমচন্দ্র চট্টোপাধ্যায়(১৮৩৮-১৮৯৪)</div></div></div></a>
- <a href="#!/practice/list/${params.id}/chap-3/চাষার দুক্ষু"> <div class="chap_item"><div><div class="name_logo">ব</div></div><div><div class="chapterName">চাষার দুক্ষু</div><div class="author">রোকেয়া সাখাওয়াত হোসেন(১৮৮০-১৯৩২)</div></div></div></a>
+ <a href="#!/practice/list/${params.id}/chap-3/চাষার দুক্ষু"> <div class="chap_item"><div><div class="name_logo">চ</div></div><div><div class="chapterName">চাষার দুক্ষু</div><div class="author">রোকেয়া সাখাওয়াত হোসেন(১৮৮০-১৯৩২)</div></div></div></a>
   </div>
   `
 },
