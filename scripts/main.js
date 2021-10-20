@@ -1083,7 +1083,7 @@ router.on({
              <div class="exam_top">
               <div class="exam-title">
               <div class="courseName">বৃত্ত প্রাকটিস</div>
-              <div class="exam_name">${myexam.details.exam_name}</div><small>সময়ঃ ${ch[0]} মিনিট</small>
+              <div class="exam_name">${myexam.details.exam_name}</div><small>সময়: ${ch[0]} মিনিট | নেগেটিভ: ${ch[1]} </small>
               </div>
               <div style="display: none;" class="score">
               <div class="mark"></div>
