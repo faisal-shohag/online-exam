@@ -538,7 +538,7 @@ textarea{
     background: -webkit-linear-gradient(45deg, rgb(252, 69, 69), rgb(236, 83, 56));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
     /* color: #414142; */
 }
 
