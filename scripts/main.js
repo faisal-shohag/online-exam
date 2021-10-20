@@ -982,7 +982,7 @@ router.on({
     let html = ``;
     snap.forEach(item=>{
     html += `
-    <a href="#!/practice/list/${params.id}/${item.key}/${item.val().name}"> <div class="chap_item"><div><div class="name_logo">${firstLetter(item.val().name)}</div></div><div><div class="chapterName">${item.val().name}</div><div class="author">${item.val().author}</div></div></div></a>
+    <a href="#!/practice/list/${params.id}/${item.key}/${item.val().name}"> <div  class="chap_item ${params.id}_list"><div><div class="name_logo">${firstLetter(item.val().name)}</div></div><div><div class="chapterName">${item.val().name}</div><div class="author">${item.val().author}</div></div></div></a>
     `
     });
     $('.chapters').html(html);
@@ -1005,7 +1005,7 @@ router.on({
     
     snap.forEach(item=>{
       ex.innerHTML += `
-      <a href="#!/practice/nb/${params.subj}/${params.chap}/${item.id}"> <div class="chap_item"><div><div class="name_logo">${firstLetter(item.data().details.exam_name)}</div></div><div><div class="chapterName">${item.data().details.exam_name}</div><div class="author">${item.data().questions.length}টি প্রশ্ন</div></div></div></a>
+      <a href="#!/practice/nb/${params.subj}/${params.chap}/${item.id}"> <div class="chap_item ${params.subj}_list"><div><div class="name_logo">${firstLetter(item.data().details.exam_name)}</div></div><div><div class="chapterName">${item.data().details.exam_name}</div><div class="author">${item.data().questions.length}টি প্রশ্ন</div></div></div></a>
       `
     })
   })
@@ -2441,6 +2441,7 @@ let question = {
    <div class="recent_list">
    <div class="title-n"><i class="icofont-checked"></i> Your Participation</div>
  <div class="r-tab">
+
    <div id="public" class="tab_item">Public</div>
    <div id="live" class="tab_item">Live</div>
    <div id="weekly" class="tab_item">Weekly</div>
