@@ -150,12 +150,14 @@ label,
 }
 
 .sl .title-n{
-  background: -webkit-linear-gradient(45deg, rgb(82, 29, 179), rgb(180, 16, 245));
+  background: -webkit-linear-gradient(45deg, rgb(88, 67, 128), rgb(180, 16, 245));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
   border-bottom: 0;
-  font-size: 20px;
+  font-size: 17px;
+  font-family: SolaimanLipi;
+  font-weight: normal;
 }
 
 .sl_menu{
@@ -167,35 +169,40 @@ label,
 
 .sl_item{
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-  height: 80px;
+  height: 70px;
   display: flex;
   justify-content: center;
   /* align-items: center; */
   padding: 5px;
   flex-direction: column;
-  gap: 10px;
+  gap: 0px;
   border-radius: 5px;
-  text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
 }
 
 
 .sl_item:nth-child(1){
-  background: linear-gradient(45deg, rgb(23, 148, 60), rgb(63, 202, 21));
-  color: #ddd;
+  /* background: linear-gradient(45deg, rgb(6, 27, 13), rgb(75, 99, 67)); */
+  color: #464343;
+  border-top: 2px solid #0f4b12;
+  background: -webkit-linear-gradient(45deg, #3d6128, #5eee65);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .sl_item:nth-child(2){
-  background: linear-gradient(45deg, rgb(21, 185, 21), rgb(17, 150, 68));
+  /* background: linear-gradient(45deg, rgb(21, 185, 21), rgb(17, 150, 68)); */
   color: #ddd;
 }
 
 .sl_icon{
-  font-size: 40px;
+  font-size: 37px;
 }
 
 .sl_name{
-  font-size: 14px;
+  font-size: 12px;
   font-family: Hind Siliguri;
+  font-weight: bold;
 }
 
 .chapters{
@@ -570,7 +577,7 @@ label,
 }
 
 .menu_title{
-  font-size: 25px;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
   background: -webkit-linear-gradient(45deg, rgb(61, 14, 189), rgb(224, 59, 155));
@@ -592,7 +599,7 @@ label,
 .item{
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   padding: 0px 10px;
-  height: 37px;
+  height: 30px;
   display: flex;
   align-items: center;
   text-align: center;
@@ -600,7 +607,7 @@ label,
   /* font-weight: bold; */
   color: #fff;
   border-radius: 3px;
-  font-size: 15px;
+  font-size: 12px;
   justify-content: center;
   gap: 5px;
 }
@@ -609,15 +616,15 @@ label,
   font-weight: bold;
   font-family: Google Sans;
   background: #fff;
-  height: 25px;
-  width: 25px;
+  height: 20px;
+  width: 20px;
   border-radius: 50%;
   color: #000;
   display: flex;
-  /* align-items: center; */
-  text-align: center;
+  align-items: center;
   justify-content: center;
   border: 2px solid rgb(228, 220, 220);
+  font-size: 12px;
 }
 
 .top_app_title i{
@@ -850,14 +857,17 @@ color: rgb(17, 98, 248);
   margin-top: 30px;
   background: #fff;
   padding: 5px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  border-radius: 5px;
+  padding-bottom: 10px;
 }
 
 .title-n{
   font-family: Hind Siliguri;
-  font-size: 25px;
+  font-size: 17px;
   font-weight: bold;
-  color: #706e6e;
-  border-bottom: 2px solid #706e6e;
+  color: #d33e23;
+  border-bottom: 2px solid #f01818;
 }
 
 .r-item{
@@ -866,12 +876,41 @@ color: rgb(17, 98, 248);
   background: #ffff;
   font-size: 15px;
   border-radius: 3px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px;
   color: #0855a8;
   height: 36px;
   display: flex;
   align-items: center;
   font-weight: bold;
+  gap: 10px;
+  border-left: 2px solid #0855a8;
+}
+
+.small_logo{
+  height: 20px;
+  width: 20px;
+  padding: 3px;
+  background: #0855a8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  border-radius: 50%;
+  font-weight: normal;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.02);
+}
+.small_no_exam{
+  font-weight: bold;
+  color: rgba(37, 37, 37, 0.932);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+.small_no_exam i{
+font-size: 25px;
+color: var(--red);
 }
 
 .r-tab{
@@ -893,7 +932,7 @@ color: rgb(17, 98, 248);
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   padding: 0px 5px;
-  min-width: 125px;
+  min-width: 80px;
   text-align: center;
   border-radius: 3px;
   cursor: pointer;

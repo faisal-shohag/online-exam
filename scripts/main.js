@@ -2440,13 +2440,9 @@ $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animat
    <div class="title-n"><i class="icofont-checked"></i> Your Participation</div>
  <div class="r-tab">
    <div id="public" class="tab_item">Public</div>
-   <div id="board" class="tab_item">Board Exam Prep.</div>
-   <div id="admission" class="tab_item">Admission</div>
-   <div id="special" class="tab_item">Special</div>
-   <div id="daily" class="tab_item">Daily</div>
+   <div id="live" class="tab_item">Live</div>
    <div id="weekly" class="tab_item">Weekly</div>
-   <div id="monthly" class="tab_item">Monthly</div>
-   <div id="model" class="tab_item">Model Test</div>
+   <div id="special" class="tab_item">Special</div>
    </div>
    <div class="r-list"></div>
    </div>
@@ -2479,7 +2475,7 @@ db.ref("app/users/"+user.uid).on('value', snap=>{
 
 
   const list = document.querySelector('.r-list');
-  let ids= ['public', 'board', 'admission', 'special', 'daily', 'weekly', 'monthly', 'model'];
+  let ids= ['public', 'live', 'weekly', 'special'];
   $(document).ready(function() {
     $('#public').trigger('click');
   })
@@ -2494,10 +2490,10 @@ db.ref("app/users/"+user.uid).on('value', snap=>{
 
   db.ref('app/users/'+user.uid+'/allExams/'+id).on('value', ex=>{
     list.innerHTML = "";
-    if(ex.val() === null) list.innerHTML = "<center>No Exam</center>";
+    if(ex.val() === null) list.innerHTML = `<center><div class="small_no_exam animate_animated animate__bounceIn"><i class="icofont-exclamation-circle"></i>এখনো কোনো পরীক্ষায় অংশগ্রহণ করো নি!</div></center>`;
   ex.forEach(item=>{
       list.innerHTML += `
-      <a href="#!/exam/public/${item.val().examID}"><div class="r-item">${item.val().name}</div></href>
+      <a href="#!/exam/public/${item.val().examID}"><div class="r-item"><div class="small_logo">${firstLetter(item.val().name)}</div><div>${item.val().name}</div></div></href>
       `
     })
 
