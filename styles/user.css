@@ -25,7 +25,7 @@
 
 .displayName{
     font-weight: bold;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 .email{
@@ -587,7 +587,7 @@ textarea{
 }
 
 .profile{
-    font-family: Hind Siliguri
+    font-family:'Roboto', Kalpurush;
 }
 
 .warn{
@@ -741,7 +741,8 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
 .bio{
     /* background: #482ab3e7; */
     border-radius: 3px;
-    font-size: 17px;
+    font-size: 16px;
+    font-family: Hind Siliguri;
     /* color: #fff; */
     font-weight: bold;
     background: -webkit-linear-gradient(45deg, rgb(31, 72, 182), rgb(230, 95, 230));
