@@ -542,9 +542,10 @@ router.on({
             $($(this)[0].parentNode.children[2]).off("click");
             $($(this)[0].parentNode.children[3]).off("click");
             $($(this)[0]).css({
-              background: "#000",
+              background: "#384dc5",
               color: "var(--light)",
               "font-weight": "bold",
+              "box-shadow" : "0px 2px 5px rgba(0,0,0,.2)"
             });
           });
          
@@ -1143,16 +1144,16 @@ router.on({
                   <div class="option">
                       <div class="opt" id="${
                         q + 1 + q * 3
-                      }"><div class="st"></div>${questions[q].opt[0]}</div>
+                      }"><div class="st"></div><div>${questions[q].opt[0]}</div></div>
                       <div class="opt" id="${
                         q + 2 + q * 3
-                      }"><div class="st"></div>${questions[q].opt[1]}</div>
+                      }"><div class="st"></div><div>${questions[q].opt[1]}</div></div>
                       <div class="opt" id="${
                         q + 3 + q * 3
-                      }"><div class="st"></div>${questions[q].opt[2]}</div>
+                      }"><div class="st"></div><div>${questions[q].opt[2]}</div></div>
                       <div class="opt" id="${
                         q + 4 + q * 3
-                      }"><div class="st"></div>${questions[q].opt[3]}</div>
+                      }"><div class="st"></div><div>${questions[q].opt[3]}</div></div>
                   </div>
                   <div class="explanation" id="exp-${q}"></div>
               </div>
@@ -1166,9 +1167,10 @@ router.on({
             $($(this)[0].parentNode.children[2]).off("click");
             $($(this)[0].parentNode.children[3]).off("click");
             $($(this)[0]).css({
-              background: "#000",
+              background: "#384dc5",
               color: "var(--light)",
               "font-weight": "bold",
+              "box-shadow" : "0px 2px 5px rgba(0,0,0,.2)"
             });
           });
          

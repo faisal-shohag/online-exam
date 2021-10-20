@@ -398,7 +398,13 @@ textarea{
     cursor: pointer;
     min-height: 37px;
     vertical-align: middle;
+    display: flex;
+    font-family: Roboto, 'SolaimanLipi';
+    /* transition: 0.1s; */
+
 }
+
+
 
 
 .opt:nth-child(1)::before{
@@ -425,7 +431,7 @@ textarea{
     left: 1%;
     height: 30px;
     width: 30px;
-    border: 2px solid #b3a5a5;
+    border: 2px solid #b1b0b0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -527,10 +533,13 @@ textarea{
     font-size: 25px;
     width: 100%;
     text-align: center;
-    color: #222;
     font-weight: bold;
     font-family: Roboto;
-    color: rgb(75, 74, 75);
+    background: -webkit-linear-gradient(45deg, rgb(252, 69, 69), rgb(236, 83, 56));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+    /* color: #414142; */
 }
 
 
