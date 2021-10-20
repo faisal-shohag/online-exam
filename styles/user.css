@@ -646,13 +646,13 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
 }
 
 .top1{
-    height: 80px;
-    width: 80px;
+    height: 50px;
+    width: 50px;
     overflow: hidden;
     border-radius: 50%;
     display: flex;
     justify-content: center;
-    border: 3px solid rgb(247, 230, 187);
+    border: 2px solid rgb(247, 230, 187);
     margin: 0;
 }
 
@@ -664,8 +664,8 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
     border: 3px solid #fafafa;
 }
 .top2, .top3{
-    height: 70px;
-    width: 70px;
+    height: 40px;
+    width: 40px;
     overflow: hidden;
     border-radius: 50%;
     display: flex;
@@ -674,17 +674,17 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
 }
 
 .top1 img{
-    height: 80px;
-    width: 80px;
+    height: 50px;
+    width: 50px;
 }
 
 .top2 img{
-    height: 70px;
-    width: 70px;
+    height: 40px;
+    width: 40px;
 }
 .top3 img{
-    height: 70px;
-    width: 70px;
+    height: 40px;
+    width: 40px;
 }
 
 .top-pos{

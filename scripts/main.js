@@ -115,7 +115,7 @@ db.ref('app/users/'+user.uid).on('value', p=>{
 });
 $('.app_loader').show();
 (async()=>{
-  console.log('Waiting....');
+  console.log("%c Waiting for Database Response...", "color: red; font-size: 15px; font-family: Hind Siliguri; font-weight: bold;");
   await new Promise(resolve=>{
     let st = setInterval(()=>{
       let data = myData;
@@ -125,6 +125,8 @@ $('.app_loader').show();
       }
     }, 500);
   })
+
+  console.log('%c Database is Ready!', "color: green; font-size: 15px; font-family: Hind Siliguri; font-weight: bold;")
   $('.app_loader').hide();
 router.on(function() {
   $('.footer').show();
@@ -366,7 +368,7 @@ router.on({
   
   if(empty){
     examlist.innerHTML = `
-    <center><h3>No Exam</h3></center>
+    <center><div class="big_no_exam animate_animated animate__bounceIn"><div class=""><i class="icofont-warning-alt"></i></div><div>পরীক্ষা নেই!</div></div></center>
     `
   }
  });

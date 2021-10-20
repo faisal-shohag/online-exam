@@ -774,11 +774,11 @@ label,
 
 
 .my_pos{
-  font-size: 15px;
+  font-size: 12px;
   margin-top: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 3px;
-  padding: 5px;
+  padding: 3px;
   margin-bottom: 15px;
   font-weight: bold;
 }
@@ -811,7 +811,7 @@ label,
   margin: 5 0px;
   border-radius: 3px;
   background: #fff;
-  font-size: 17px;
+  font-size: 14px;
   align-items: center;
 
 }
@@ -831,12 +831,15 @@ text-align: center;
 border-radius: 3px;
 display: flex;
 justify-content: center;
+font-weight: bold;
 align-items: center;
 color: rgb(17, 98, 248);
+box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+
 }
 
 .l-score{
-  /* font-size: 10px; */
+  font-size: 20px;
   color: crimson;
   font-weight: bold;
 }
@@ -909,14 +912,25 @@ color: rgb(17, 98, 248);
 }
 .small_no_exam{
   font-weight: bold;
-  color: rgba(37, 37, 37, 0.932);
+  color: #302e2eee;
   display: flex;
   justify-content: center;
   flex-direction: column;
 
 }
+.big_no_exam{
+  font-weight: bold;
+  color: #494848ee;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background: var(--white);
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
 
-.small_no_exam i{
+.small_no_exam i, .big_no_exam i{
 font-size: 25px;
 color: var(--red);
 }
