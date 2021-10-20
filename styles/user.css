@@ -630,6 +630,17 @@ textarea{
     align-items: center;
 }
 
+.crown{
+position: absolute;
+font-size: 55px;
+top: -40%;
+background: -webkit-linear-gradient(
+45deg, #f31e1e, #e2df40);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 1px 5px rgb(0 0 0 / 10%);
+}
+
 .topName{
 text-align: center;
 width: 100%;

@@ -1185,6 +1185,7 @@ router.on({
           // if(localStorage.getItem('sec') != null) sec = parseInt(localStorage.getItem('sec'));
           // if(localStorage.getItem('min') != null) minute = parseInt(localStorage.getItem('min'));
          // console.log("local: "+minute);
+        //  var timerAud = new Audio('./sounds/Sound-effect-Clock-Ticking-1.mp3');
           var timer = setInterval(function () {
             if (sec === 0) {
               minute--;
@@ -1194,6 +1195,10 @@ router.on({
             let min=minute, secs=sec;
             if(minute<10) min = "0"+min;
             if(sec<10) secs = "0"+secs;
+
+            // if(minute === 0 && sec===30){
+            //   timerAud.play();
+            // }
 
             if (minute <= 0 && sec <= 0) {
               $("#submit").click();
@@ -1223,6 +1228,7 @@ router.on({
           $("#submit")
             .off()
             .click(function () {
+              
               // localStorage.removeItem('sec');
               // localStorage.removeItem('min');
               $('.parc').show();
@@ -1407,7 +1413,7 @@ router.on({
 db.ref('app/users').on('value', data=>{
   $('.top3content').html(`
   <div class="twrap"><div class="top2"><img src="${data.val()[ladder[1].id].photoURL}"></div> <div class="topName">${data.val()[ladder[1].id].nickName}</div></div>
-  <div class="twrap"><div class="top1"><img src="${data.val()[ladder[0].id].photoURL}"></div> <div class="topName">${data.val()[ladder[0].id].nickName}</div></div>
+  <div class="twrap"><div class="top1"><img src="${data.val()[ladder[0].id].photoURL}"></div> <div class="topName">${data.val()[ladder[0].id].nickName}</div> <div class="crown"><i class="icofont-crown-queen"></i></div></div>
   <div class="twrap"><div class="top3"><img src="${data.val()[ladder[2].id].photoURL}"></div> <div class="topName">${data.val()[ladder[2].id].nickName}</div></div>
   `)
  });

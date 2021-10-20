@@ -137,7 +137,7 @@ label,
 .btn-flat,
 .timepicker,
 .top, .btn-flat, .btn {
- font-family: 'SolaimanLipi';
+  font-family:'Roboto', Kalpurush;
 }
 
 
@@ -298,7 +298,7 @@ label,
   box-shadow: 0 -2px 5px 0px rgba(0, 0, 0, 0.2);
   padding: 0px 15px;
   height: 45px;
-  font-family: Hind Siliguri;
+  font-family:'Roboto', Kalpurush;
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
 }
@@ -570,7 +570,7 @@ label,
 
 .chip{
   color: #fff;
-  font-family: SolaimanLipi;
+  font-family:'Roboto', Kalpurush;
 }
 
 .timer{
@@ -585,7 +585,7 @@ label,
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   padding: 5px;
   border-radius: 5px;
-  font-family: Hind Siliguri;
+  font-family:'Roboto', Kalpurush;
 }
 
 .menu_title{
@@ -596,7 +596,7 @@ label,
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
-  font-family: Hind Siliguri;
+  font-family:'Roboto', Kalpurush;
 }
 
 .menu_items{
