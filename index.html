@@ -52,7 +52,6 @@ MathJax = {
 
   
 <div class="wrap">
-  <div class="fullSceen" onclick="requestFullScreen()"><i class="icofont-iphone"></i></div>
   <a data-target="slide-out" class="sidenav-trigger" href="#!/myprofile"><div class="image"></div></a>
 </div>
 </div>
@@ -67,7 +66,7 @@ MathJax = {
     <div class="myemail"></div>
   </div></li>
   <li><a class="waves-effect" href="#!/myprofile"><i class="icofont-user-alt-2"></i>Profile</a></li>
-  <li><a href="#!">Second Link</a></li>
+  <li><a href="#!" onclick="requestFullScreen()"><i class="icofont-iphone"></i> Full Screen Mode</a></li>
   <li><div class="divider"></div></li>
   <li><a class="subheader">Subheader</a></li>
   <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
@@ -309,7 +308,15 @@ console.log(err);
 */
 $(document).ready(function(){
     $('.sidenav').sidenav();
+    $('.sidenav')
+        .sidenav()
+        .on('click tap', 'li a', () => {
+            $('.sidenav').sidenav('close');
+        });
+
   });
+
+
   </script>
   <script src="./scripts/common.js"></script>
   <script src="./scripts/firebaseui.js"></script>
