@@ -152,12 +152,21 @@ router.on(function() {
   <div class="title-n"><i class="icofont-education"></i> বিষয়ভিত্তিক প্রাকটিস</div>
 
 
-  <a href="#!/practice/subject/b1"><div class="sl_menu">
+  <div class="sl_menu">
+  <a href="#!/practice/subject/b1"> 
   <div class="sl_item">
   <div class="sl_icon"><i class="icofont-book"></i></div>
   <div class="sl_name">বাংলা ১ম পত্র</div>
-  </div></a>
+  </div>
+  </a>
+ 
   
+  <a href="#!/practice/subject/b2">
+  <div class="sl_item">
+  <div class="sl_icon"><i class="icofont-book"></i></div>
+  <div class="sl_name">বাংলা ২য়  পত্র</div>
+  </div>
+  </a>
 
 
 </div>
