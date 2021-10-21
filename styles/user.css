@@ -886,16 +886,26 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
     display: block;
     font-size: 14px;
     font-weight: 500;
-    height: 48px;
+    height: 30px;
     line-height: 20px;
     padding: 0 10px;
 }
 
 .sidenav li>a>i, .sidenav li>a>[class^="mdi-"], .sidenav li>a li>a>[class*="mdi-"], .sidenav li>a>i.material-icons {
     float: left;
-    height: 48px;
+    height: 30px;
     line-height: 20px;
     margin: 0 5px 0 0;
     width: 24px;
+    color: #1f971f;
+    font-size: 20px;
+}
+
+.sidenav .subheader {
+    cursor: initial;
+    pointer-events: none;
     color: rgba(0,0,0,0.54);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
 }
