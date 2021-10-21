@@ -850,7 +850,7 @@ box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 
 }
 
 .l-score{
-  font-size: 20px;
+  font-size:17px;
   color: crimson;
   font-weight: bold;
 }
@@ -999,6 +999,7 @@ color: var(--red);
 
 .l-name{
   text-align: left;
+  font-size: 13px;
 }
 .instName{
   font-size: 10px;
