@@ -238,13 +238,13 @@ label,
 
 }
 
-.b1_list .name_logo{
+.name_logo{
   background: linear-gradient(45deg, #273a1c, #27cf2f);
   border: 2px solid #3d6128;
 }
 
 
-.b1_list .chapterName{
+.chapterName{
   font-size: 16px;
   font-weight: bold;
   background: -webkit-linear-gradient(
