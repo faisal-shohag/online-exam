@@ -8,8 +8,12 @@ $(document).ready(function(){
 
 firebase.auth().onAuthStateChanged((user)=>{
   if(user){
+    console.log(user);
     $('.top').show();
-    $('.image').html(`<img src="${user.photoURL}"/>`)
+    $('.image').html(`<img src="${user.photoURL}"/>`);
+    $('.imagexBig0').html(`<div class="navprogImg"><img src="${user.photoURL}"/></div>`);
+    $('.myname').html(`${user.displayName}`);
+    $('.myemail').html(`${user.email}`);
     $('.sign').hide();
 // $('.deleteAc').click(function(){
 //   window.location.reload()

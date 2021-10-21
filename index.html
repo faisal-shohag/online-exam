@@ -45,12 +45,33 @@ MathJax = {
 
 
   <div class="top">
+   
   <div class="top_logo"><i class="icofont-focus"></i> </div>
+
   <div class="countdown"></div>
+
+  
 <div class="wrap">
   <div class="fullSceen" onclick="requestFullScreen()"><i class="icofont-iphone"></i></div>
-  <a  href="#!/myprofile"><div class="image"></div></a>
+  <a data-target="slide-out" class="sidenav-trigger" href="#!/myprofile"><div class="image"></div></a>
 </div>
+</div>
+
+<ul id="slide-out" class="sidenav">
+  <li><div class="user-view">
+    <div class="background">
+      <img src="https://oyshistask.netlify.app/images/sidenavbg.webp">
+    </div>
+    <div  class="imagexBig0"></div>
+    <div class="myname"></div>
+    <div class="myemail"></div>
+  </div></li>
+  <li><a class="waves-effect" href="#!/myprofile"><i class="icofont-user-alt-2"></i>Profile</a></li>
+  <li><a href="#!">Second Link</a></li>
+  <li><div class="divider"></div></li>
+  <li><a class="subheader">Subheader</a></li>
+  <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+</ul>  
 
 <script>
   var element = document.documentElement;
@@ -217,6 +238,8 @@ MathJax = {
           </center> 
         </div>
 
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/navigo/7.1.3/navigo.min.js" integrity="sha512-T5Jaw8KOeloIRJz6TfFWDNqeTwMnLTXf2amscWwmNmIPmrAjPdl47fupdu7TrX3eSVuS1NElEfw0h2+0SsNxaQ==" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -284,6 +307,9 @@ console.log(err);
 })
 }
 */
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
   </script>
   <script src="./scripts/common.js"></script>
   <script src="./scripts/firebaseui.js"></script>
