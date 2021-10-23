@@ -1078,7 +1078,7 @@ router.on({
         if(choose.ch_neg.value != ""){
           chNeg = choose.ch_neg.value;
          }
-         router.navigate('practice/exam/'+params.subj +'/'+params.chap+'/'+key[0]+'/'+chTime+'~'+chNeg);
+         router.navigate('practice/exam/'+params.subj +'/'+params.chap+'/'+key[0]+'/'+parseInt(chTime)+'~'+chNeg);
       });
 
       $(document).ready(function(){
