@@ -103,7 +103,7 @@ db.ref('app/users/'+user.uid).on('value', p=>{
       Swal.fire('Saved!', '', 'success');
       db.ref('app/users/'+user.uid).update(data);
       store.collection('globalScore').doc(user.uid).update({
-        username: data.nickName,
+        name: data.nickName,
         inst: data.inst +"|"+data.group
       });
     } else if (result.isDenied) {
