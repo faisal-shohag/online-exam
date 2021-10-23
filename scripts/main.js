@@ -1018,7 +1018,7 @@ router.on({
     
     snap.forEach(item=>{
       ex.innerHTML += `
-      <a href="#!/practice/nb/${params.subj}/${params.chap}/${item.id}"> <div class="chap_item ${params.subj}_list"><div><div class="name_logo">${firstLetter(item.data().details.exam_name)}</div></div><div><div class="chapterName">${item.data().details.exam_name}</div><div class="author">${item.data().questions.length}টি প্রশ্ন</div></div></div></a>
+      <a href="#!/practice/nb/${params.subj}/${params.chap}/${item.id}|${item.data().questions.length}"> <div class="chap_item ${params.subj}_list"><div><div class="name_logo">${firstLetter(item.data().details.exam_name)}</div></div><div><div class="chapterName">${item.data().details.exam_name}</div><div class="author">${item.data().questions.length}টি প্রশ্ন</div></div></div></a>
       `
     })
   })
@@ -1027,6 +1027,7 @@ router.on({
 "/practice/nb/:subj/:chap/:key": function(params){
   // $('.footer').hide();
   // $('.app_loader').show();
+  let key = (params.key).split('|');
   $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Before Exam</div></div>`);
   app.innerHTML = `
   <div class="prac_nb">
@@ -1036,7 +1037,7 @@ router.on({
  <li>প্রাকটিস পরীক্ষার মার্ক র‍্যাঙ্ক এর সাথে যুক্ত হবে না।</li>
  <li>প্রাকটিস পরীক্ষাগুলি যেকোনো সময় দেয়া যাবে।</li>
  <li>প্রাকটিস পরীক্ষাগুলির সময় এবং নেগেটিভ মার্ক নিচে দেয়া অপশন থেকে নিজের মত বেঁছে নেয়া যাবে।</li>
- <li>সময় এবং নেগেটিভ মার্ক বেঁছে না নিলে স্বয়ংক্রিয়ভাবে সময় 15 minutes এবং নেগেটিভ মার্ক 0 বলে গণ্য হবে।</li>
+ <li>সময় এবং নেগেটিভ মার্ক <b>বেঁছে না নিলে</b> স্বয়ংক্রিয়ভাবে <b>সময় (প্রশ্ন সংখ্যা/২) মিনিট</b> এবং <b>নেগেটিভ মার্ক 0</b> বলে গণ্য হবে।</li>
  <li>পরীক্ষাগুলির জন্য আপাতত কোনো লিডারবোর্ড থাকছে না।</li>
  </ul>
 </div>
@@ -1069,7 +1070,7 @@ router.on({
       let choose = document.getElementById('chooseForm');
       choose.addEventListener('submit', a=>{
         a.preventDefault();
-        let chTime = 15;
+        let chTime = parseInt(key[1])/2;
         let chNeg = 0;
         if(choose.ch_time.value != ""){
          chTime = choose.ch_time.value;
@@ -1077,7 +1078,7 @@ router.on({
         if(choose.ch_neg.value != ""){
           chNeg = choose.ch_neg.value;
          }
-         router.navigate('practice/exam/'+params.subj +'/'+params.chap+'/'+params.key+'/'+chTime+'~'+chNeg);
+         router.navigate('practice/exam/'+params.subj +'/'+params.chap+'/'+key[0]+'/'+chTime+'~'+chNeg);
       });
 
       $(document).ready(function(){
