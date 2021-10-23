@@ -1085,6 +1085,7 @@ router.on({
         $('select').formSelect();
       });
 },
+
 "practice/exam/:subj/:chap/:key/:choice": function(params){
   $('.footer').hide();
   $('.app_loader').show();
