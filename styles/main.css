@@ -1003,6 +1003,7 @@ color: var(--red);
 .l-name{
   text-align: left;
   font-size: 13px;
+  font-weight: bold;
 }
 .instName{
   font-size: 10px;
