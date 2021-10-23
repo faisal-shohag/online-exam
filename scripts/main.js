@@ -175,7 +175,7 @@ router.on(function() {
   `
 
   
-  store.collection('public_exams').where('details.sl_group', '==', myData.group).orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
+  store.collection('public_exams').orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
     let rncount = 0, upcount=0, endcount=0 
     $('.app_loader').hide();
     $('.div-1').html(`<div class="h-menu">
@@ -218,7 +218,7 @@ router.on({
   </div>
   `;
  const examlist = document.querySelector('.examlist');
- store.collection(params.id+'_exams').where('details.sl_group', '==', myData.group).orderBy("publish_date", 'desc').limit(20).onSnapshot(snap=> {
+ store.collection(params.id+'_exams').orderBy("publish_date", 'desc').limit(20).onSnapshot(snap=> {
   examlist.innerHTML = "";
    clearInterval(timer);
    $('.app_loader').hide();
