@@ -408,7 +408,6 @@ router.on({
     });
 
     if(taken){
-      $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Leaderboard</div></div>`);
       $('.footer').show();
       $('.exam-doc').html(`
       <div class="ladder">
@@ -756,10 +755,10 @@ router.on({
         
         })
       }else{
+        $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Leaderboard</div></div>`);
         $('.footer').show();
         app.innerHTML = `
         <div class="ladder">
-        <div class="menu_title"> <i class="icofont-people"></i> Leaderboard</div>
         <a class="btn green" href="#!/solutions/${params.ida}/${params.id}">See Questions & Solutions</a>
         <div class="my_pos" style="background: crimson; color: #fff; font-weigth: bold;"> <i class="icofont-ban"></i> Your didn't participated in this exam!</div>
         <div id="board" class="board"></div>
