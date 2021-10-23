@@ -784,7 +784,7 @@ router.on({
                 <div class="l-name">${item.username}</div>
                 </div>
                 <div class="sandt">
-                <div class="l-score">${item.score}</div>
+                <div class="l-score ldscore">${item.score}</div>
                 <divname class="l-time">${min}:${sec}</div>
                 </div>
                 </div>
