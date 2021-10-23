@@ -983,7 +983,7 @@ router.on({
 },
 
 "/practice/subject/:id": function(params){
-  // $('.footer').hide();
+$('.footer').show();
   // $('.app_loader').show();
   $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">${tag[params.id]}</div></div>`);
   app.innerHTML = `
@@ -1004,7 +1004,7 @@ router.on({
 
 },
 "/practice/list/:subj/:chap/:chapName": function(params){
-  // $('.footer').hide();
+$('.footer').show();
   $('.app_loader').show();
   $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">${params.chapName}</div></div>`);
   app.innerHTML = `
@@ -1025,7 +1025,7 @@ router.on({
 },
 
 "/practice/nb/:subj/:chap/:key": function(params){
-  // $('.footer').hide();
+   $('.footer').show();
   // $('.app_loader').show();
   let key = (params.key).split('|');
   $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Before Exam</div></div>`);
