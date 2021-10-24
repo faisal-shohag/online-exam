@@ -886,9 +886,11 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
     display: block;
     font-size: 14px;
     font-weight: 500;
-    height: 30px;
+    height: 40px;
     line-height: 20px;
     padding: 0 10px;
+    display: flex;
+    align-items: center;
 }
 
 .sidenav li>a>i, .sidenav li>a>[class^="mdi-"], .sidenav li>a li>a>[class*="mdi-"], .sidenav li>a>i.material-icons {
@@ -899,6 +901,8 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
     width: 24px;
     color: #1f971f;
     font-size: 20px;
+    display: flex;
+    align-items: center;
 }
 
 .sidenav .subheader {
