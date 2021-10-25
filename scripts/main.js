@@ -2156,7 +2156,7 @@ let question = {
         <div class="opt" id="${i+4+i*3}"><div class="st"></div>${dt.questions[i].opt[3]}</div>
     </div>
     <div class="solution"><b>Solution:</b></br> ${dt.questions[i].ex}</div>
-    <center><a href="#!/edit_q/${i}"><button class="btn green">Edit</button></a></center>
+    <center><a href="#!/edit_q/create2/${i}"><button class="btn green">Edit</button></a></center>
 </div>`
   }
       for(let a=0; a<ans.length; a++){
@@ -2284,7 +2284,7 @@ let question = {
         <div class="opt" id="${i+4+i*3}"><div class="st"></div>${dt.questions[i].opt[3]}</div>
     </div>
     <div class="solution"><b>Solution:</b></br> ${dt.questions[i].ex}</div>
-    <center><a href="#!/edit_q/${i}"><button class="btn green">Edit</button></a></center>
+    <center><a href="#!/edit_q/create/${i}"><button class="btn green">Edit</button></a></center>
 </div>`
   }
       for(let a=0; a<ans.length; a++){
@@ -2327,14 +2327,14 @@ let question = {
 
 },
 
-"/edit_q/:id" : function(params){
+"/edit_q/:ref/:id" : function(params){
   $('.app_loader').show();
     $('.footer').show();
     $('.footertext').hide();
       $('.footerIcon').removeClass('footerIconActive');
       $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Question Edit</div></div>`);
       app.innerHTML = `<span class="edit-q-doc"></span>`
-  db.ref('app/users/'+user.uid+'/create/history/questions/'+params.id).on('value', snap=>{
+  db.ref('app/users/'+user.uid+'/'+params.ref+'/history/questions/'+params.id).on('value', snap=>{
     $('.app_loader').hide();
     $('.edit-q-doc').html(`
     <div class="page1">
@@ -2394,7 +2394,7 @@ let question = {
           confirmButtonText: 'Yes'
         }).then((result) => {
           if (result.isConfirmed) {
-            db.ref('app/users/'+user.uid+'/create/history/questions/'+params.id).update(question);
+            db.ref('app/users/'+user.uid+'/'+params.ref+'/history/questions/'+params.id).update(question);
             Swal.fire(
               'Saved',
               'Your question has been saved.',
