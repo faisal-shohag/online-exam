@@ -359,7 +359,7 @@ textarea{
 }
 
  .question{
-    /* font-weight: bold; */
+    font-weight: bold;
     padding: 5px;
     font-size: 18px;
     font-family:'Roboto', Kalpurush;
