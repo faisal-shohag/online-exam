@@ -8,7 +8,6 @@ $(document).ready(function(){
 
 firebase.auth().onAuthStateChanged((user)=>{
   if(user){
-    console.log(user);
     $('.top').show();
     $('.image').html(`<img src="${user.photoURL}"/>`);
     $('.imagexBig0').html(`<div class="navprogImg"><img src="${user.photoURL}"/></div>`);
@@ -168,6 +167,12 @@ router.on(function() {
   </div>
   </a>
 
+  <a href="#!/practice/subject/e">
+  <div class="sl_item">
+  <div class="sl_icon"><i class="icofont-book"></i></div>
+  <div class="sl_name">English</div>
+  </div>
+  </a>
 
 </div>
   </div>

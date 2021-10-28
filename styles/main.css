@@ -178,6 +178,7 @@ label,
   flex-direction: column;
   gap: 0px;
   border-radius: 5px;
+  min-width: 70px;
 }
 
 

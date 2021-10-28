@@ -218,9 +218,11 @@ margin-right: 10px;
     display: flex;
     position: fixed;
     justify-content: center;
-    width: 100%;
+    width: 90%;
     height: 100%;
     align-items: center;
+    left: 0;
+    top: 0;
 }
 
 textarea{
