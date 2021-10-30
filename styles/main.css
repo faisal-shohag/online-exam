@@ -1,4 +1,5 @@
 @import url("https://fonts.maateen.me/kalpurush/font.css");
+@import url('https://fonts.maateen.me/siyam-rupali/font.css');
 body {
   font-family:'Roboto', Kalpurush;
   background: #f9fafb;
@@ -157,7 +158,7 @@ label,
   text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
   border-bottom: 0;
   font-size: 20px;
-  font-family: SolaimanLipi;
+  font-family: 'SiyamRupali';;
   /* font-weight: bold; */
 }
 
@@ -204,7 +205,7 @@ label,
 
 .sl_name{
   font-size: 12px;
-  font-family: Hind Siliguri;
+  font-family: SiyamRupali, 'Roboto';
   font-weight: bold;
 }
 
@@ -212,6 +213,7 @@ label,
   display: flex;
   flex-direction: column;
   gap: 10px;
+  font-family: SiyamRupali, 'Roboto';
 }
 
 .chap_item{
@@ -584,7 +586,7 @@ label,
 
 
 .h-menu{
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 3px 16px;
   padding: 5px;
   border-radius: 5px;
   font-family:'Roboto', Kalpurush;
@@ -642,7 +644,7 @@ label,
 }
 
 .top_dir{
- font-size: 30px;
+ font-size: 10px;
 }
 
 .top_app_title{
@@ -655,7 +657,7 @@ label,
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; */
   text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
-  font-family: Hind Siliguri;
+  font-family: SiyamRupali, 'Roboto';
   font-size: 23px;
 }
 
