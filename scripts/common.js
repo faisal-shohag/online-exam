@@ -618,9 +618,15 @@ function shuffleArray(array) {
             totalExams : snap.val().exams.total,
             createPermission: snap.val().createPermission,
             nickName: snap.val().nickName,
-            group: snap.val().group
+            group: snap.val().group,
+            subscribed: snap.val().subscribed
            }
            localStorage.setItem('group', snap.val().group);
+
+          $('.prName').text(myData.nickName);
+          $('.prScore').html(`<i class="icofont-cop-badge"></i> <span>${myData.totalScore}</span>`);
+           //Subscription remider
+           
         });
         
     }

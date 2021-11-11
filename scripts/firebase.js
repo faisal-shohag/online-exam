@@ -42,11 +42,11 @@
                   group: "",
                   district: "",
                   inst: "",
-                  phone: ""
-
+                  phone: "",
+                  subscribed: "Jan 01 2021 00:00:00",
               }
               db.ref("app/users/"+authResult.user.uid).update(data);
-              store.collection('globalScore').doc(authResult.user.uid).set({id: authResult.user.uid, username: authResult.user.displayName, inst: "", score: 0});
+              store.collection('globalScore').doc(authResult.user.uid).set({id: authResult.user.uid, username: authResult.user.displayName, inst: "", score: 0, subscribed: "Jan 01 2021 00:00:00",});
 
           }
           if (authResult.additionalUserInfo) {

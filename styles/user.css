@@ -24,8 +24,24 @@
 .displayName{
     font-weight: bold;
     font-size: 17px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
 }
-
+.subs_icon{
+ color: #fff;
+ font-size: 18px;
+ height: 18px;
+ width: 18px;
+ background: rgb(88, 88, 180);
+ border-radius: 50%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ font-weight: bold;
+}
 .email{
     font-size: 15px;
 }
@@ -228,7 +244,7 @@ textarea{
 }
 
 #question_form textarea{
-    font-family: 'SolaimanLipi';
+    /* font-family: 'SolaimanLipi'; */
     background: #fff;
     color: #000;
     padding: 7px;
@@ -384,7 +400,7 @@ textarea{
     margin: 5px 2px; 
     border: 2px solid var(--success);
     background: #5ad4429f;
-    font-family: 'SolaimanLipi';
+    /* font-family: 'SolaimanLipi'; */
 }
 
 .opt{
@@ -400,7 +416,7 @@ textarea{
     min-height: 37px;
     vertical-align: middle;
     display: flex;
-    font-family: Roboto, 'SolaimanLipi';
+    font-family:'Roboto', Kalpurush; 
     /* transition: 0.1s; */
 
 }
@@ -756,6 +772,34 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
     font-size: 20px;
     font-weight: normal;
 }
+.prem{
+    background: linear-gradient(45deg, rgb(92, 39, 190), rgb(179, 29, 166));
+    color: rgb(240, 233, 233);
+    position: relative;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    border-radius: 3px;
+  }
+
+  .prem::after{
+      content: 'Subscribed!';
+      color: #ddd;
+      position: absolute;
+      top: 30%;
+      font-size: 50px;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      opacity: 0.1;
+  }
+
+.prem .bio{
+    background: -webkit-linear-gradient(45deg, rgb(149, 163, 204), rgb(255, 244, 255));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  }
 
 .prof-edit-icon{
     position: fixed;
@@ -912,4 +956,118 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
     font-size: 14px;
     font-weight: 500;
     line-height: 20px;
+}
+
+.donate{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.donate_card{
+    text-align: center;
+    background: linear-gradient(45deg, rgb(92, 39, 190), rgb(179, 29, 166));
+    width: 300px;
+    border-radius: 5px;
+    padding: 20px;
+    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.donate_card .price{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-family: SiyamRupali;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.p_tk{
+    position: absolute;
+    top: 20%;
+    left: 25%;
+    font-size: 30px;
+    text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.p_time{
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+  text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.p_line{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.donate_card .p_value{
+    background: -webkit-linear-gradient(45deg, rgb(151, 160, 184), rgb(224, 229, 231));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    font-size: 60px;
+}
+
+.offer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.subscribe_button{
+    font-size: 18px;
+    margin: 15px 10px;
+    border-radius: 15px;
+    width: 200px;
+    padding: 10px;
+    font-weight: bold;
+    color: #222;
+    cursor: pointer;
+    background: linear-gradient(45deg, rgb(248, 248, 248), rgb(243, 243, 239));
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.subscribe_button:hover{
+    background: rgb(15, 15, 15);
+    color: #fff;
+    transition: 0.5s;
+}
+
+.grn{
+    background: rgb(80, 136, 80);
+    color: rgb(245, 241, 241);
+}
+
+.p_logo{
+    font-size: 70px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    /* border: 2px solid rgb(228, 222, 222); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.prScore{
+    font-size: 15px;
+    color: rgb(117, 114, 114);
+    font-weight: bold;
+    font-family: Hind Siliguri;
+}
+.prScore i{
+    color: goldenrod;
+    font-size: 15px;
+}
+.prName{
+    font-size: 13px;
+    font-family: Hind Siliguri;
 }

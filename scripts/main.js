@@ -129,6 +129,7 @@ $('.app_loader').show();
     }, 500);
   })
 
+
   console.log('%c Database is Ready!', "color: green; font-size: 15px; font-family: Hind Siliguri; font-weight: bold;")
   $('.app_loader').hide();
 router.on(function() {
@@ -141,7 +142,7 @@ router.on(function() {
     $('.hm').addClass('footerIconActive');
     $($($('.hm')[0].parentNode)[0].lastElementChild).show();
   }
-  $('.top_logo').html(`<div class="animate__animated animate__fadeInLeft top_app_title"><div class="top_dir"><i class="icofont-focus"></i></div> <div class="top_text">বৃত্ত</div></div>`);
+  $('.top_logo').html(`<div class="animate__animated animate__fadeInLeft top_app_title"><div class="top_dir"><i class="icofont-brand-bada"></i></div> <div class="top_text"></div></div>`);
   // $('.top_logo').html(`<divclass="top_app_title"><div class="animate__animated animate__fadeLeft top_dir"><i class="icofont-focus"></i></div> <div class="animate__animated animate__fadeIn top_text">Public Exams</div></div>`);
   app.innerHTML= `
   <div class="div-1"></div>
@@ -218,6 +219,7 @@ router.on({
     $('.app_loader').show();
   
     app.innerHTML = `
+    <div id="aaa+p"></div>
     <div class="menu_title" id="all_t"></div>
   <div class="examlist">
   </div>
@@ -234,6 +236,30 @@ router.on({
       if(n=="0") return "";
       return "·-"+n;
     }
+
+   
+
+    // (async()=>{
+    //   await new Promise(resolve=>{
+    //    // console.log(typeof countDownTimer(data.details.end_date, doc.id, doc.id+"+p"))
+    //     //let intv;
+    //    // intv = setInterval(() => {
+    //       if(typeof countDownTimer(data.details.end_date, doc.id, doc.id+"+p") != undefined){
+    //         resolve();
+    //       //clearInterval(intv);
+    //       } 
+    //    // }, 1000);
+    //    })
+
+    //   // console.log(typeof countDownTimer(data.details.end_date, doc.id, doc.id+"+p"));
+    //   })();
+
+
+    //console.log(countDownTimer(data.details.end_date, doc.id, doc.id+"+p"));
+  // setInterval(() => {
+  //  console.log(countDownTimer(data.details.end_date));
+  // }, 1000);
+
     if(params.id2==="running"){
     $('#all_t').html(`<i class="icofont-hand-drag1"></i> Running`)
     if(new Date(data.details.end_date) > new Date() && new Date(data.details.start_date) < new Date()){
@@ -311,6 +337,7 @@ router.on({
               </div>  </a>`
           }
     }
+
   //}
   });
 
@@ -1007,6 +1034,7 @@ $('.footer').show();
 
 
 },
+
 "/practice/list/:subj/:chap/:chapName": function(params){
 $('.footer').show();
   $('.app_loader').show();
@@ -1093,6 +1121,7 @@ $('.footer').show();
 "practice/exam/:subj/:chap/:key/:choice": function(params){
   $('.footer').hide();
   $('.app_loader').show();
+  $('#fullscr').click();
   $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text"> </div></div>`);
   app.innerHTML=`<span class="exam-doc" id="practice-exam"></div>`;
   var ch = (params.choice).split('~');
@@ -1338,7 +1367,6 @@ $('.footer').show();
         })
   })
 },
-
 
 "/solutions/:ida/:id": function (params) {
   $('.footer').show();
@@ -2426,9 +2454,86 @@ let question = {
     $($($('.dnt')[0].parentNode)[0].lastElementChild).show();
     $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text"> Pricing & Donation</div></div>`);
     }
+  if(new Date(myData.subscribed) < new Date()){
     app.innerHTML = `
-    <center><h4>This section is under construction!</h4>
+    <div class="donate">
+    <div class="donate_card">
+   <center><div class="p_logo"><i class="icofont-safety"></i></div></center>
+    <div class="price">
+    <div class="p_tk">৳</div>
+    <div class="p_value">৪৯</div>
+    <div class="p_time">টাকা/মাস</div>
+    </div>
+     <center><div class="p_line">একদম সাশ্রয়ী মূল্যে পাচ্ছো সবকিছু!</div></center>
+     
+     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">আনলিমিটেড Self Arranged Exam</div></div>
+     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">সপ্তাহের ৫ দিনই লাইভ পরীক্ষা</div></div>
+     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">প্রথম মেরিট পজিশনে Gift Box</div></div>
+     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">প্রতি ১৫ দিনে মডেল টেস্ট</div></div>
+     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">Admission Test Full প্যাকেজ</div></div>
+
+     <center><div class="subscribe_button">সাবস্ক্রাইব করো</div></center>
+    </div>
+    </div>
     `
+  }else{
+    app.innerHTML = `
+    <div class="donate">
+    <div class="donate_card">
+   <center><div class="p_logo"><i class="icofont-safety"></i></div></center>
+    <div class="price">
+    <div class="p_tk">৳</div>
+    <div class="p_value">৪৯</div>
+    <div class="p_time">টাকা/মাস</div>
+    </div>
+     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">আনলিমিটেড Self Arranged Exam</div></div>
+     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">সপ্তাহের ৫ দিনই লাইভ পরীক্ষা</div></div>
+     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">প্রথম মেরিট পজিশনে Gift Box</div></div>
+     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">প্রতি ১৫ দিনে মডেল টেস্ট</div></div>
+     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">Admission Test Full প্যাকেজ</div></div>
+
+     <center><snap id="subs_btn"><div class="subscribe_button grn"><i class="icofont-check-circled"></i> সাবস্ক্রাইব করেছো!</div></span>
+     <div id="sub_time_text" style="font-weight: bold; font-size: 14px;">সাবস্ক্রিপশনের মেয়াদ বাকি</div>
+     <div id="sub_dur"></div>
+     </center>
+    
+    </div>
+    </div>
+    `
+
+    var timer;
+
+      var countDownDate = new Date(myData.subscribed).getTime();
+      console.log(countDownDate);
+      timer = setInterval(function() {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        if(days!==0){
+          $('#sub_dur').html( `${days} day ${hours} hr ${minutes} min ${seconds} sec`);
+        }
+       else if(hours===0 && minutes !== 0){
+          $('#sub_dur').html( `${minutes} min ${seconds} sec`);
+        }else if(hours===0 && minutes===0){
+          $('#sub_dur').html( `${seconds}`);
+        }else{
+          $('#sub_dur').html( `${hours} hr ${minutes} min ${seconds} sec`);
+        }
+       
+        if (distance < 0) {
+          clearInterval(timer);
+      //    $($('#'+element)[0].parentNode).hide(200);
+         $('#sub_time_text').hide(50);
+         $('#sub_dur').hide(50);
+         $('#subs_btn').html(`<div class="subscribe_button">সাবস্ক্রাইব করো</div>`);
+        }
+      }, 1000);
+      
+
+  }
 },
 
 "/myprofile" : function (){
@@ -2437,13 +2542,16 @@ let question = {
     $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Profile</div></div>`);
    app.innerHTML=`
    <center class="profile">
+   <div id="prem">
    <a href="#!/edit_profile"><div class="prof-edit-icon animate__animated animate__backInRight animte__faster"><i class="icofont-pencil-alt-3"></i></div></a>
   <div id="logout" class="logout-icon  animate__animated animate__backInLeft animte__faster"><i class="icofont-logout"></i></div>
    <div class="img"><div class="grp">${tag[myData.group]}</div><div class="imagexbig"><img src="${user.photoURL}"/></div></div>
-   <div class="displayName">${user.displayName}<span class="nick"></span></div>
+   <div class="displayName">${user.displayName}<span class="nick"></span><div class="subs_icon"></div></div>
    <div class="bio"></div>
    <div class="inst"> </div>
    <div class="dist"></div>
+   <span id="subs"></span>
+   </div>
    <div class="line"></div>
    <div class="score_card">
    <div class="rank cardXmed">
@@ -2467,10 +2575,10 @@ let question = {
    <div class="title-n"><i class="icofont-checked"></i> Your Participation</div>
  <div class="r-tab">
 
-   <div id="public" class="tab_item">Public</div>
-   <div id="live" class="tab_item">Live</div>
-   <div id="weekly" class="tab_item">Weekly</div>
-   <div id="special" class="tab_item">Special</div>
+   <div id="public" class="tab_item"><i class="icofont-people"></i> Public</div>
+   <div id="live" class="tab_item"><i class="icofont-oscommerce"></i> Live</div>
+   <div id="weekly" class="tab_item"><i class="icofont-calendar"></i> Weekly</div>
+   <div id="special" class="tab_item"><i class="icofont-space"></i> Special</div>
    </div>
    <div class="r-list"></div>
    </div>
@@ -2489,6 +2597,16 @@ db.ref("app/users/"+user.uid).on('value', snap=>{
   $('.inst').html(`<i class="icofont-institution"></i> ${snap.val().inst}`)
   $('.dist').html(`<i class="icofont-building-alt"></i> ${snap.val().district}`);
   $('.bio').text(snap.val().bio);
+
+ if(new Date(snap.val().subscribed) > new Date){
+   $('.subs_icon').html(`<i class="icofont-check-circled"></i>`);
+   $('#prem').addClass('prem');
+   console.log('%c Subscribed!', 'font-size: 15px; color: blue, font-weight:bold;');
+ }else{
+  $('.subs_icon').html(`<i class="icofont-warning-alt"></i>`);
+  $('#prem').removeClass('prem');
+  console.log('%c Unsubscribed!', 'font-size: 15px; color: blue, font-weight:bold;');
+ }
   });
 
 
@@ -2535,12 +2653,14 @@ db.ref("app/users/"+user.uid).on('value', snap=>{
     $('.footer').show();
     $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text" id="prof_name">Profile</div></div>`);
    app.innerHTML=`
-   <center class="profile">
+   <center  class="profile">
+   <div id="prem">
    <div class="img"><div class="grp"></div><div class="imagexbig"></div></div>
-   <div class="displayName"><span class="name"></span><span class="nick"></span></div>
+   <div class="displayName"><span class="name"></span><span class="nick"></span> <div class="subs_icon"></div></div>
    <div class="bio"></div>
    <div class="inst"> </div>
    <div class="dist"></div>
+   </div>
    <div class="line"></div>
    <div class="score_card">
    <div class="rank cardXmed">   
@@ -2574,6 +2694,15 @@ db.ref("app/users/"+params.id).on('value', snap=>{
   $('.bio').text(snap.val().bio);
   $('.nick').text("("+snap.val().nickName+")");
   $('.grp').html(`${tag[snap.val().group]}`);
+  if(new Date(snap.val().subscribed) > new Date){
+    $('.subs_icon').html(`<i class="icofont-check-circled"></i>`);
+    $('#prem').addClass('prem');
+    console.log('%c Subscribed!', 'font-size: 15px; color: blue, font-weight:bold;');
+  }else{
+   $('.subs_icon').html(`<i class="icofont-warning-alt"></i>`);
+   $('#prem').removeClass('prem');
+   console.log('%c Unsubscribed!', 'font-size: 15px; color: blue, font-weight:bold;');
+  }
   });
 
 
@@ -2706,8 +2835,6 @@ if (result.isConfirmed) {
 },
 
 
-
-
 }).resolve();
 
 
@@ -2737,7 +2864,40 @@ if (result.isConfirmed) {
       id += key.charAt(Math.floor(Math.random()*keyLen));
     }
     return id;
+  } 
+
+
+  let d = Math.abs(new Date(myData.subscribed) - (new Date()));
+  //console.log(d);
+  var totalseconds = d;
+  var day = 86400000;
+  var hour = 3600000;
+  var minute = 60;
+  
+  var daysout = Math.floor(totalseconds / day);
+  var hoursout = Math.floor((totalseconds - daysout * day)/hour);
+  var minutesout = Math.floor((totalseconds - daysout * day - hoursout * hour)/minute);
+  var secondsout = totalseconds - daysout * day - hoursout * hour - minutesout * minute;
+
+  //console.log(daysout);
+  if(daysout<=10 && (daysout !=0 && hoursout!=0)){
+   Swal.fire({
+       title: 'Your subscription will expire soon!',
+       html: `<h5>${daysout} Day(s) ${hoursout} Hour(s) left!</h5>`,
+       text: "Subscribe again to access premium features!",
+       icon: 'warning',
+       showCancelButton: true,
+       confirmButtonColor: '#d33',
+       cancelButtonColor: 'orange',
+       confirmButtonText: 'Subscribe'
+     }).then((result) => {
+       if (result.isConfirmed) {
+         router.navigate('#!/donate');
+       }
+     })
   }
+
+
 })();
 
 }else{

@@ -1,7 +1,12 @@
 <html lang="en">
 <head>
+  <title>Britto Exam | Online Free Exam</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -20,8 +25,7 @@
     <link rel="stylesheet" href="./styles/login.css">
     <link rel="stylesheet" href="./styles/user.css">
     <link rel="stylesheet" href="./styles/media_screen.css" />
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous"></script>
 <script>
 MathJax = {
     tex: {
@@ -31,14 +35,10 @@ MathJax = {
       fontCache: 'global'
     }
 };
-  </script>
-
+</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3610301435640021"
      crossorigin="anonymous"></script>
-<title>Britto Exam | Online Free Exam</title>
-
-
 </head>
 <body>
 
@@ -46,13 +46,17 @@ MathJax = {
 
   <div class="top">
    
-  <div class="top_logo"><i class="icofont-focus"></i> </div>
+  <div class="top_logo"><i class="icofont-brand-bada"></i> </div>
 
   <div class="countdown"></div>
 
   
 <div class="wrap">
   <a data-target="slide-out" class="sidenav-trigger" href="#!/myprofile"><div class="image"></div></a>
+ <div style="display: flex; flex-direction: column; gap: 0px;  align-items: center; height: 50%;">
+  <div class="prName"></div>
+  <div class="prScore"></div>
+</div>
 </div>
 </div>
 
@@ -66,7 +70,7 @@ MathJax = {
     <div class="myemail"></div>
   </div></li>
   <li><a class="waves-effect" href="#!/myprofile"><i class="icofont-user-alt-2"></i>Profile</a></li>
-  <li><a href="#!" onclick="requestFullScreen()"><i class="icofont-iphone"></i> Full Screen Mode</a></li>
+  <li><a id="fullscr" onclick="requestFullScreen()"><i class="icofont-iphone"></i> Full Screen Mode</a></li>
   <li><div class="divider"></div></li>
   <!-- <li><a class="subheader">Subheader</a></li>
   <li><a class="waves-effect" href="#!">Third Link With Waves</a></li> -->
@@ -75,7 +79,7 @@ MathJax = {
 <script>
   var element = document.documentElement;
     function requestFullScreen() {
-      console.log('clicked')
+      //console.log('clicked')
     // Supports most browsers and their versions.
     var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
 
@@ -168,7 +172,7 @@ MathJax = {
         <div class="footertext">Rank</div></a>
       </div>
       <a href="#!/create"><div class="footerMenu">
-        <div class="footerIcon sz crt"><i class="icofont-livejournal"></i>
+        <div class="footerIcon sz crt"><i class="icofont-pencil-alt-5"></i>
           </div>
         <div class="footertext">Create</div></a>
         <div class="newsActive"></div>
