@@ -148,7 +148,6 @@ router.on(function() {
   <div class="div-1"></div>
 
   <div class="sl">
-
   <div class="title-n"><i class="icofont-education"></i> বিষয়ভিত্তিক প্রাকটিস</div>
 
 
@@ -174,8 +173,10 @@ router.on(function() {
   <div class="sl_name">English</div>
   </div>
   </a>
-
 </div>
+
+
+
   </div>
  
   `
@@ -1121,7 +1122,7 @@ $('.footer').show();
 "practice/exam/:subj/:chap/:key/:choice": function(params){
   $('.footer').hide();
   $('.app_loader').show();
-  $('#fullscr').click();
+  // $('#fullscr').click();
   $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text"> </div></div>`);
   app.innerHTML=`<span class="exam-doc" id="practice-exam"></div>`;
   var ch = (params.choice).split('~');
@@ -1296,6 +1297,7 @@ $('.footer').show();
                         );
                         // $('#'+ans[k]).css({'background': 'var(--success)', 'color': 'var(--light)'});
                         $("#" + ans[k] + " .st").addClass("cr");
+                       // console.log(ans[k]);
                         $(
                           $($($("#" + ans[k])[0].parentNode)[0].parentNode)[0]
                             .children[0]
