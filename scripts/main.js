@@ -166,7 +166,7 @@ router.on(function() {
   <div class="sl_menu">
   <a href="#!/practice/subject/b1"> 
   <div class="sl_item">
-  <div class="sl_icon"><img src="../images/open-book.png"></div>
+  <div class="sl_icon"><img src="../images/literature.png"></div>
   <div class="sl_name">বাংলা ১ম পত্র</div>
   </div>
   </a>
@@ -174,17 +174,77 @@ router.on(function() {
   
   <a href="#!/practice/subject/b2">
   <div class="sl_item">
-  <div class="sl_icon"><img src="../images/book-bn2.png"></div>
+  <div class="sl_icon"><img src="../images/reading.png"></div>
   <div class="sl_name">বাংলা ২য়  পত্র</div>
   </div>
   </a>
 
   <a href="#!/practice/subject/e">
   <div class="sl_item">
-  <div class="sl_icon"><img src="../images/origami/eng.png"></div>
+  <div class="sl_icon"><img src="../images/grammar.png"></div>
   <div class="sl_name">English 2nd</div>
   </div>
   </a>
+
+  <a href="#!/practice/subject/bio1">
+<div class="sl_item">
+<div class="sl_icon"><img src="../images/phy1.png"></div>
+<div class="sl_name">পদার্থ ১ম</div>
+</div>
+</a>
+
+<a href="#!/practice/subject/bio1">
+<div class="sl_item">
+<div class="sl_icon"><img src="../images/phy2.png"></div>
+<div class="sl_name">পদার্থ ২য় </div>
+</div>
+</a>
+
+<a href="#!/practice/subject/bio1">
+<div class="sl_item">
+<div class="sl_icon"><img src="../images/che1.png"></div>
+<div class="sl_name">রসায়ন ১ম</div>
+</div>
+</a>
+
+<a href="#!/practice/subject/bio1">
+<div class="sl_item">
+<div class="sl_icon"><img src="../images/che2.png"></div>
+<div class="sl_name">রসায়ন ২য়</div>
+</div>
+</a>
+
+
+<a href="#!/practice/subject/bio1">
+<div class="sl_item">
+<div class="sl_icon"><img src="../images/leaf.png"></div>
+<div class="sl_name">জীববিজ্ঞান ১ম</div>
+</div>
+</a>
+
+<a href="#!/practice/subject/bio1">
+<div class="sl_item">
+<div class="sl_icon"><img src="../images/zoology.png"></div>
+<div class="sl_name">জীববিজ্ঞান ২য়</div>
+</div>
+</a>
+
+<a href="#!/practice/subject/bio1">
+<div class="sl_item">
+<div class="sl_icon"><img src="../images/math1.png"></div>
+<div class="sl_name">উচ্চতর গণিত ১ম</div>
+</div>
+</a>
+
+<a href="#!/practice/subject/bio1">
+<div class="sl_item">
+<div class="sl_icon"><img src="../images/math2.png"></div>
+<div class="sl_name">উচ্চতর গণিত ২য়</div>
+</div>
+</a>
+
+
+
 </div>
 
 
@@ -250,29 +310,6 @@ router.on({
       return "·-"+n;
     }
 
-   
-
-    // (async()=>{
-    //   await new Promise(resolve=>{
-    //    // console.log(typeof countDownTimer(data.details.end_date, doc.id, doc.id+"+p"))
-    //     //let intv;
-    //    // intv = setInterval(() => {
-    //       if(typeof countDownTimer(data.details.end_date, doc.id, doc.id+"+p") != undefined){
-    //         resolve();
-    //       //clearInterval(intv);
-    //       } 
-    //    // }, 1000);
-    //    })
-
-    //   // console.log(typeof countDownTimer(data.details.end_date, doc.id, doc.id+"+p"));
-    //   })();
-
-
-    //console.log(countDownTimer(data.details.end_date, doc.id, doc.id+"+p"));
-  // setInterval(() => {
-  //  console.log(countDownTimer(data.details.end_date));
-  // }, 1000);
-
     if(params.id2==="running"){
     $('#all_t').html(`<i class="icofont-hand-drag1"></i> Running`)
     if(new Date(data.details.end_date) > new Date() && new Date(data.details.start_date) < new Date()){
@@ -322,80 +359,9 @@ router.on({
               </div>  </a>`
           }
     }
-
-  //}
   });
 
-  $('.').click(function(){
-    let key = ($(this)[0].id).split('+');
-    key = key[0];
-    Swal.fire({
-      title: '<i class="icofont-hand"></i> Know Before Exam',
-      html: `<div class="exam_desc">
-      <ol>
-      <li>You can access this exam only once.</li>
-      <li>Your score will sum with previous score.</li>
-      <li>This exam will be responsible for your rank value.</li>
-      <li>Do not try to be dishonest.</li>
-      <li>Auto sumission will happen without any notice when time up.</li>
-      </ol>
-      </div>`,
-      confirmButtonText: 'Start',
-      showCancelButton: true,
-    }).then(result=>{
-      if(result.isConfirmed){
-        router.navigate('/exam/public/'+key);
-       }
-    });
-  })
-
-  $('.with_pass').click(function(){
-    let key = ($(this)[0].id).split('+');
-    key = key[0];
-    Swal.fire({
-      title: 'Password',
-      input: 'text',
-      inputAttributes: {
-        autocapitalize: 'off'
-      },
-      showCancelButton: true,
-      confirmButtonText: 'Submit',
-      showLoaderOnConfirm: true,
-      preConfirm: (login) => {
-       return store.collection('public_exams').doc(key).get().then(doc=>{
-            if(login !== doc.data().details.password) throw new Error("Password Incorrect");
-            return doc.data().details;
-        }).catch(error => {
-            Swal.showValidationMessage(
-              `Request failed: ${error}`
-            )
-          })
-      },
-      allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
-      if (result.isConfirmed) {
-          Swal.fire({
-            title: '<i class="icofont-hand"></i> Know Before Exam',
-            html: `<div class="exam_desc">
-            <ol>
-            <li>You can access this exam only once.</li>
-            <li>Your score will sum with previous score.</li>
-            <li>This exam will be responsible for your rank value.</li>
-            <li>Do not try to be dishonest.</li>
-            <li>Auto sumission will happen without any notice when time up.</li>
-            </ol>
-            </div>`,
-            confirmButtonText: 'Start',
-            showCancelButton: true,
-          }).then(result=>{
-            if(result.isConfirmed){
-             router.navigate('/exam/public/'+key);
-            }
-          })
-      }
-    })
-  })
-  
+ 
   if(empty){
     examlist.innerHTML = `
     <center><div class="big_no_exam animate_animated animate__bounceIn"><div class=""><i class="icofont-warning-alt"></i></div><div>পরীক্ষা নেই!</div></div></center>

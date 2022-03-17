@@ -180,6 +180,9 @@ label,
   gap: 20px;
   text-align: center;
   margin-top: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .sl_item{
