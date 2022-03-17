@@ -277,9 +277,8 @@ router.on({
     $('#all_t').html(`<i class="icofont-hand-drag1"></i> Running`)
     if(new Date(data.details.end_date) > new Date() && new Date(data.details.start_date) < new Date()){
       empty = false;
-      if(data.details.password == ""){
         examlist.innerHTML += `
-        <div id="${doc.id}+p" class="list_exam no_password ${doc.id}">
+        <a href="#!/exam/public/${doc.id}"><div id="${doc.id}+p" class="list_exam  ${doc.id}">
         <div class="list_name">${data.details.exam_name}</div>
         <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes ${neg(data.details.negative_mark)}</div>
         <div class="timer"><i class="icofont-ui-clock"></i> Remaining: <span id="${doc.id}"> ${countDownTimer(data.details.end_date, doc.id, doc.id+"+p")}</span></div>
@@ -287,28 +286,15 @@ router.on({
         <div class="chip red">${tag[data.details.sl_class]}</div>
         <div class="chip green">${tag[data.details.sl_subject]}</div>
         <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
-        </div>
+        </div></a>
         `
-      }else{
-        empty = false;
-        examlist.innerHTML += `
-        <div id="${doc.id}+p" class="list_exam with_pass ${doc.id}">
-        <div class="list_name">${data.details.exam_name} <span class="lock"><i class="icofont-lock"></i></span></div> 
-        <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes ${neg(data.details.negative_mark)}</div>
-        <div  class="timer"><i class="icofont-ui-clock"></i> Remaining: <span id="${doc.id}">${countDownTimer(data.details.end_date, doc.id, doc.id+"+p")}</span></div>
-        <div class="maker"><b>Prepared by:</b>  <span>${data.details.maker}</span></div>
-        <div class="chip red">${tag[data.details.sl_class]}</div>
-        <div class="chip green">${tag[data.details.sl_subject]}</div>
-        <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
-        </div>
-        `
-      }
+      
     }
   }else if(params.id2==="upcoming"){
     $('#all_t').html(`<i class="icofont-history"></i> Upcoming`)
       if(new Date(data.details.start_date) > new Date()){
         empty = false;
-        if(data.details.password === ""){
+       
           examlist.innerHTML += `
           <div class="list_exam ${doc.id}">
           <div class="list_name">${data.details.exam_name}</div>
@@ -319,21 +305,7 @@ router.on({
           <div class="chip green">${tag[data.details.sl_subject]}</div>
           <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
           </div>
-          `
-        }else{
-          empty = false;
-          examlist.innerHTML += `
-          <div class="list_exam ${doc.id}">
-          <div class="list_name">${data.details.exam_name} <span class="lock"><i class="icofont-lock"></i></span></div>
-          <div class="list_dur">${data.questions.length} Questions · ${data.details.sl_duration} minutes ${neg(data.details.negative_mark)}</div>
-          <div  class="timer"><i class="icofont-ui-clock"></i> Starting: <span id="${doc.id}">${countDownTimer(data.details.start_date, doc.id)}</span></div>
-          <div class="maker"><b>Prepared by:</b>  <span>${data.details.maker}</span></div>
-          <div class="chip red">${tag[data.details.sl_class]}</div>
-          <div class="chip green">${tag[data.details.sl_subject]}</div>
-          <div class="chip orange">${tag[data.details.sl_exam_type]}</div>
-          </div>
-          `
-        }
+`
       }
     }else{
         $('#all_t').html(`<i class="icofont-ui-check"></i> Ended`)
@@ -354,7 +326,7 @@ router.on({
   //}
   });
 
-  $('.no_password').click(function(){
+  $('.').click(function(){
     let key = ($(this)[0].id).split('+');
     key = key[0];
     Swal.fire({
