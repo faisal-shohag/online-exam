@@ -1288,6 +1288,7 @@ $('.footer').show();
                           );
                         }
                       }
+                      MathJax.typeset();
 
                       $(".score").show();
                       $(".mark").html(
@@ -1358,6 +1359,8 @@ $('.footer').show();
   for(let a=0; a<ans.length; a++){
        $("#" + ans[a] + " .st").addClass("cr");
      }
+
+     MathJax.typeset();
   
 })
 },
