@@ -134,7 +134,7 @@ $('.app_loader').show();
   $('.app_loader').hide();
 router.on(function() {
   $('.footer').show();
-  $('.app_loader').show();
+  // $('.app_loader').show();
   $('.footer').show();
   $('.footertext').hide();
   $('.footerIcon').removeClass('footerIconActive');
@@ -145,7 +145,19 @@ router.on(function() {
   $('.top_logo').html(`<div class="animate__animated animate__fadeInLeft top_app_title"><div class="top_dir"><i class="icofont-brand-bada"></i></div> <div class="top_text"></div></div>`);
   // $('.top_logo').html(`<divclass="top_app_title"><div class="animate__animated animate__fadeLeft top_dir"><i class="icofont-focus"></i></div> <div class="animate__animated animate__fadeIn top_text">Public Exams</div></div>`);
   app.innerHTML= `
-  <div class="div-1"></div>
+  <div class="div-1">
+  <center> <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-red">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </center> 
+  </div>
 
   <div class="sl">
   <div class="title-n"><img src="../images/book-stack.png"> বিষয়ভিত্তিক প্রাকটিস</div>
@@ -184,9 +196,9 @@ router.on(function() {
   
   store.collection('public_exams').orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
     let rncount = 0, upcount=0, endcount=0 
-    $('.app_loader').hide();
+    // $('.app_loader').hide();
     $('.div-1').html(`<div class="h-menu">
-    <div class="menu_title"><i class="icofont-people"></i> Public Exams</div>
+    <div class="menu_title"><img src="../images/free-exam.png"> Free Exams</div>
   <div class="menu_items">
   <a href="#!/exams/public/running"><div class="item">
   <div class="item_name">Running</div> <div id="rn_count" class="c_num">0</div>
