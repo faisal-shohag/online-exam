@@ -1,7 +1,15 @@
+html {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
 @import url("https://fonts.maateen.me/kalpurush/font.css");
 @import url('https://fonts.maateen.me/siyam-rupali/font.css');
+
 body {
-  font-family:'Roboto', Kalpurush;
+  font-family: 'Lato', Kalpurush;
   background: #f9fafb;
    
 }
@@ -85,7 +93,7 @@ body:-moz-full-screen {
   left: 0;
   background: #fdfdfd;
   width: 100%;
-  box-shadow: 0px 0.1px 2px rgba(0, 0, 0, 0.5);
+  /* box-shadow: 0px 0.1px 2px rgba(0, 0, 0, 0.5); */
   padding: 5px;
   z-index: 99;
   height: 50px;
@@ -145,7 +153,7 @@ label,
 .btn-flat,
 .timepicker,
 .top, .btn-flat, .btn {
-  font-family:'Roboto', Kalpurush;
+  font-family:'Lato', Kalpurush;
 }
 
 
@@ -213,7 +221,7 @@ label,
 
 .sl_name{
   font-size: 13px;
-  font-family: Hind Siliguri, 'Roboto';
+  font-family: Hind Siliguri, 'Lato';
   font-weight: bold;
   color: rgb(49, 46, 46);
 }
@@ -222,7 +230,7 @@ label,
   display: flex;
   flex-direction: column;
   gap: 10px;
-  font-family: SiyamRupali, 'Roboto';
+  font-family: SiyamRupali, 'Lato';
 }
 
 .chap_item{
@@ -311,7 +319,7 @@ label,
   box-shadow: 0 -2px 5px 0px rgba(0, 0, 0, 0.2);
   padding: 0px 15px;
   height: 50px;
-  font-family:'Roboto', Kalpurush;
+  font-family:'Lato', Kalpurush;
   /* border-top-left-radius: 40px; */
   /* border-top-right-radius: 40px; */
 }
@@ -587,7 +595,7 @@ label,
 
 .chip{
   color: #fff;
-  font-family:'Roboto', Kalpurush;
+  font-family:'Lato', Kalpurush;
 }
 
 .timer{
@@ -602,7 +610,7 @@ label,
   box-shadow: rgba(149, 157, 165, 0.2) 0px 3px 16px;
   padding: 5px;
   border-radius: 5px;
-  font-family:'Roboto', Kalpurush;
+  font-family:'Lato', Kalpurush;
 }
 
 .menu_title{
@@ -615,7 +623,7 @@ label,
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
-  font-family:'Roboto', Kalpurush;
+  font-family:'Lato', Kalpurush;
 }
 
 .menu_title img{
@@ -649,7 +657,7 @@ label,
 
 .c_num{
   font-weight: bold;
-  font-family: Roboto;
+  font-family: Lato;
   background: #fff;
   height: 23px;
   width: 23px;
@@ -676,7 +684,7 @@ label,
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent; */
   text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
-  font-family: SiyamRupali, 'Roboto';
+  font-family: SiyamRupali, 'Lato';
   font-size: 20px;
   font-weight: bold;
 }

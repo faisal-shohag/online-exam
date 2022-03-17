@@ -10,10 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans" as="style" />
     <link rel="preload" href="./fonts/SolaimanLipiNormal.woff2" as="font" type="font/woff2" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Poppins:ital,wght@0,600;0,700;0,900;1,500;1,600;1,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" href="./icons/icofont/icofont.min.css" />
@@ -53,10 +52,6 @@ MathJax = {
   
 <div class="wrap">
   <a data-target="slide-out" class="sidenav-trigger" href="#!/myprofile"><div class="image"></div></a>
- <div style="display: flex; flex-direction: column; gap: 0px;  align-items: center; height: 50%;">
-  <div class="prName"></div>
-  <div class="prScore"></div>
-</div>
 </div>
 </div>
 
@@ -70,31 +65,9 @@ MathJax = {
     <div class="myemail"></div>
   </div></li>
   <li><a class="waves-effect" href="#!/myprofile"><i class="icofont-user-alt-2"></i>Profile</a></li>
-  <li><a id="fullscr" onclick="requestFullScreen()"><i class="icofont-iphone"></i> Full Screen Mode</a></li>
   <li><div class="divider"></div></li>
-  <!-- <li><a class="subheader">Subheader</a></li>
-  <li><a class="waves-effect" href="#!">Third Link With Waves</a></li> -->
 </ul>  
 
-<script>
-  var element = document.documentElement;
-    function requestFullScreen() {
-      //console.log('clicked')
-    // Supports most browsers and their versions.
-    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
-
-    if (requestMethod) { // Native full screen.
-        requestMethod.call(element);
-    } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
-        var wscript = new ActiveXObject("WScript.Shell");
-        if (wscript !== null) {
-            wscript.SendKeys("{F11}");
-        }
-    }
-}
-
-
-</script>
 
   </div>
   <div class="loading">
@@ -121,6 +94,27 @@ MathJax = {
   </div>
     <main>
         <div id="app">
+          <div class="sign">
+            <div id="container">
+              <div id="loading">Loading...</div>
+                <div id="loaded" class="hidden">
+                  <div id="main">
+                    <div id="user-signed-in" class="hidden">
+                      <p>
+                        <button id="sign-out">Sign Out</button>
+                        <button id="delete-account">Delete account</button>
+                      </p>
+                    </div>
+                    <div id="user-signed-out" class="hidden">
+                     <div class="top_login_title"><img src="./images/puzzle.png" height="40px"> বৃত্ত Sign in</div>
+                      <div id="firebaseui-spa">
+                        <div id="firebaseui-container"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
         </div>
     </main>
 
@@ -146,27 +140,7 @@ MathJax = {
       </div>
     </div>
 
-<div class="sign">
-    <div id="container">
-      <div id="loading">Loading...</div>
-        <div id="loaded" class="hidden">
-          <div id="main">
-            <div id="user-signed-in" class="hidden">
-              <p>
-                <button id="sign-out">Sign Out</button>
-                <button id="delete-account">Delete account</button>
-              </p>
-            </div>
-            <div id="user-signed-out" class="hidden">
-             <div class="top_login_title"><i class="icofont-focus"></i> বৃত্ত Sign in</div>
-              <div id="firebaseui-spa">
-                <div id="firebaseui-container"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
+
 
       <div id="modal1" class="modal bottom-sheet">
         <div class="modal-content">
@@ -225,7 +199,6 @@ MathJax = {
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.all.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-database.js"></script>
@@ -252,37 +225,7 @@ var CLIENT_ID = '612135243639-14ma717s4im15i0ks2psjpam93k0nk48.apps.googleuserco
     var store = firebase.firestore();
     var db = firebase.database();
     var storage = firebase.storage();
-    const messaging=firebase.messaging();
- /*   
-function getStartToken(){
-messaging.getToken({vapidKey: "BLmr_FVY8kFvdgvkXCE2xngWFDA9TNNoly2MbJJhG1q4wzPo1_Y5wh1UTtUysX8KFbl9KLbk_n0sBHDER9xzDBY"}).then((currentToken) => {
-if (currentToken) {
-  console.log(currentToken);
-sendTokenToServer(currentToken);
-} 
-else {
-// Show permission request.
-RequestPermission();
-setTokenSentToServer(false);
-}
-}).catch((err) => {
-setTokenSentToServer(false);
-});
-}
 
-function RequestPermission(){
-messaging.requestPermission()
-.then(function(permission){
-if (permission === 'granted') {
-console.log("have Permission");
-//calls method again and to sent token to server
-getStartToken();
- }else{console.log("Permission Denied");}
-}).catch(function(err){
-console.log(err);
-})
-}
-*/
 $(document).ready(function(){
     $('.sidenav').sidenav();
     $('.sidenav')

@@ -2539,6 +2539,7 @@ let question = {
 
    $('#logout').click(function(){
     firebase.auth().signOut();
+    router.navigate('/');
     window.location.reload()
   });
 

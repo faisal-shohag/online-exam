@@ -218,14 +218,18 @@ margin-right: 10px;
 }
 
 .top_login_title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
     font-size: 35px;
-    text-align: center;
     font-weight: bold;
-    background: -webkit-linear-gradient(90deg, rgb(197, 60, 190), rgb(14, 5, 65));
+    background: -webkit-linear-gradient(90deg, rgb(219, 172, 44), rgb(196, 24, 24));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+    font-family: Hind Siliguri;
 }
 
 
