@@ -147,15 +147,20 @@ router.on(function() {
   app.innerHTML= `
   <div class="div-1">
   <center> <div class="preloader-wrapper big active">
+
             <div class="spinner-layer spinner-red">
+
               <div class="circle-clipper left">
+        
                 <div class="circle"></div>
               </div><div class="gap-patch">
                 <div class="circle"></div>
               </div><div class="circle-clipper right">
                 <div class="circle"></div>
+              
+                </div>
+            
               </div>
-            </div>
           </center> 
   </div>
 
@@ -164,6 +169,7 @@ router.on(function() {
 
 
   <div class="sl_menu">
+
   <a href="#!/practice/subject/b1"> 
   <div class="sl_item">
   <div class="sl_icon"><img src="../images/literature.png"></div>
@@ -186,28 +192,28 @@ router.on(function() {
   </div>
   </a>
 
-  <a href="#!/practice/subject/bio1">
+  <a href="#!/practice/subject/phy1">
 <div class="sl_item">
 <div class="sl_icon"><img src="../images/phy1.png"></div>
 <div class="sl_name">পদার্থ ১ম</div>
 </div>
 </a>
 
-<a href="#!/practice/subject/bio1">
+<a href="#!/practice/subject/phy2">
 <div class="sl_item">
 <div class="sl_icon"><img src="../images/phy2.png"></div>
 <div class="sl_name">পদার্থ ২য় </div>
 </div>
 </a>
 
-<a href="#!/practice/subject/bio1">
+<a href="#!/practice/subject/chem1">
 <div class="sl_item">
 <div class="sl_icon"><img src="../images/che1.png"></div>
 <div class="sl_name">রসায়ন ১ম</div>
 </div>
 </a>
 
-<a href="#!/practice/subject/bio1">
+<a href="#!/practice/subject/chem2">
 <div class="sl_item">
 <div class="sl_icon"><img src="../images/che2.png"></div>
 <div class="sl_name">রসায়ন ২য়</div>
@@ -229,26 +235,21 @@ router.on(function() {
 </div>
 </a>
 
-<a href="#!/practice/subject/bio1">
+<a href="#!/practice/subject/math1">
 <div class="sl_item">
 <div class="sl_icon"><img src="../images/math1.png"></div>
 <div class="sl_name">উচ্চতর গণিত ১ম</div>
 </div>
 </a>
 
-<a href="#!/practice/subject/bio1">
+<a href="#!/practice/subject/math2">
 <div class="sl_item">
 <div class="sl_icon"><img src="../images/math2.png"></div>
 <div class="sl_name">উচ্চতর গণিত ২য়</div>
 </div>
 </a>
 
-
-
-
-
-
-
+</div>
   </div>
  
   `
@@ -982,6 +983,9 @@ $('.footer').show();
     `
     });
     $('.chapters').html(html);
+    if($('.chapters')[0].innerHTML === ""){
+      $('.chapters').html('<center><div class="big_no_exam animate_animated animate__bounceIn"><div class=""><i class="icofont-warning-alt"></i></div><div>পরীক্ষা নেই!</div></div></center>');
+    }
   })
 
 
@@ -1175,7 +1179,7 @@ $('.footer').show();
               "box-shadow" : "0px 2px 5px rgba(0,0,0,.2)"
             });
           });
-         
+          MathJax.typeset();
 
           //timer
           var sec = 0;
@@ -2141,6 +2145,7 @@ let question = {
     <center><a href="#!/edit_q/create2/${i}"><button class="btn green">Edit</button></a></center>
 </div>`
   }
+  MathJax.typeset();
       for(let a=0; a<ans.length; a++){
            $("#" + ans[a] + " .st").addClass("cr");
          }

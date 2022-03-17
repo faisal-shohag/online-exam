@@ -562,7 +562,7 @@ textarea{
     gap: 10px;
     font-weight: bold;
     font-family: Lato;
-    background: -webkit-linear-gradient(45deg, rgb(183, 64, 219), rgb(110, 56, 236));
+    background: -webkit-linear-gradient(45deg, rgb(183, 64, 219), rgb(78, 25, 201));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
