@@ -148,13 +148,13 @@ router.on(function() {
   <div class="div-1"></div>
 
   <div class="sl">
-  <div class="title-n"><i class="icofont-education"></i> বিষয়ভিত্তিক প্রাকটিস</div>
+  <div class="title-n"><img src="../images/book-stack.png"> বিষয়ভিত্তিক প্রাকটিস</div>
 
 
   <div class="sl_menu">
   <a href="#!/practice/subject/b1"> 
   <div class="sl_item">
-  <div class="sl_icon"><i class="icofont-book"></i></div>
+  <div class="sl_icon"><img src="../images/open-book.png"></div>
   <div class="sl_name">বাংলা ১ম পত্র</div>
   </div>
   </a>
@@ -162,15 +162,15 @@ router.on(function() {
   
   <a href="#!/practice/subject/b2">
   <div class="sl_item">
-  <div class="sl_icon"><i class="icofont-book"></i></div>
+  <div class="sl_icon"><img src="../images/book-bn2.png"></div>
   <div class="sl_name">বাংলা ২য়  পত্র</div>
   </div>
   </a>
 
   <a href="#!/practice/subject/e">
   <div class="sl_item">
-  <div class="sl_icon"><i class="icofont-book"></i></div>
-  <div class="sl_name">English</div>
+  <div class="sl_icon"><img src="../images/origami/eng.png"></div>
+  <div class="sl_name">English 2nd</div>
   </div>
   </a>
 </div>
@@ -1016,7 +1016,7 @@ router.on({
 
 "/practice/subject/:id": function(params){
 $('.footer').show();
-  // $('.app_loader').show();
+  $('.app_loader').show();
   $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">${tag[params.id]}</div></div>`);
   app.innerHTML = `
   <div class="chapters">
@@ -1024,6 +1024,7 @@ $('.footer').show();
   `
   
   db.ref('app/practiceRef/'+params.id).on('value', snap=>{
+    $('.app_loader').hide();
     let html = ``;
     snap.forEach(item=>{
     html += `
