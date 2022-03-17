@@ -556,10 +556,13 @@ textarea{
 .countdown{
     font-size: 25px;
     width: 100%;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     font-weight: bold;
-    font-family: Roboto;
-    background: -webkit-linear-gradient(45deg, rgb(252, 69, 69), rgb(236, 83, 56));
+    font-family: Lato;
+    background: -webkit-linear-gradient(45deg, rgb(183, 64, 219), rgb(110, 56, 236));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

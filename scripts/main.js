@@ -288,7 +288,7 @@ router.on(function() {
 router.on({
 "/exams/:id/:id2": function(params){
   $('.footer').show();
-    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Public Exams</div></div>`);
+    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Public Exams</div></div>`);
     $('.app_loader').show();
   
     app.innerHTML = `
@@ -738,7 +738,7 @@ router.on({
         
         })
       }else{
-        $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Leaderboard</div></div>`);
+        $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Leaderboard</div></div>`);
         $('.footer').show();
         app.innerHTML = `
         <div class="ladder">
@@ -788,7 +788,7 @@ router.on({
 },
 
 "/answersheet/:ida/:id": function(params) {
-  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Answersheet</div></div>`);
+  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Answersheet</div></div>`);
   $('.app_loader').show();
   let ref = (params.id).split('|');
   let time = parseInt(ref[1]);
@@ -967,7 +967,7 @@ router.on({
 "/practice/subject/:id": function(params){
 $('.footer').show();
   $('.app_loader').show();
-  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">${tag[params.id]}</div></div>`);
+  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">${tag[params.id]}</div></div>`);
   app.innerHTML = `
   <div class="chapters">
   </div>
@@ -990,7 +990,7 @@ $('.footer').show();
 "/practice/list/:subj/:chap/:chapName": function(params){
 $('.footer').show();
   $('.app_loader').show();
-  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">${params.chapName}</div></div>`);
+  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">${params.chapName}</div></div>`);
   app.innerHTML = `
   <div class="chapters" id="chaps">
   </div>
@@ -1012,7 +1012,7 @@ $('.footer').show();
    $('.footer').show();
   // $('.app_loader').show();
   let key = (params.key).split('|');
-  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Before Exam</div></div>`);
+  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Before Exam</div></div>`);
   app.innerHTML = `
   <div class="prac_nb">
  <div class="nb-bdy">
@@ -1074,8 +1074,8 @@ $('.footer').show();
   $('.footer').hide();
   $('.app_loader').show();
   // $('#fullscr').click();
-  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text"> </div></div>`);
-  app.innerHTML=`<span class="exam-doc" id="practice-exam"></div>`;
+  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text"> </div></div>`);
+  app.innerHTML=`<div class="exam-doc" id="practice-exam"></div>`;
   var ch = (params.choice).split('~');
   store.collection('subjectExams').doc(params.subj).collection(params.chap).doc(params.key).onSnapshot(snap=> {
     $('.app_loader').hide();
@@ -1211,7 +1211,7 @@ $('.footer').show();
               // localStorage.setItem('min', min);
               // console.log(localStorage.getItem('sec'))
               $(".countdown").html(
-                `<i class="icofont-stopwatch"></i> ${min} : ${secs}`
+                `<img src="../images/clock.png" height="30px"> <div> ${min} : ${secs}</div>`
               );
             }
           }, 1000);
@@ -1228,11 +1228,7 @@ $('.footer').show();
           $("#submit")
             .off()
             .click(function () {
-              
-              // localStorage.removeItem('sec');
-              // localStorage.removeItem('min');
               $('.parc').show();
-
                       clearInterval(timer);
                       $("html, body").animate({ scrollTop: 0 }, "slow");
                       $("#submit").hide();
@@ -1323,7 +1319,7 @@ $('.footer').show();
 
 "/solutions/:ida/:id": function (params) {
   $('.footer').show();
-  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Solution</div></div>`);
+  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Solution</div></div>`);
   $('.app_loader').show();
   store.collection(params.ida + '_exams').doc(params.id).onSnapshot(doc=>{
   $('.app_loader').hide();
@@ -1370,7 +1366,7 @@ $('.footer').show();
   if($('.rnk')[0].classList[3] === undefined){
     $('.rnk').addClass('footerIconActive');
     $($($('.rnk')[0].parentNode)[0].lastElementChild).show();
-    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Rank</div></div>`);
+    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Rank</div></div>`);
   }
 
   app.innerHTML = `<span class="rank-doc"></div>`;
@@ -1494,7 +1490,7 @@ db.ref('app/users').on('value', data=>{
     $('.crt').addClass('footerIconActive');
     $($($('.crt')[0].parentNode)[0].lastElementChild).show();
   }
-  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Create</div></div>`);
+  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Create</div></div>`);
   app.innerHTML = `<span class="create-doc"></div>`;
    
   if(myData.createPermission == false){
@@ -1798,7 +1794,7 @@ if($('.crt')[0].classList[3] === undefined){
   $('.crt').addClass('footerIconActive');
   $($($('.crt')[0].parentNode)[0].lastElementChild).show();
 }
-$('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Create v2</div>`);
+$('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-simple-left"></i> Create v2</div>`);
 app.innerHTML = `<span class="create-doc"></div>`;
  
 if(myData.createPermission == false){
@@ -2075,7 +2071,7 @@ let question = {
   $('.footer').show();
   $('.footertext').hide();
     $('.footerIcon').removeClass('footerIconActive');
-    $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-swoosh-left"></i> Edit</div>`);
+    $('.top_logo').html(`<div onclick="window.history.back()" class="animate__animated animate__fadeInRight top_app_title"><i class="icofont-simple-left"></i> Edit</div>`);
     app.innerHTML= `
     <div class="details_view"></div>
     <div class="questions_view"></div>
@@ -2190,7 +2186,7 @@ let question = {
   $('.footer').show();
   $('.footertext').hide();
     $('.footerIcon').removeClass('footerIconActive');
-    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Edit Exam</div></div>`);
+    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Edit Exam</div></div>`);
     app.innerHTML= `
     <div class="details_view"></div>
     <div class="questions_view"></div>
@@ -2318,7 +2314,7 @@ let question = {
     $('.footer').show();
     $('.footertext').hide();
       $('.footerIcon').removeClass('footerIconActive');
-      $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Question Edit</div></div>`);
+      $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Question Edit</div></div>`);
       app.innerHTML = `<span class="edit-q-doc"></span>`
   db.ref('app/users/'+user.uid+'/'+params.ref+'/history/questions/'+params.id).on('value', snap=>{
     $('.app_loader').hide();
@@ -2405,7 +2401,7 @@ let question = {
         if($('.dnt')[0].classList[3] === undefined){
     $('.dnt').addClass('footerIconActive');
     $($($('.dnt')[0].parentNode)[0].lastElementChild).show();
-    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text"> Pricing & Donation</div></div>`);
+    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text"> Pricing & Donation</div></div>`);
     }
   if(new Date(myData.subscribed) < new Date()){
     app.innerHTML = `
@@ -2492,7 +2488,7 @@ let question = {
 "/myprofile" : function (){
   $('.app_loader').show();
     $('.footer').show();
-    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Profile</div></div>`);
+    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Profile</div></div>`);
    app.innerHTML=`
    <center class="profile">
    <div id="prem">
@@ -2605,7 +2601,7 @@ db.ref("app/users/"+user.uid).on('value', snap=>{
 "/profile/:id" : function (params){
   $('.app_loader').show();
     $('.footer').show();
-    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text" id="prof_name">Profile</div></div>`);
+    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text" id="prof_name">Profile</div></div>`);
    app.innerHTML=`
    <center  class="profile">
    <div id="prem">
@@ -2674,7 +2670,7 @@ db.ref("app/users/"+params.id).on('value', snap=>{
 "edit_profile": function(params) {
   $('.app_loader').show();
   $('.footer').show();
-  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-swoosh-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Edit Profile</div></div>`);
+  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Edit Profile</div></div>`);
 app.innerHTML = `
 <br>
 <form id="edit_profile">
