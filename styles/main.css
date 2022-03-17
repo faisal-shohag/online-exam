@@ -16,6 +16,13 @@ body:-moz-full-screen {
   background-color: #fff;
 }
 
+#app{
+  margin-top: 40px;
+  margin-bottom: 30px;
+  height: 100vh;
+  padding: 10px;
+}
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -127,13 +134,7 @@ body:-moz-full-screen {
   font-weight: bold;
 }
 
-main {
-  margin-top: 50px;
-  padding: 10px;
-  margin-bottom: 55px;
-  /* height: 100%; */
-  /* font-family: 'SolaimanLipi'; */
-}
+
 
 ul,
 li,
@@ -206,12 +207,12 @@ label,
 }
 
 .sl_icon img{
-  height: 50px;
+  height: 40px;
   margin-bottom: 10px;
 }
 
 .sl_name{
-  font-size: 16px;
+  font-size: 13px;
   font-family: Hind Siliguri, 'Roboto';
   font-weight: bold;
   color: rgb(49, 46, 46);
