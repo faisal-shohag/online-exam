@@ -59,11 +59,17 @@ body:-moz-full-screen {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background: linear-gradient(45deg, #39165a, #12128b);
+  background: linear-gradient(45deg, #fcfcfc, #f0f0f7);
   z-index: 9999999;
   color: #fff;
   font-size: 20px;
   font-family: Hind Siliguri;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.loading img{
+  height: 150px;
 }
 
 .top {
@@ -145,7 +151,7 @@ label,
 .sl{
   margin-top: 20px;
   background: #fff;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
   padding: 10px;
   border-radius: 5px;
   height: 200px;
