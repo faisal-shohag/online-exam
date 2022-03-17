@@ -546,7 +546,7 @@ router.on({
               "box-shadow" : "0px 2px 5px rgba(0,0,0,.2)"
             });
           });
-         
+          MathJax.typeset();
 
           //timer
           var sec = 0;
@@ -568,16 +568,11 @@ router.on({
 
             if (minute <= 0 && sec <= 0) {
               $("#submit").click();
-              // localStorage.removeItem('sec');
-              // localStorage.removeItem('min');
               clearInterval(timer);
               
             } else {
-              // localStorage.setItem('sec', sec);
-              // localStorage.setItem('min', min);
-              // console.log(localStorage.getItem('sec'))
               $(".countdown").html(
-                `<i class="icofont-stopwatch"></i> ${min} : ${secs}`
+                `<img src="../images/clock.png" height="30px"> <div>${min} : ${secs}</div>`
               );
             }
           }, 1000);
@@ -660,6 +655,8 @@ router.on({
                           );
                         }
                       }
+
+                      MathJax.typeset();
 
                       $(".score").show();
                       $(".mark").html(
