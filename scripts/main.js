@@ -971,7 +971,7 @@ $('.footer').show();
   </div>
   `
   
-  db.ref('app/practiceRef/'+params.id).on('value', snap=>{
+  db.ref('app/practiceRef/'+params.id).once('value', snap=>{
     $('.app_loader').hide();
     let html = ``;
     let chapters = [];
