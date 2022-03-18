@@ -27,8 +27,11 @@ body:-moz-full-screen {
 main{
   margin-top: 54px;
   margin-bottom: 60px;
-  padding: 10px;
+}
+
+#app{
   box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  padding: 10px;
   border-radius: 10px;
 }
 
@@ -309,32 +312,39 @@ label,
   display: flex;
   justify-content: space-between;
   align-items: center;
-  text-align: center;
   position: fixed;
   width: 100%;
   bottom: 0;
   z-index: 99;
   background: #fff;
-  /* background: linear-gradient(45deg, rgba(88, 30, 182, 0.933), rgba(44, 20, 153, 0.933)); */
   box-shadow: 0 -2px 5px 0px rgba(0, 0, 0, 0.2);
   padding: 0px 15px;
-  height: 50px;
+  height: 60px;
   font-family:'Lato', Kalpurush;
-  /* border-top-left-radius: 40px; */
-  /* border-top-right-radius: 40px; */
+  flex-direction: row;
 }
+
+
 
 .footer a {
   color: #817b7b;
 }
 
 .footerMenu {
-  margin: 0px px;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
   position: relative;
-  color: #9b8888;
-  margin-bottom: 10px;
-  width: 50px;
+  padding-top: 5px;
+}
+
+
+.footerMenu img{
+  height: 30px;
+  
 }
 
 .ucnt {
@@ -355,11 +365,6 @@ label,
   font-weight: bold;
   display: none;
   font-size: 13px;
-  padding: 0 0;
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  bottom: -70%;
   font-family: Hind Siliguri;
   background: -webkit-linear-gradient(45deg, rgb(56, 58, 204), rgb(204, 35, 167));
   -webkit-background-clip: text;
@@ -367,14 +372,15 @@ label,
   text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
 }
 
+.footerIcon{
+  filter: grayscale(90%);
+}
+
 .footerIconActive {
+  filter: grayscale(0%);
   font-size: 25px;
   font-weight: bold;
-  transition: 0.1s;
-  background: -webkit-linear-gradient(45deg, rgb(56, 58, 204), rgb(204, 35, 167));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+  transition: 1s ease-in;
 }
 
 .page1 {
