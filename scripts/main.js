@@ -142,7 +142,7 @@ router.on(function() {
     $('.hm').addClass('footerIconActive');
     $($($('.hm')[0].parentNode)[0].lastElementChild).show();
   }
-  $('.top_logo').html(`<div class="animate__animated animate__fadeInLeft top_app_title"><div class="top_dir"><i class="icofont-brand-bada"></i></div> <div class="top_text"></div></div>`);
+  $('.top_logo').html(`<div class="animate__animated animate__fadeInLeft top_app_title"><div class="top_dir"><img src="./images/puzzle.png" height="20px"></div> <div class="top_text">বৃত্ত</div></div>`);
   // $('.top_logo').html(`<divclass="top_app_title"><div class="animate__animated animate__fadeLeft top_dir"><i class="icofont-focus"></i></div> <div class="animate__animated animate__fadeIn top_text">Public Exams</div></div>`);
   app.innerHTML= `
   <div class="div-1">
@@ -1960,7 +1960,7 @@ detalisform.addEventListener('submit', e=>{
     maker: user.displayName,
   }
   db.ref('app/users/'+user.uid+'/create2/history').update({details: details, status: true});
- 
+
   db.ref('app/practiceRef/'+details.sl_subject+'/'+details.sl_chapter).update({
     name: detalisform.chap_name.value,
     author: detalisform.auth_name.value,
