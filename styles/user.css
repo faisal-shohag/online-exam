@@ -383,13 +383,13 @@ textarea{
     font-weight: bold;
     padding: 5px;
     font-size: 18px;
-    font-family:'Roboto', Kalpurush;
+    font-family: Lato, Kalpurush;
 }
 
 
 .option{
     margin-top: 17px;
-    font-family:'Roboto', Kalpurush; 
+    font-family:Lato, Kalpurush; 
    
 }
 
@@ -423,7 +423,7 @@ textarea{
     min-height: 37px;
     vertical-align: middle;
     display: flex;
-    font-family:'Roboto', Kalpurush; 
+    font-family: Lato, Kalpurush; 
     /* transition: 0.1s; */
 
 }
@@ -614,7 +614,7 @@ textarea{
 }
 
 .profile{
-    font-family:'Roboto', Kalpurush;
+    font-family: Lato, Kalpurush;
 }
 
 .warn{
