@@ -974,11 +974,27 @@ $('.footer').show();
   db.ref('app/practiceRef/'+params.id).on('value', snap=>{
     $('.app_loader').hide();
     let html = ``;
+    let chapters = [];
     snap.forEach(item=>{
-    html += `
-    <a href="#!/practice/list/${params.id}/${item.key}/${item.val().name}"> <div  class="chap_item ${params.id}_list"><div><div class="name_logo">${firstLetter(item.val().name)}</div></div><div><div class="chapterName">${item.val().name}</div><div class="author">${item.val().author}</div></div></div></a>
-    `
+      chapters.push({
+        i:item.val().i,
+        name: item.val().name,
+        author: item.val().author,
+        key: item.key
+      })
     });
+
+    //sorting
+    chapters.sort(function(a, b){
+      return a.i - b.i;
+    });
+
+    for(let i=0; i<chapters.length; i++){
+      html += `
+      <a href="#!/practice/list/${params.id}/${chapters[i].key}/${chapters[i].name}"> <div  class="chap_item ${params.id}_list"><div><div class="name_logo">${firstLetter(chapters[i].name)}</div></div><div><div class="chapterName">${chapters[i].name}</div><div class="author">${chapters[i].author}</div></div></div></a>
+      `
+    }
+    //  console.log(chapters)
     $('.chapters').html(html);
     if($('.chapters')[0].innerHTML === ""){
       $('.chapters').html('<center><div class="big_no_exam animate_animated animate__bounceIn"><div class=""><i class="icofont-warning-alt"></i></div><div>পরীক্ষা নেই!</div></div></center>');
@@ -1086,7 +1102,6 @@ $('.footer').show();
               <div class="exam-container">
              <div class="exam_top">
               <div class="exam-title">
-              <div class="courseName">বৃত্ত প্রাকটিস</div>
               <div class="exam_name">${myexam.details.exam_name}</div><small>সময়: ${ch[0]} মিনিট | নেগেটিভ: ${ch[1]} </small>
               </div>
               <div style="display: none;" class="score">
@@ -1653,7 +1668,9 @@ Select Expire Date:
   <center><button class="btn green" type="submit">Next</button></center>
   </form>
   </div>
+ 
   `);
+
 
 const detalisform = document.querySelector('#details_form');
   $(document).ready( function () {
@@ -1664,7 +1681,8 @@ const detalisform = document.querySelector('#details_form');
 $(document).ready( function () {
   $('#picker2').dateTimePicker();
   $('#picker-no-time').dateTimePicker({ showTime: false, dateFormat: 'DD/MM/YYYY', title: 'Select Date'});
-})
+});
+
    
 detalisform.addEventListener('submit', e=>{
     e.preventDefault();
@@ -1725,8 +1743,11 @@ detalisform.addEventListener('submit', e=>{
 </div>
 <center><button type="submit" class="btn red">Add Question</button><center>
 </form>
+
 </div>
+
 `)
+
 
 
 $('.publish').click(function(){
@@ -2006,7 +2027,30 @@ $('.create-doc').html( `
 <center><button type="submit" class="btn red">Add Question</button><center>
 </form>
 </div>
-`)
+
+<center><div class="btn send">Send Ques</div></center>
+`);
+
+$('.send').click(function(e){
+  fetch('../scripts/q.json')
+  .then(response => response.json())
+  .then(json => {
+    console.log(json);
+    // db.ref('app/practiceRef/bio1/chap-12').set({
+    //   name: "জীবের পরিবেশ, বিস্তার ও সংরক্ষণ",
+    //   author: "---"
+    // });
+
+    db.ref('app/users/094Rbu13YbWc9On6KnuJIUv3QMx2/create2/history/details').update({
+      exam_name: "উপক্রমনিকা, প্রাণিভৌগলিক অঞ্চল থেকে শেষ পর্যন্ত",
+      sl_chapter: "chap-12",
+      notice: "“যারা নতুন কিছু খোঁজে না, একদিন তাদেরও কেউ খুঁজবে না” – জে আর আর টলকিন (লেখক, লর্ড অব দ্য রিংস)",
+    });
+
+    db.ref('app/users/094Rbu13YbWc9On6KnuJIUv3QMx2/create2/history/questions').set(json)
+  })
+})
+
 
 
 $('.publish').click(function(){
