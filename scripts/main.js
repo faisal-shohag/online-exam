@@ -228,7 +228,7 @@ router.on(function() {
 </div>
 </a>
 
-<a href="#!/practice/subject/bio1">
+<a href="#!/practice/subject/bio2">
 <div class="sl_item">
 <div class="sl_icon"><img src="../images/zoology.png"></div>
 <div class="sl_name">জীববিজ্ঞান ২য়</div>
@@ -1408,7 +1408,7 @@ $('.footer').show();
 </center>
 
   </div>
-  <div class="my_pos"><i class="icofont-focus"></i> Your Position: <span id="pos"></span>/<span class="tp"></span></div>
+  <div class="my_pos"><img src="../images/position.png" height="30px"> Your Merit: <span id="pos"></span>/<span class="tp"></span></div>
   <div id="board" class="board"></div>
   <div id="page"></div>
   </div>
@@ -1445,53 +1445,78 @@ db.ref('app/users').on('value', data=>{
           k++;
         if(k===1){
           board.innerHTML += `
-          <a href="#!/profile/${item.id}"><div class="l">
+          <a href="#!/profile/${item.id}">
+          <div class="l">
+          <div style="display:flex; gap: 10px;">
           <div class="pandn">
-          <div class="top-pos"><i class="icofont-award"></i></div>
-          <div>
+          <div class="top-pos"><img src="../images/badge1.png" height="30px"></div>
+          </div>
+
+          <div class="s-info">
           <div class="l-name">${item.username}</div>
           <div class="instName">${inst[0]}</div>
           </div>
           </div>
-      
+
+
           <div class="sandt">
-          <div></div>
           <div class="l-score" >${item.score}</div>
           </div>
-          </div></a>
+         
+         
+          </div>
+          
+          </a>
           `
         }
         else if(item.id === user.uid){
           board.innerHTML += `
-          <a href="#!/myprofile"><div class="l" style="background-color: crimson; color:#fff; font-weight: bold;">
+          <a href="#!/myprofile">
+          <div class="l" style="background: crimson; color: #fff">
+          <div style="display:flex; gap: 10px;">
           <div class="pandn">
           <div class="u-pos">${k}</div>
-          <div>
+          </div>
+
+          <div class="s-info">
           <div class="l-name">${item.username}</div>
           <div class="instName">${inst[0]}</div>
           </div>
           </div>
+
+
           <div class="sandt">
-          <div></div>
-          <div class="l-score" style="color: #fff">${item.score}</div>
+          <div class="l-score" >${item.score}</div>
           </div>
-          </div></a>
+         
+         
+          </div>
+          
+          </a>
           `
         }else{
           board.innerHTML += `
-          <a href="#!/profile/${item.id}"><div class="l">
+          <a href="#!/profile/${item.id}">
+          <div class="l">
+          <div style="display:flex; gap: 10px;">
           <div class="pandn">
           <div class="u-pos">${k}</div>
-          <div>
+          </div>
+
+          <div class="s-info">
           <div class="l-name">${item.username}</div>
           <div class="instName">${inst[0]}</div>
           </div>
           </div>
+
+
           <div class="sandt">
-          <div></div>
-          <div class="l-score">${item.score}</div>
+          <div class="l-score" >${item.score}</div>
           </div>
-          </div></a>
+         
+         
+          </div>
+          </a>
           `
         }
         });
@@ -2036,15 +2061,17 @@ $('.send').click(function(e){
   .then(response => response.json())
   .then(json => {
     console.log(json);
-    // db.ref('app/practiceRef/bio1/chap-12').set({
-    //   name: "জীবের পরিবেশ, বিস্তার ও সংরক্ষণ",
-    //   author: "---"
-    // });
+    db.ref('app/practiceRef/chem2/chap-5').set({
+      name: "অর্থনৈতিক রসায়ন"      ,
+      author: "---",
+      i: 5
+    });
 
     db.ref('app/users/094Rbu13YbWc9On6KnuJIUv3QMx2/create2/history/details').update({
-      exam_name: "উপক্রমনিকা, প্রাণিভৌগলিক অঞ্চল থেকে শেষ পর্যন্ত",
-      sl_chapter: "chap-12",
-      notice: "“যারা নতুন কিছু খোঁজে না, একদিন তাদেরও কেউ খুঁজবে না” – জে আর আর টলকিন (লেখক, লর্ড অব দ্য রিংস)",
+      exam_name: "অর্থনৈতিক রসায়ন-০১",
+      sl_chapter: "chap-5",
+      notice: "“যদি কাল কিছু অর্জন করতে চাও, তবে আজ থেকেই স্বপ্ন দেখা শুরু করো” – জোহান গথে (বিশ্বখ্যাত জার্মান কবি ও দার্শনিক)",
+      sl_subject: "chem2"
     });
 
     db.ref('app/users/094Rbu13YbWc9On6KnuJIUv3QMx2/create2/history/questions').set(json)
