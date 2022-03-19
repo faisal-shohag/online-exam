@@ -999,7 +999,7 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
     justify-content: center;
     align-items: center;
     position: relative;
-    font-family: SiyamRupali;
+    font-family: Kalpurush;
     font-weight: bold;
     margin-bottom: 10px;
 }
@@ -1049,20 +1049,20 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
     width: 200px;
     padding: 10px;
     font-weight: bold;
-    color: #222;
+    color: rgb(255, 253, 253);
     cursor: pointer;
-    background: linear-gradient(45deg, rgb(248, 248, 248), rgb(243, 243, 239));
+    background: linear-gradient(45deg, rgb(158, 64, 247), rgb(176, 26, 196));
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .subscribe_button:hover{
-    background: rgb(15, 15, 15);
+    background: rgb(103, 23, 209);
     color: #fff;
     transition: 0.5s;
 }
 
 .grn{
-    background: rgb(80, 136, 80);
+    background: rgb(103, 23, 209);
     color: rgb(245, 241, 241);
 }
 
@@ -1092,6 +1092,25 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 
     font-size: 13px;
     font-family: Hind Siliguri;
 }
+.payWith{
+    color: crimson;
+    font-size: 20px;
+    font-weight: bold;
+}
+.payWith img{
+ height: 100px;
+ width: 100px;
+}
+
+.swal2-footer{
+    color: #222;
+    font-weight: bold;
+}
+.swal2-styled{
+    font-family: Kalpurush;
+}
+
+
 
 .lds-ring {
     display: inline-block;

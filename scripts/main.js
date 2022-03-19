@@ -2479,52 +2479,70 @@ let question = {
     $($($('.dnt')[0].parentNode)[0].lastElementChild).show();
     $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text"> Pricing & Donation</div></div>`);
     }
-  if(new Date(myData.subscribed) < new Date()){
+
     app.innerHTML = `
     <div class="donate">
     <div class="donate_card">
    <center><div class="p_logo"><i class="icofont-safety"></i></div></center>
     <div class="price">
     <div class="p_tk">৳</div>
-    <div class="p_value">৪৯</div>
-    <div class="p_time">টাকা/মাস</div>
+    <div class="p_value">৯৯৯</div>
+    <div class="p_time">ফুল কোর্স</div>
     </div>
-     <center><div class="p_line">একদম সাশ্রয়ী মূল্যে পাচ্ছো সবকিছু!</div></center>
+     <center><div class="p_line">অ্যাডমিশন টেস্ট ফুল কোর্স!</div></center>
      
-     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">আনলিমিটেড Self Arranged Exam</div></div>
-     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">সপ্তাহের ৫ দিনই লাইভ পরীক্ষা</div></div>
-     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">প্রথম মেরিট পজিশনে Gift Box</div></div>
-     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">প্রতি ১৫ দিনে মডেল টেস্ট</div></div>
-     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">Admission Test Full প্যাকেজ</div></div>
+     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">৫০+ চ্যাপ্টার এক্সাম</div></div>
+     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">১০+ সাবজেক্ট ফাইনাল</div></div>
+     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">৩টি পেপার ফাইনাল</div></div>
+     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">৫টি মডেল টেস্ট</div></div>
+     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">লাইভ এক্সাম</div></div>
+     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">স্পেশাল রিসোর্স</div></div>
 
-     <center><div class="subscribe_button">সাবস্ক্রাইব করো</div></center>
+     <center id="isSubs"></center>
     </div>
     </div>
     `
+  if(! new Date(myData.subscribed) < new Date()){
+    $('#isSubs').html(`<div id="Dosubs" class="subscribe_button">সাবস্ক্রাইব করো</div>`);
+
+    $('#Dosubs').click(function(e){
+      e.preventDefault();
+      
+Swal.fire({
+  html:` 
+  <div class="payWith">
+  <img src="../images/BKash.png">
+  <div>Send Money with bKash</div>
+  </div>
+  <center>প্রথমে বিকাশ থেকে <b style="color: crimson">Send Money</b> করো। এরপর <b style="color: crimson">Transaction ID</b> টি নিচে লিখে সাবমিট করো।
+  </center>
+  `,
+  input: 'text',
+  footer: 'যে কোনো সমস্যায় যোগাযোগ করো: +8801318067123 এই নম্বরে।',
+  inputAttributes: {
+    placeholder: 'TransxID',
+    autocapitalize: 'off'
+  },
+  showCancelButton: true,
+  confirmButtonText: 'সাবমিট',
+  showLoaderOnConfirm: true,
+  cancelButtonText: 'বাতিল',
+}).then(result=>{
+  if(result.isConfirmed) {
+    Swal.fire({
+      title:'সাবমিট করা হয়েছে!',
+      html: '<b style="color: crimson">Transaction ID</b> টি সাবমিট হয়েছে! ৩-৫ঘণ্টার মধ্যে SMS এর মাধ্যমে কনফার্ম করা হবে।',
+      icon: 'success',
+      footer: 'যে কোনো সমস্যায় যোগাযোগ করো: +8801318067123 এই নম্বরে।',
+    })
+  }
+})
+
+    });
   }else{
-    app.innerHTML = `
-    <div class="donate">
-    <div class="donate_card">
-   <center><div class="p_logo"><i class="icofont-safety"></i></div></center>
-    <div class="price">
-    <div class="p_tk">৳</div>
-    <div class="p_value">৪৯</div>
-    <div class="p_time">টাকা/মাস</div>
-    </div>
-     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">আনলিমিটেড Self Arranged Exam</div></div>
-     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">সপ্তাহের ৫ দিনই লাইভ পরীক্ষা</div></div>
-     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">প্রথম মেরিট পজিশনে Gift Box</div></div>
-     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">প্রতি ১৫ দিনে মডেল টেস্ট</div></div>
-     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">Admission Test Full প্যাকেজ</div></div>
-
-     <center><snap id="subs_btn"><div class="subscribe_button grn"><i class="icofont-check-circled"></i> সাবস্ক্রাইব করেছো!</div></span>
+    $('#isSubs').html(`<snap id="subs_btn"><div class="subscribe_button grn"><i class="icofont-check-circled"></i> সাবস্ক্রাইব করেছো!</div></span>
      <div id="sub_time_text" style="font-weight: bold; font-size: 14px;">সাবস্ক্রিপশনের মেয়াদ বাকি</div>
-     <div id="sub_dur"></div>
-     </center>
-    
-    </div>
-    </div>
-    `
+     <div id="sub_dur"></div>`);
 
     var timer;
 
