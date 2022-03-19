@@ -2743,7 +2743,7 @@ db.ref("app/users/"+params.id).on('value', snap=>{
 
 },
 
-"edit_profile": function(params) {
+"/edit_profile": function(params) {
   $('.app_loader').show();
   $('.footer').show();
   $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Edit Profile</div></div>`);
@@ -2859,6 +2859,20 @@ if (result.isConfirmed) {
 })
 
 },
+
+"/resource":function(params){
+  $('.footer').show();
+  $('.footertext').hide();
+    $('.footerIcon').removeClass('footerIconActive');
+        if($('.rsc')[0].classList[3] === undefined){
+    $('.rsc').addClass('footerIconActive');
+    $($($('.rsc')[0].parentNode)[0].lastElementChild).show();
+    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Resource</div></div>`);
+    }
+  app.innerHTML = `
+  <center><img src="../images/pencil-case.png" height="200px"></center>
+  `
+}
 
 
 }).resolve();
