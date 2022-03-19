@@ -1428,7 +1428,7 @@ $('.footer').show();
 db.ref('app/users').on('value', data=>{
   $('.top3content').html(`
   <div class="twrap"><div class="top2"><img src="${data.val()[ladder[1].id].photoURL}"></div> <div class="topName">${data.val()[ladder[1].id].nickName}</div></div>
-  <div class="twrap"><div class="top1"><img src="${data.val()[ladder[0].id].photoURL}"></div> <div class="topName">${data.val()[ladder[0].id].nickName}</div> <div class="crown"><i class="icofont-crown-queen"></i></div></div>
+  <div class="twrap"><div class="top1"><img src="${data.val()[ladder[0].id].photoURL}"></div> <div class="topName">${data.val()[ladder[0].id].nickName}</div> <div class="crown"><img src="../images/crown.png"></div></div>
   <div class="twrap"><div class="top3"><img src="${data.val()[ladder[2].id].photoURL}"></div> <div class="topName">${data.val()[ladder[2].id].nickName}</div></div>
   `)
  });
