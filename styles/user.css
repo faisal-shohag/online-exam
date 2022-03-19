@@ -987,7 +987,7 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
 .donate_card{
     text-align: center;
     background: linear-gradient(45deg, rgb(92, 39, 190), rgb(179, 29, 166));
-    width: 300px;
+    width: 100%;
     border-radius: 5px;
     padding: 20px;
     color: #fff;

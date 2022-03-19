@@ -2486,10 +2486,10 @@ let question = {
    <center><div class="p_logo"><i class="icofont-safety"></i></div></center>
     <div class="price">
     <div class="p_tk">৳</div>
-    <div class="p_value">৯৯৯</div>
+    <div class="p_value">৬১০</div>
     <div class="p_time">ফুল কোর্স</div>
     </div>
-     <center><div class="p_line">অ্যাডমিশন টেস্ট ফুল কোর্স!</div></center>
+     <center><div class="p_line">অ্যাডমিশন টেস্ট এক্সাম প্যাক!</div></center>
      
      <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">৫০+ চ্যাপ্টার এক্সাম</div></div>
      <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">১০+ সাবজেক্ট ফাইনাল</div></div>
@@ -2502,9 +2502,8 @@ let question = {
     </div>
     </div>
     `
-  if(! new Date(myData.subscribed) < new Date()){
+  if(myData.subscribed.first === false){
     $('#isSubs').html(`<div id="Dosubs" class="subscribe_button">সাবস্ক্রাইব করো</div>`);
-
     $('#Dosubs').click(function(e){
       e.preventDefault();
       
@@ -2539,43 +2538,10 @@ Swal.fire({
 })
 
     });
+  }else if(myData.subscribed.first === "pending"){
+    $('#isSubs').html(`<snap id="subs_btn"><div class="subscribe_button grn"><i class="icofont-ui-clock"></i> সাবস্ক্রাইব পেনডিং</div></span>`);
   }else{
-    $('#isSubs').html(`<snap id="subs_btn"><div class="subscribe_button grn"><i class="icofont-check-circled"></i> সাবস্ক্রাইব করেছো!</div></span>
-     <div id="sub_time_text" style="font-weight: bold; font-size: 14px;">সাবস্ক্রিপশনের মেয়াদ বাকি</div>
-     <div id="sub_dur"></div>`);
-
-    var timer;
-
-      var countDownDate = new Date(myData.subscribed).getTime();
-      console.log(countDownDate);
-      timer = setInterval(function() {
-        var now = new Date().getTime();
-        var distance = countDownDate - now;
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        if(days!==0){
-          $('#sub_dur').html( `${days} day ${hours} hr ${minutes} min ${seconds} sec`);
-        }
-       else if(hours===0 && minutes !== 0){
-          $('#sub_dur').html( `${minutes} min ${seconds} sec`);
-        }else if(hours===0 && minutes===0){
-          $('#sub_dur').html( `${seconds}`);
-        }else{
-          $('#sub_dur').html( `${hours} hr ${minutes} min ${seconds} sec`);
-        }
-       
-        if (distance < 0) {
-          clearInterval(timer);
-      //    $($('#'+element)[0].parentNode).hide(200);
-         $('#sub_time_text').hide(50);
-         $('#sub_dur').hide(50);
-         $('#subs_btn').html(`<div class="subscribe_button">সাবস্ক্রাইব করো</div>`);
-        }
-      }, 1000);
-      
-
+    $('#isSubs').html(`<snap id="subs_btn"><div class="subscribe_button grn"><i class="icofont-check-circled"></i> সাবস্ক্রাইব করেছো!</div></span>`);
   }
 },
 
@@ -2642,7 +2608,7 @@ db.ref("app/users/"+user.uid).on('value', snap=>{
   $('.dist').html(`<i class="icofont-building-alt"></i> ${snap.val().district}`);
   $('.bio').text(snap.val().bio);
 
- if(new Date(snap.val().subscribed) > new Date){
+ if(snap.val().subscribed.first === true){
    $('.subs_icon').html(`<i class="icofont-check-circled"></i>`);
    $('#prem').addClass('prem');
    console.log('%c Subscribed!', 'font-size: 15px; color: blue, font-weight:bold;');
@@ -2738,7 +2704,7 @@ db.ref("app/users/"+params.id).on('value', snap=>{
   $('.bio').text(snap.val().bio);
   $('.nick').text("("+snap.val().nickName+")");
   $('.grp').html(`${tag[snap.val().group]}`);
-  if(new Date(snap.val().subscribed) > new Date){
+  if(snap.val().subscribed.first === true){
     $('.subs_icon').html(`<i class="icofont-check-circled"></i>`);
     $('#prem').addClass('prem');
     console.log('%c Subscribed!', 'font-size: 15px; color: blue, font-weight:bold;');
