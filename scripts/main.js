@@ -1486,7 +1486,7 @@ db.ref('app/users').on('value', data=>{
 
 
           <div class="sandt">
-          <div class="l-score" >${item.score}</div>
+          <div class="l-score" style="color: #fff">${item.score}</div>
           </div>
          
          
