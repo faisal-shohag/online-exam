@@ -142,7 +142,7 @@ router.on(function() {
     $('.hm').addClass('footerIconActive');
     $($($('.hm')[0].parentNode)[0].lastElementChild).show();
   }
-  $('.top_logo').html(`<div class="animate__animated animate__fadeInLeft top_app_title"><div class="top_dir"><img src="./images/puzzle.png" height="20px"></div> <div class="top_text">বৃত্ত</div></div>`);
+  $('.top_logo').html(`<div class="animate__animated animate__fadeIn top_app_title"><div class="top_dir"><img src="./images/puzzle.png" height="20px"></div> <div class="top_text">বৃত্ত</div></div>`);
   // $('.top_logo').html(`<divclass="top_app_title"><div class="animate__animated animate__fadeLeft top_dir"><i class="icofont-focus"></i></div> <div class="animate__animated animate__fadeIn top_text">Public Exams</div></div>`);
   app.innerHTML= `
   <div class="div-1">
@@ -1386,7 +1386,7 @@ router.on({
   if($('.rnk')[0].classList[3] === undefined){
     $('.rnk').addClass('footerIconActive');
     $($($('.rnk')[0].parentNode)[0].lastElementChild).show();
-    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Rank</div></div>`);
+    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeIn top_dir"><img src="../images/bottom-nav/rank.png" height="30px"></div> <div class="animate__animated animate__fadeIn top_text">Rank</div></div>`);
   }
 
   app.innerHTML = `<span class="rank-doc"></div>`;
@@ -2466,29 +2466,22 @@ let question = {
         if($('.dnt')[0].classList[3] === undefined){
     $('.dnt').addClass('footerIconActive');
     $($($('.dnt')[0].parentNode)[0].lastElementChild).show();
-    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text"> Pricing & Donation</div></div>`);
+    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeIn top_dir"><img src="../images/bottom-nav/pay.png" height="30px"></div> <div class="animate__animated animate__fadeIn top_text"> Pricing & Donation</div></div>`);
     }
 
     app.innerHTML = `
     <div class="donate">
-    <div class="donate_card">
-   <center><div class="p_logo"><i class="icofont-safety"></i></div></center>
-    <div class="price">
-    <div class="p_tk">৳</div>
-    <div class="p_value">৬১০</div>
-    <div class="p_time">ফুল কোর্স</div>
-    </div>
-     <center><div class="p_line">অ্যাডমিশন টেস্ট এক্সাম প্যাক!</div></center>
-     
-     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">৫০+ চ্যাপ্টার এক্সাম</div></div>
-     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">১০+ সাবজেক্ট ফাইনাল</div></div>
-     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">৩টি পেপার ফাইনাল</div></div>
-     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">৫টি মডেল টেস্ট</div></div>
-     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">লাইভ এক্সাম</div></div>
-     <div class="offer"><div class="offer_lg"><i class="icofont-ui-check"></i></div><div class="offer_text">স্পেশাল রিসোর্স</div></div>
 
-     <center id="isSubs"></center>
+    <div class="donate_card">
+    This Page is under construction!
     </div>
+
+    <div class="donate_card">
+    </div>
+
+    <div class="donate_card">
+    </div>
+
     </div>
     `
   if(myData.subscribed.first === false){
@@ -2840,7 +2833,7 @@ if (result.isConfirmed) {
         if($('.rsc')[0].classList[3] === undefined){
     $('.rsc').addClass('footerIconActive');
     $($($('.rsc')[0].parentNode)[0].lastElementChild).show();
-    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Resource</div></div>`);
+    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeIn top_dir"><img src="../images/pencil-case.png" height="30px"></div> <div class="animate__animated animate__fadeIn top_text">Resource</div></div>`);
     }
   app.innerHTML = `
   <center><img src="../images/pencil-case.png" height="200px"></center>

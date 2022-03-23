@@ -982,6 +982,8 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .donate_card{
@@ -994,113 +996,11 @@ text-shadow: 0 1px 2px rgb(0,0,0,.2);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.donate_card .price{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    font-family: Kalpurush;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.p_tk{
-    position: absolute;
-    top: 20%;
-    left: 25%;
-    font-size: 30px;
-    text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.p_time{
-  position: absolute;
-  right: 10%;
-  bottom: 10%;
-  text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.p_line{
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.donate_card .p_value{
-    background: -webkit-linear-gradient(45deg, rgb(151, 160, 184), rgb(224, 229, 231));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-    font-size: 60px;
-}
-
-.offer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    font-size: 16px;
-}
-
-.subscribe_button{
-    font-size: 18px;
-    margin: 15px 10px;
-    border-radius: 15px;
-    width: 200px;
-    padding: 10px;
-    font-weight: bold;
-    color: rgb(255, 253, 253);
-    cursor: pointer;
-    background: linear-gradient(45deg, rgb(158, 64, 247), rgb(176, 26, 196));
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
-
-.subscribe_button:hover{
-    background: rgb(103, 23, 209);
-    color: #fff;
-    transition: 0.5s;
-}
-
 .grn{
     background: rgb(103, 23, 209);
     color: rgb(245, 241, 241);
 }
 
-.p_logo{
-    font-size: 70px;
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
-    /* border: 2px solid rgb(228, 222, 222); */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-}
-
-.prScore{
-    font-size: 15px;
-    color: rgb(117, 114, 114);
-    font-weight: bold;
-    font-family: Hind Siliguri;
-}
-.prScore i{
-    color: goldenrod;
-    font-size: 15px;
-}
-.prName{
-    font-size: 13px;
-    font-family: Hind Siliguri;
-}
-.payWith{
-    color: crimson;
-    font-size: 20px;
-    font-weight: bold;
-}
-.payWith img{
- height: 100px;
- width: 100px;
-}
 
 .swal2-footer{
     color: #222;
