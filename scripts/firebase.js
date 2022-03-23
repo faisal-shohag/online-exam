@@ -136,8 +136,8 @@
   // Listen to change in auth state so it displays the correct UI for when
   // the user is signed in or not.
   firebase.auth().onAuthStateChanged(function(user) {
-   $('#loading').hide();
-   $('#loaded').show();
+  //  $('#loading').hide();
+  //  $('#loaded').show();
     user ? handleSignedInUser(user) : handleSignedOutUser();
   });
   

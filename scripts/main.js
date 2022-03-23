@@ -2050,17 +2050,17 @@ $('.send').click(function(e){
   .then(response => response.json())
   .then(json => {
     console.log(json);
-    db.ref('app/practiceRef/chem2/chap-5').set({
-      name: "অর্থনৈতিক রসায়ন"      ,
+    db.ref('app/practiceRef/phy2/chap-10').set({
+      name: "সেমিকন্ডাক্টর ও ইলেকট্রনিক্স"      ,
       author: "---",
-      i: 5
+      i: 10
     });
 
     db.ref('app/users/094Rbu13YbWc9On6KnuJIUv3QMx2/create2/history/details').update({
-      exam_name: "অর্থনৈতিক রসায়ন-০১",
-      sl_chapter: "chap-5",
-      notice: "“যদি কাল কিছু অর্জন করতে চাও, তবে আজ থেকেই স্বপ্ন দেখা শুরু করো” – জোহান গথে (বিশ্বখ্যাত জার্মান কবি ও দার্শনিক)",
-      sl_subject: "chem2"
+      exam_name: "সেমিকন্ডাক্টর ও ইলেকট্রনিক্স-০১",
+      sl_chapter: "chap-10",
+      notice: "“সফল হতে চাইলে তোমাকে সামনে আসা সব চ্যালেঞ্জ মোকাবিলা করতে হবে। বেছে বেছে চ্যালেঞ্জ নেয়া যাবে না” - মাইক গাফকা (লেখক ও উদ্যোক্তা)",
+      sl_subject: "phy2"
     });
 
     db.ref('app/users/094Rbu13YbWc9On6KnuJIUv3QMx2/create2/history/questions').set(json)

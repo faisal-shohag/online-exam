@@ -88,7 +88,7 @@ main{
 }
 
 .loading img{
-  height: 150px;
+  height: 80px;
 }
 
 .top {
@@ -709,6 +709,19 @@ label,
   text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
   font-family: Lato, Kalpurush;
 }
+
+.appTitle{
+  background: -webkit-linear-gradient(45deg, rgb(61, 14, 189), rgb(224, 59, 155));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+  font-family: Lato, Kalpurush;
+  font-weight: bold;
+  font-weight: 20px;
+  margin-bottom: 50px;
+  font-size: 20px;
+}
+
 .exam_desc{
   text-align: left;
 }
