@@ -2833,10 +2833,125 @@ if (result.isConfirmed) {
         if($('.rsc')[0].classList[3] === undefined){
     $('.rsc').addClass('footerIconActive');
     $($($('.rsc')[0].parentNode)[0].lastElementChild).show();
-    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeIn top_dir"><img src="../images/pencil-case.png" height="30px"></div> <div class="animate__animated animate__fadeIn top_text">Resource</div></div>`);
+    $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeIn top_dir"><img src="../images/pencil-case.png" height="30px"></div> <div class="animate__animated animate__fadeIn top_text">Resources</div></div>`);
     }
   app.innerHTML = `
-  <center><img src="../images/pencil-case.png" height="200px"></center>
+  <div class="floating-button"><img src="../images/plus.png"></div>
+  <div class="search-bar">
+  <div class="search-icon"><img src="../images/search (1).png"></div>
+  <input autocomplete="off" id="search-member" placeholder="সার্চ করুন..." type="text" name="search">
+  </div>
+  <div class="resource-head">Newly Added</div>
+  <div class="new-resources">
+  
+  <div class="resource-item">
+  <div class="book-cat">দাগানো বই</div>
+  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
+  <div class="book-title">রসায়ন ১ম পত্র</div>
+  <div class="book-author">উন্মেষ</div>
+  </div>
+
+  <div class="resource-item">
+  <div class="book-cat">দাগানো বই</div>
+  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
+  <div class="book-title">রসায়ন ১ম পত্র</div>
+  <div class="book-author">উন্মেষ</div>
+  </div>
+
+  <div class="resource-item">
+  <div class="book-cat">দাগানো বই</div>
+  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
+  <div class="book-title">রসায়ন ১ম পত্র</div>
+  <div class="book-author">উন্মেষ</div>
+  </div>
+
+  <div class="resource-item">
+  <div class="book-cat">দাগানো বই</div>
+  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
+  <div class="book-title">রসায়ন ১ম পত্র</div>
+  <div class="book-author">উন্মেষ</div>
+  </div>
+
+  <div class="resource-item">
+  <div class="book-cat">দাগানো বই</div>
+  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
+  <div class="book-title">রসায়ন ১ম পত্র</div>
+  <div class="book-author">উন্মেষ</div>
+  </div>
+
+
+  <div class="resource-item">
+  <div class="book-cat">দাগানো বই</div>
+  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
+  <div class="book-title">রসায়ন ১ম পত্র</div>
+  <div class="book-author">উন্মেষ</div>
+  </div>
+
+
+  <div class="resource-item">
+  <div class="book-cat">দাগানো বই</div>
+  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
+  <div class="book-title">রসায়ন ১ম পত্র</div>
+  <div class="book-author">উন্মেষ</div>
+  </div>
+
+  </div>
+
+  <div class="resource-head">All Resources</div>
+  <div class="all-resources">
+  
+  <div class="resource-item">
+  <div class="book-cat">দাগানো বই</div>
+  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
+  <div class="book-title">রসায়ন ১ম পত্র</div>
+  <div class="book-author">উন্মেষ</div>
+  </div>
+
+  <div class="resource-item">
+  <div class="book-cat">দাগানো বই</div>
+  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
+  <div class="book-title">রসায়ন ১ম পত্র</div>
+  <div class="book-author">উন্মেষ</div>
+  </div>
+
+  <div class="resource-item">
+  <div class="book-cat">দাগানো বই</div>
+  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
+  <div class="book-title">রসায়ন ১ম পত্র</div>
+  <div class="book-author">উন্মেষ</div>
+  </div>
+
+  <div class="resource-item">
+  <div class="book-cat">দাগানো বই</div>
+  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
+  <div class="book-title">রসায়ন ১ম পত্র</div>
+  <div class="book-author">উন্মেষ</div>
+  </div>
+
+  <div class="resource-item">
+  <div class="book-cat">দাগানো বই</div>
+  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
+  <div class="book-title">রসায়ন ১ম পত্র</div>
+  <div class="book-author">উন্মেষ</div>
+  </div>
+
+
+  <div class="resource-item">
+  <div class="book-cat">দাগানো বই</div>
+  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
+  <div class="book-title">রসায়ন ১ম পত্র</div>
+  <div class="book-author">উন্মেষ</div>
+  </div>
+
+
+  <div class="resource-item">
+  <div class="book-cat">দাগানো বই</div>
+  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
+  <div class="book-title">রসায়ন ১ম পত্র</div>
+  <div class="book-author">উন্মেষ</div>
+  </div>
+
+  </div>
   `
 }
 
