@@ -2844,56 +2844,17 @@ if (result.isConfirmed) {
   <div class="resource-head">Newly Added</div>
   <div class="new-resources">
   
-  <div class="resource-item">
-  <div class="book-cat">দাগানো বই</div>
-  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
-  <div class="book-title">রসায়ন ১ম পত্র</div>
-  <div class="book-author">উন্মেষ</div>
+  <center><div class="preloader-wrapper small active">
+  <div class="spinner-layer spinner-green-only">
+    <div class="circle-clipper left">
+      <div class="circle"></div>
+    </div><div class="gap-patch">
+      <div class="circle"></div>
+    </div><div class="circle-clipper right">
+      <div class="circle"></div>
+    </div>
   </div>
-
-  <div class="resource-item">
-  <div class="book-cat">দাগানো বই</div>
-  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
-  <div class="book-title">রসায়ন ১ম পত্র</div>
-  <div class="book-author">উন্মেষ</div>
-  </div>
-
-  <div class="resource-item">
-  <div class="book-cat">দাগানো বই</div>
-  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
-  <div class="book-title">রসায়ন ১ম পত্র</div>
-  <div class="book-author">উন্মেষ</div>
-  </div>
-
-  <div class="resource-item">
-  <div class="book-cat">দাগানো বই</div>
-  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
-  <div class="book-title">রসায়ন ১ম পত্র</div>
-  <div class="book-author">উন্মেষ</div>
-  </div>
-
-  <div class="resource-item">
-  <div class="book-cat">দাগানো বই</div>
-  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
-  <div class="book-title">রসায়ন ১ম পত্র</div>
-  <div class="book-author">উন্মেষ</div>
-  </div>
-
-
-  <div class="resource-item">
-  <div class="book-cat">দাগানো বই</div>
-  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
-  <div class="book-title">রসায়ন ১ম পত্র</div>
-  <div class="book-author">উন্মেষ</div>
-  </div>
-
-
-  <div class="resource-item">
-  <div class="book-cat">দাগানো বই</div>
-  <div class="book-cover"><img src="http://wozcart.com/wp-content/uploads/2021/12/bds-admission.png"></div>
-  <div class="book-title">রসায়ন ১ম পত্র</div>
-  <div class="book-author">উন্মেষ</div>
-  </div>
+</div></center>
 
   </div>
 
@@ -2953,6 +2914,24 @@ if (result.isConfirmed) {
 
   </div>
   `
+
+  const newr = document.querySelector('.new-resources');
+  store.collection('books').orderBy("creationTime", "desc").limit(10).onSnapshot(snap=>{
+    newr.innerHTML = "";
+    snap.forEach(item=>{
+        newr.innerHTML += `
+        <a target="_blank" href="${item.data().link}"><div class="resource-item">
+        <div class="book-cat">${item.data().cat}</div>
+        <div class="book-cover"><img src="${item.data().cover}"></div>
+        <div class="book-title">${item.data().title}</div>
+        <div class="book-author">${item.data().author}</div>
+        </div></a>
+        `
+    });
+
+  })
+
+
 },
 
 "add_resources": function(){
