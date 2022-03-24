@@ -1268,7 +1268,7 @@ input[type=text]:focus {
  z-index: 99999;
  background: #fff;
  bottom: 6%;
- left: 45%;
+ left: 43%;
  /* right: 5%; */
  cursor: pointer;
 }
