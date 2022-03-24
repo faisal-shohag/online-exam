@@ -1156,7 +1156,7 @@ color: var(--red);
   font-family: Lato, Kalpurush;
 }
 
-input[type=text]:focus {
+.search-bar input[type=text]:focus {
   border: 1px solid rgb(81, 39, 233) !important;
   box-shadow: 0 0px 0 0 rgb(212, 22, 22) !important;
   /* box-shadow: rgba(230, 58, 28, 0.2) 0px 7px 29px 0px; */
@@ -1270,7 +1270,7 @@ input[type=text]:focus {
  bottom: 6%;
  left: 43%;
  /* right: 5%; */
- cursor: pointer;
+ /* cursor: pointer; */
 }
 
 

@@ -2836,7 +2836,7 @@ if (result.isConfirmed) {
     $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeIn top_dir"><img src="../images/pencil-case.png" height="30px"></div> <div class="animate__animated animate__fadeIn top_text">Resources</div></div>`);
     }
   app.innerHTML = `
-  <div class="floating-button"><img src="../images/plus.png"></div>
+  <a href="#!/add_resources"><div class="floating-button"><img src="../images/plus.png"></div></a>
   <div class="search-bar">
   <div class="search-icon"><img src="../images/search (1).png"></div>
   <input autocomplete="off" id="search-member" placeholder="সার্চ করুন..." type="text" name="search">
@@ -2953,6 +2953,85 @@ if (result.isConfirmed) {
 
   </div>
   `
+},
+
+"add_resources": function(){
+  // $('.app_loader').show();
+  $('.footer').hide();
+  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Add Resources</div></div>`);
+  app.innerHTML = `
+  <form id="add_book">
+  <div class="input-field">
+  <input type="text" name="title" required>
+  <label for="title">বইয়ের নাম</label>
+  </div>
+
+  <div class="input-field">
+  <input type="text" name="cover" required>
+  <label for="cover">বইয়ের কভার ইমেজ লিঙ্ক</label>
+  </div>
+
+  <div class="input-field">
+  <input type="text" name="author" required>
+  <label for="author">বইয়ের লেখক বা প্রতিষ্ঠান বা প্রকাশনী</label>
+  </div>
+
+
+  <div class="input-field col s12">
+<select name="cat" required>
+  <option value="" disabled selected>বইয়ের ধরণ</option>
+  <option value="টেক্সট বুক">টেক্সট বুক</option>
+  <option value="দাগানো বই">দাগানো বই</option>
+  <option value="নোট">নোট</option>
+  <option value="কনসেপ্ট বুক">কনসেপ্ট বুক</option>
+  <option value="ডাইজেস্ট">ডাইজেস্ট</option>
+  </select>
+  </div>
+
+  <div class="input-field">
+  <input type="text" name="link" required>
+  <label for="link">বইয়ের লিঙ্ক</label>
+  </div>
+
+  <div class="input-field">
+  <input type="text" name="size" required>
+  <label for="size">বইয়ের সাইজ</label>
+  </div>
+  <center><button type="submit" class="btn green">সাবমিট করুন</button></center>
+  </form>
+  `
+
+  $(document).ready(function () {
+    $("select").formSelect();
+  });
+  const add_book = document.getElementById('add_book');
+ 
+  add_book.addEventListener('submit', e=>{
+    e.preventDefault();
+
+    store.collection('books').add({
+      creationTime: firebase.firestore.Timestamp.fromDate(
+        new Date()),
+      title: add_book.title.value,
+      cover: add_book.cover.value,
+      author: add_book.author.value,
+      cat: add_book.cat.value,
+      link: add_book.link.value,
+      size: add_book.size.value
+    }).then(()=>{
+    Swal.fire(
+      'সাবমিটেড!',
+      'বইটি এখন ডেটাবেসে সংরক্ষিত!',
+      'success'
+    )
+  })
+    
+  })
+
+
+
+ 
+
 }
 
 
