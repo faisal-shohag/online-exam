@@ -2842,21 +2842,13 @@ if (result.isConfirmed) {
   <input autocomplete="off" id="search-member" placeholder="সার্চ করুন..." type="text" name="search">
   </div>
   <div class="resource-head">Newly Added</div>
-  <div class="new-resources">
   
-  <center><div class="preloader-wrapper small active">
-  <div class="spinner-layer spinner-green-only">
-    <div class="circle-clipper left">
-      <div class="circle"></div>
-    </div><div class="gap-patch">
-      <div class="circle"></div>
-    </div><div class="circle-clipper right">
-      <div class="circle"></div>
-    </div>
+  <div class="new-resources">
+  <div class="progress">
+  <div class="indeterminate red" ></div>
+</div>
   </div>
-</div></center>
 
-  </div>
 
   <div class="resource-head">All Resources</div>
   <div class="all-resources">

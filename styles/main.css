@@ -1288,3 +1288,7 @@ color: var(--red);
 .floating-button img{
   height: 30px;
 }
+
+.progress{
+  background: #f1f1f1;;
+}
