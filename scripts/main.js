@@ -2852,15 +2852,47 @@ if (result.isConfirmed) {
 
   <div class="resource-head">All Resources</div>
   <div class="all-resources">
-  <div class="progress">
+  <div class="resource-item">
+  <div class="progress ">
   <div class="indeterminate red" ></div>
+</div>
+</div>
+
+<div class="resource-item">
+<div class="progress ">
+<div class="indeterminate red" ></div>
+</div>
+</div>
+
+<div class="resource-item">
+<div class="progress ">
+<div class="indeterminate red" ></div>
+</div>
+</div>
+
+<div class="resource-item">
+<div class="progress ">
+<div class="indeterminate red" ></div>
+</div>
+</div>
+
+<div class="resource-item">
+<div class="progress ">
+<div class="indeterminate red" ></div>
+</div>
+</div>
+
+<div class="resource-item">
+<div class="progress ">
+<div class="indeterminate red" ></div>
+</div>
 </div>
 
   </div>
   `
 
   const newr = document.querySelector('.new-resources');
-  store.collection('books').orderBy("creationTime", "desc").limit(10).onSnapshot(snap=>{
+  store.collection('books').orderBy("creationTime", "desc").limit(6).onSnapshot(snap=>{
     newr.innerHTML = "";
     snap.forEach(item=>{
         newr.innerHTML += `
