@@ -1346,3 +1346,10 @@ color: var(--red);
   font-weight: bold;
   color: crimson;
 }
+
+.firebaseui-callback-indicator-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Kalpurush;
+}
