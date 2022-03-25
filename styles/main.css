@@ -1169,8 +1169,9 @@ color: var(--red);
   width: 100%;
   overflow-x: scroll;
   margin-bottom: 20px;
-  justify-content: center;
+  /* justify-content: center; */
   padding-bottom: 10px;
+  /* padding-left: 20px; */
 }
 
 .all-resources{
