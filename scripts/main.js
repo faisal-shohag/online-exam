@@ -2950,9 +2950,9 @@ if (result.isConfirmed) {
         else $('.search-result').hide();
         let allPost = document.querySelectorAll('.book-title-s');
         for(let i=0; i<allPost.length; i++){
-          tag = allPost[i].innerText.toUpperCase();
+          s_tag = allPost[i].innerText.toUpperCase();
           
-          if(tag.indexOf(filter) > -1) {
+          if(s_tag.indexOf(filter) > -1) {
             allPost[i].parentNode.parentNode.parentNode.style.display = "block";
             // $('.search-result').hide();
           } else{
