@@ -2839,10 +2839,14 @@ if (result.isConfirmed) {
   <a href="#!/add_resources"><div class="floating-button"><img src="../images/plus.png"></div></a>
   <div class="search-bar">
   <div class="search-icon"><img src="../images/search (1).png"></div>
-  <input autocomplete="off" id="search-member" placeholder="সার্চ করুন..." type="text" name="search">
+  <input autocomplete="off" id="search-book" placeholder="সার্চ করুন..." type="text" name="search">
   </div>
+
+  <div id="search-result">
+  <div class="search-result"></div>
+  </div>
+
   <div class="resource-head">Newly Added</div>
-  
   <div class="new-resources">
   <div class="progress">
   <div class="indeterminate red" ></div>
@@ -2908,8 +2912,10 @@ if (result.isConfirmed) {
   });
 
   const allr = document.querySelector('.all-resources');
+  const search_result = document.querySelector('.search-result');
     store.collection('books').onSnapshot(snap=>{
       allr.innerHTML = "";
+      search_result.innerHTML = "";
       snap.forEach(item=>{
         allr.innerHTML += `
         <a target="_blank" href="${item.data().link}"><div class="resource-item">
@@ -2919,8 +2925,44 @@ if (result.isConfirmed) {
         <div class="book-author">${item.data().author}</div>
         </div></a>
         `
+
+        search_result.innerHTML += `
+        <div id="search-item">
+        <a target="_blank" href="${item.data().link}"><div class="search-item">
+        <div class="book-cover-s"><img src="${item.data().cover}"></div>
+        <div class="search-details">
+        <div class="book-title-s">${item.data().title}</div>
+        <div class="book-author">${item.data().author}</div>
+        <div class="book-cat-s">${item.data().cat}</div>
+        <div class="book-size">${item.data().size}</div>
+        </div>
+        </div></a></div>
+        `
       })
-    })
+    });
+
+    //Searching books
+    document.getElementById('search-book').addEventListener('keyup', e=>{
+      if(e.key = 'Enter'){
+        e.preventDefault();
+        let filter = ($('#search-book')[0].value).toUpperCase();
+        if(filter.length>0) $('.search-result').show();
+        else $('.search-result').hide();
+        let allPost = document.querySelectorAll('.book-title-s');
+        for(let i=0; i<allPost.length; i++){
+          tag = allPost[i].innerText.toUpperCase();
+          
+          if(tag.indexOf(filter) > -1) {
+            allPost[i].parentNode.parentNode.parentNode.style.display = "block";
+            // $('.search-result').hide();
+          } else{
+            allPost[i].parentNode.parentNode.parentNode.style.display = "none";
+            // $('.search-result').show();
+          }
+
+        }
+      }
+    });
 
 
 },

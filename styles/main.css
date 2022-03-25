@@ -1132,7 +1132,7 @@ color: var(--red);
 .search-bar {
   display: flex;
   width: 100%;
-  padding: 10px;
+  /* padding: 10px; */
   gap: 10px;
   align-items: center;
 }
@@ -1285,8 +1285,64 @@ color: var(--red);
 
 .floating-button img{
   height: 30px;
-}
+}  /* text-align: center; */
 
 .progress{
   background: #f1f1f1;;
+}
+
+.search-item{
+ display: flex;
+ gap: 10px;
+ width: 100%;
+ border-radius: 5px;
+ box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+/* margin-bottom: 5px; */
+}
+
+.book-cover-s{
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+ }
+ 
+ .book-cover-s img{
+    height: 80px;
+    width: 60px;
+ }
+
+ .search-result{
+   display: none;
+  position: fixed;
+  background: #fff;
+  /* padding: 5px; */
+  border-radius: 5px;
+  z-index: 99;
+  width: 95%;
+ }
+
+/* .search-details{
+
+} */
+
+.book-title-s{
+  font-weight: bold;
+  font-weight: 15px;
+  color: #313aaa;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 15px;
+}
+
+
+
+.book-cat-s{
+  font-size: 13px;
+}
+
+.book-size{
+  font-size: 10px;
+  font-weight: bold;
+  color: crimson;
 }
