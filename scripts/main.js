@@ -132,7 +132,10 @@ $('.app_loader').show();
 
   console.log('%c Database is Ready!', "color: green; font-size: 15px; font-family: Hind Siliguri; font-weight: bold;")
   $('.app_loader').hide();
-router.on(function() {
+
+
+router.on({
+"/": function(){
   $('.footer').show();
   // $('.app_loader').show();
   $('.footer').show();
@@ -164,27 +167,75 @@ router.on(function() {
           </center> 
   </div>
 
-  <div class="sl">
-  <div class="title-n"><img src="../images/book-stack.png"> বিষয়ভিত্তিক প্রাকটিস</div>
+<div class="sl">
+<div class="sl_menu">
 
+<a href="#!/subjects"> 
+<div class="sl_item">
+<div class="sl_icon"><img src="../images/book-stack.png"></div>
+<div class="sl_name">বিষয় সমূহ</div>
+</div>
+</a>
 
+<a href="#!/practice/subject/model"> 
+<div class="sl_item">
+<div class="sl_icon"><img src="../images/test.png"></div>
+<div class="sl_name">মডেল টেস্ট</div>
+</div>
+</a>
+
+</div>
+</div>
+  `
+
+  
+  store.collection('public_exams').orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
+    let rncount = 0, upcount=0, endcount=0 
+    // $('.app_loader').hide();
+    $('.div-1').html(`<div class="h-menu">
+    <div class="menu_title"><img src="../images/free-exam.png"> Free Exams</div>
+  <div class="menu_items">
+  <a href="#!/exams/public/running"><div class="item">
+  <div class="item_name">Running</div> <div id="rn_count" class="c_num">0</div>
+  </div></a>
+  <a href="#!/exams/public/upcoming"><div class="item">
+  <div class="item_name">Upcoming</div> <div id="up_count" class="c_num">0</div>
+  </div></a>
+  <a href="#!/exams/public/ended"><div class="item">
+  <div class="item_name">Ended</div> <div id="end_count" class="c_num">0</div>
+  </div></a>
+    </div>
+    </div>`)
+    snap.forEach(doc=> {
+      let data = doc.data();
+      if(new Date(data.details.end_date) > new Date() && new Date(data.details.start_date) < new Date()){rncount++}
+      if(new Date(data.details.start_date) > new Date()){upcount++;}
+      if(new Date(data.details.end_date) < new Date()){endcount++;}
+     })
+    $('#rn_count').text(rncount);
+    $('#up_count').text(upcount);
+    $('#end_count').text(endcount);
+  });
+},
+"/subjects": function(){
+  $('.footer').hide();
+  // $('.app_loader').show();
+  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">বিষয় সমূহ</div></div>`);
+      app.innerHTML = `
+<div class="sl">
   <div class="sl_menu">
-
   <a href="#!/practice/subject/b1"> 
   <div class="sl_item">
   <div class="sl_icon"><img src="../images/literature.png"></div>
   <div class="sl_name">বাংলা ১ম পত্র</div>
   </div>
   </a>
- 
-  
   <a href="#!/practice/subject/b2">
   <div class="sl_item">
   <div class="sl_icon"><img src="../images/reading.png"></div>
   <div class="sl_name">বাংলা ২য়  পত্র</div>
   </div>
   </a>
-
   <a href="#!/practice/subject/e">
   <div class="sl_item">
   <div class="sl_icon"><img src="../images/grammar.png"></div>
@@ -251,42 +302,8 @@ router.on(function() {
 
 </div>
   </div>
- 
-  `
-
-  
-  store.collection('public_exams').orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
-    let rncount = 0, upcount=0, endcount=0 
-    // $('.app_loader').hide();
-    $('.div-1').html(`<div class="h-menu">
-    <div class="menu_title"><img src="../images/free-exam.png"> Free Exams</div>
-  <div class="menu_items">
-  <a href="#!/exams/public/running"><div class="item">
-  <div class="item_name">Running</div> <div id="rn_count" class="c_num">0</div>
-  </div></a>
-  <a href="#!/exams/public/upcoming"><div class="item">
-  <div class="item_name">Upcoming</div> <div id="up_count" class="c_num">0</div>
-  </div></a>
-  <a href="#!/exams/public/ended"><div class="item">
-  <div class="item_name">Ended</div> <div id="end_count" class="c_num">0</div>
-  </div></a>
-    </div>
-    </div>`)
-    snap.forEach(doc=> {
-      let data = doc.data();
-      if(new Date(data.details.end_date) > new Date() && new Date(data.details.start_date) < new Date()){rncount++}
-      if(new Date(data.details.start_date) > new Date()){upcount++;}
-      if(new Date(data.details.end_date) < new Date()){endcount++;}
-     })
-    $('#rn_count').text(rncount);
-    $('#up_count').text(upcount);
-    $('#end_count').text(endcount);
-  });
-}).resolve();
-
-
-
-router.on({
+      `
+},
 "/exams/:id/:id2": function(params){
   $('.footer').hide();
     $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Public Exams</div></div>`);
@@ -1862,6 +1879,7 @@ $('.create-doc').html(`
 <div class="input-field col s12">
 <select name="sl_subject" requiredrequired>
 <option value="" disabled selected>Select Subject</option>
+<option value="model">Model Test</option>
 <option value="b1">Bangla 1st Paper</option>
 <option value="b2">Bangla 2nd Paper</option>
 <option value="e">English</option>

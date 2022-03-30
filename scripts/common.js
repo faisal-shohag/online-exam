@@ -492,6 +492,7 @@ var tag = {
   "uni"  : "বিশ্ববিদ্যালয়",
   "med"  : "মেডিকেল",
   "eng"  : "ইঞ্জিনিয়ারিং",
+  "model": "মডেল টেস্ট"
 };
 
 function firstLetter(str){
