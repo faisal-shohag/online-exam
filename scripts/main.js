@@ -1164,6 +1164,8 @@ router.on({
             na = 0,
             neg = parseFloat(ch[1]);
           questions = myexam.questions;
+          shuffle(questions);
+          // console.log(questions);
           $(".exam-nb").html(`${myexam.details.notice}`);
 
            for (let q = 0; q <questions.length; q++) {
@@ -1276,9 +1278,9 @@ router.on({
                         $(e).html(
                           `<b style="color: green;">Solution:</b><br>${exp[k]}`
                         );
-                        // $('#'+ans[k]).css({'background': 'var(--success)', 'color': 'var(--light)'});
+
                         $("#" + ans[k] + " .st").addClass("cr");
-                       // console.log(ans[k]);
+
                         $(
                           $($($("#" + ans[k])[0].parentNode)[0].parentNode)[0]
                             .children[0]
@@ -3137,3 +3139,21 @@ if (result.isConfirmed) {
   $('.top').hide();
 }
 });
+
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
