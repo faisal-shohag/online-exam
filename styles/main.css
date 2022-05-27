@@ -283,6 +283,11 @@ label,
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0px 1px 5px rgb(0 0 0 / 10%);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block; 
+    overflow: hidden;
+    width: 99%;
 }
 
 .chap_item .author{
@@ -330,6 +335,10 @@ label,
   height: 60px;
   font-family:'Lato', Kalpurush;
   flex-direction: row;
+}
+
+#footer{
+  display: block;
 }
 
 
@@ -695,7 +704,7 @@ label,
 .top_app_title{
   cursor: pointer;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   gap: 3px;
   /* background: -webkit-linear-gradient(45deg, rgb(61, 14, 189), rgb(224, 59, 155));
@@ -710,6 +719,15 @@ label,
 .top_dir{
   font-size: 35px;
 }
+
+.top_text{
+  display: inline-block;
+  white-space: nowrap;
+  width: 70%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .top_text, .top_dir{
    background: -webkit-linear-gradient(45deg, rgb(61, 14, 189), rgb(224, 59, 155));
   -webkit-background-clip: text;
@@ -1080,6 +1098,7 @@ color: var(--red);
 .div-1{
   background: #fff;
   margin-top: 10px;
+  padding: 10px;
 }
 
 .l-name{

@@ -10,6 +10,11 @@
     #app{
         width: 60%;
     }
+
+    #footer{
+        /* display: none; */
+    }
+
     .dtp_modal-content {
      left: 15%;
      right: 15%;
@@ -34,5 +39,27 @@
       .c_num{
         height: 30px;
         width: 30px;
+      }
+
+      
+}
+
+@media (min-width: 318px) {
+
+
+    .top_text{
+        display: block;
+        white-space: wrap;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      .chapterName{
+          text-overflow: ellipsis;
+          white-space: wrap;
+          display: block; 
+          overflow: hidden;
+          width: 100%;
       }
 }

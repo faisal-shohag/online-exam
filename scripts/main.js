@@ -148,13 +148,10 @@ router.on({
   $('.top_logo').html(`<div class="animate__animated animate__fadeIn top_app_title"><div class="top_dir"><img src="./images/puzzle.png" height="20px"></div> <div class="top_text">বৃত্ত</div></div>`);
   // $('.top_logo').html(`<divclass="top_app_title"><div class="animate__animated animate__fadeLeft top_dir"><i class="icofont-focus"></i></div> <div class="animate__animated animate__fadeIn top_text">Public Exams</div></div>`);
   app.innerHTML= `
-  <div class="div-1">
-  <center> <div class="preloader-wrapper big active">
-
+  <div class="div-1 free-exams">
+  <center> <div class="preloader-wrapper small active">
             <div class="spinner-layer spinner-red">
-
               <div class="circle-clipper left">
-        
                 <div class="circle"></div>
               </div><div class="gap-patch">
                 <div class="circle"></div>
@@ -183,14 +180,22 @@ router.on({
 </a>
 
 </div>
+
+
 </div>
+
+<div class="div-1">
+<div class="menu_title"><img src="../images/together.png"> Recent Solution</div>
+</div>
+
+
   `
 
   
   store.collection('public_exams').orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
     let rncount = 0, upcount=0, endcount=0 
     // $('.app_loader').hide();
-    $('.div-1').html(`<div class="h-menu">
+    $('.free-exams').html(`<div class="h-menu">
     <div class="menu_title"><img src="../images/free-exam.png"> Free Exams</div>
   <div class="menu_items">
   <a href="#!/exams/public/running"><div class="item">
