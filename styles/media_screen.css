@@ -44,22 +44,22 @@
       
 }
 
-@media (min-width: 318px) {
+@media (min-width: 360px) {
 
 
     .top_text{
         display: block;
         white-space: wrap;
-        width: 100%;
+        width: 99%;
         text-overflow: ellipsis;
         overflow: hidden;
       }
 
       .chapterName{
-          text-overflow: ellipsis;
+          text-overflow: none;
           white-space: wrap;
           display: block; 
-          overflow: hidden;
+          /* overflow: hidden; */
           width: 100%;
       }
 }
