@@ -287,14 +287,14 @@ router.on({
 <a href="#!/practice/subject/math1">
 <div class="sl_item">
 <div class="sl_icon"><img src="../images/math1.png"></div>
-<div class="sl_name">উচ্চতর গণিত ১ম</div>
+<div class="sl_name">উচ্চ. গণিত ১ম</div>
 </div>
 </a>
 
 <a href="#!/practice/subject/math2">
 <div class="sl_item">
 <div class="sl_icon"><img src="../images/math2.png"></div>
-<div class="sl_name">উচ্চতর গণিত ২য়</div>
+<div class="sl_name">উচ্চ. গণিত ২য়</div>
 </div>
 </a>
 
