@@ -43,6 +43,7 @@
 
       
 }
+/*
 
 @media (min-width: 500px) {
 
@@ -59,7 +60,8 @@
           text-overflow: none;
           white-space: wrap;
           display: block; 
-          /* overflow: hidden; */
+          overflow: hidden;
           width: 100%;
       }
 }
+*/
