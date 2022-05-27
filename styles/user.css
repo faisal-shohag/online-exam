@@ -384,6 +384,7 @@ textarea{
     padding: 5px;
     font-size: 18px;
     font-family: Lato, Kalpurush;
+    overflow-x: scroll;
 }
 
 
@@ -408,6 +409,7 @@ textarea{
     border: 2px solid var(--success);
     background: #5ad4429f;
     /* font-family: 'SolaimanLipi'; */
+    overflow-x: scroll;
 }
 
 .opt{
