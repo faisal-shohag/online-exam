@@ -2944,6 +2944,7 @@ if (result.isConfirmed) {
         <div class="book-cat">${item.data().cat}</div>
         <div class="book-cover"><img src="${item.data().cover}"></div>
         <div class="book-title">${item.data().title}</div>
+        <div class="book-size">${item.data().size}</div>
         <div class="book-author">${item.data().author}</div>
         </div></a>
         `
@@ -2962,6 +2963,7 @@ if (result.isConfirmed) {
         <div class="book-cat">${item.data().cat}</div>
         <div class="book-cover"><img src="${item.data().cover}"></div>
         <div class="book-title">${item.data().title}</div>
+        <div class="book-size">${item.data().size}</div>
         <div class="book-author">${item.data().author}</div>
         </div></a>
         `
