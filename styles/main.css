@@ -10,7 +10,7 @@ html {
 
 body {
   font-family: 'Lato', Kalpurush;
-  background: #f9fafb;
+  background: url(https://resources.beecrowd.com.br/academic/img/geometry.png);
    
 }
 
@@ -206,7 +206,7 @@ label,
   flex-direction: column;
   gap: 0px;
   border-radius: 5px;
-  min-width: 70px;
+  min-width: 100px;
 }
 
 

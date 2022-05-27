@@ -55,6 +55,43 @@
   }
 
 
+
+  //getting initial user data
+  var myData = '';
+  firebase.auth().onAuthStateChanged((user)=>{
+    $('.loading').hide();
+    if(user){
+        db.ref('app/users/'+user.uid).on('value', snap=>{
+           myData = {
+            totalCorrect : snap.val().scores.totalCorrect,
+            totalEmpt : snap.val().scores.totalEmpt,
+            totalScore : snap.val().scores.totalScore,
+            totalWrong : snap.val().scores.totalWrong,
+            admission : snap.val().exams.admission,
+            daily : snap.val().exams.daily,
+            live : snap.val().exams.live,
+            model : snap.val().exams.model,
+            public : snap.val().exams.public,
+            weekly : snap.val().exams.weekly,
+            totalExams : snap.val().exams.total,
+            createPermission: snap.val().createPermission,
+            nickName: snap.val().nickName,
+            group: snap.val().group,
+            subscribed: snap.val().subscribed
+           }
+           localStorage.setItem('group', snap.val().group);
+
+          $('.prName').text(myData.nickName);
+          $('.prScore').html(`<i class="icofont-cop-badge"></i> <span>${myData.totalScore}</span>`);
+           //Subscription remider
+           
+        });
+        
+    }
+});
+
+
+
   //time & date picker
   (function ($) {
     'use strict';
@@ -599,36 +636,3 @@ function shuffleArray(array) {
     return array;
   }
 
-  var myData = '';
-  
-  firebase.auth().onAuthStateChanged((user)=>{
-    $('.loading').hide();
-    if(user){
-        db.ref('app/users/'+user.uid).on('value', snap=>{
-           myData = {
-            totalCorrect : snap.val().scores.totalCorrect,
-            totalEmpt : snap.val().scores.totalEmpt,
-            totalScore : snap.val().scores.totalScore,
-            totalWrong : snap.val().scores.totalWrong,
-            admission : snap.val().exams.admission,
-            daily : snap.val().exams.daily,
-            live : snap.val().exams.live,
-            model : snap.val().exams.model,
-            public : snap.val().exams.public,
-            weekly : snap.val().exams.weekly,
-            totalExams : snap.val().exams.total,
-            createPermission: snap.val().createPermission,
-            nickName: snap.val().nickName,
-            group: snap.val().group,
-            subscribed: snap.val().subscribed
-           }
-           localStorage.setItem('group', snap.val().group);
-
-          $('.prName').text(myData.nickName);
-          $('.prScore').html(`<i class="icofont-cop-badge"></i> <span>${myData.totalScore}</span>`);
-           //Subscription remider
-           
-        });
-        
-    }
-});

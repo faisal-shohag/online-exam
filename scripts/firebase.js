@@ -68,6 +68,18 @@
           // Required to enable ID token credentials for this provider.
           clientId: CLIENT_ID
         },
+        // {
+        //   provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        //   scopes :[
+        //     'public_profile',
+        //     'email',
+        //     'user_likes',
+        //     'user_friends'
+        //   ]
+        // },
+        firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+
+
       ],
       'tosUrl': '#',
       // Privacy policy url.

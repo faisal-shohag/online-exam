@@ -166,10 +166,8 @@ router.on({
               </div>
           </center> 
   </div>
-
 <div class="sl">
 <div class="sl_menu">
-
 <a href="#!/subjects"> 
 <div class="sl_item">
 <div class="sl_icon"><img src="../images/book-stack.png"></div>
@@ -300,6 +298,13 @@ router.on({
 </div>
 </a>
 
+<a href="#!/practice/subject/ict">
+<div class="sl_item">
+<div class="sl_icon"><img src="../images/ict.png"></div>
+<div class="sl_name">ICT</div>
+</div>
+</a>
+
 </div>
   </div>
       `
@@ -387,7 +392,6 @@ router.on({
   }
  });
 },
-
 "/exam/:ida/:id": function(params){
   $('.footer').hide();
   $('.app_loader').show();
@@ -801,7 +805,6 @@ router.on({
     }
   });
 },
-
 "/answersheet/:ida/:id": function(params) {
   $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Answersheet</div></div>`);
   $('.app_loader').show();
@@ -857,7 +860,7 @@ router.on({
       wrong = 0,
       na = 0,
       neg = parseFloat(myexam.details.negative_mark);
-      console.log(userAns);
+      // console.log(userAns);
     questions = myexam.questions;
     $(".exam-nb").html(`${myexam.details.notice}`);
     var elem = "";
@@ -979,7 +982,6 @@ router.on({
 })
  
 },
-
 "/practice/subject/:id": function(params){
   $('.footer').hide();
   $('.app_loader').show();
@@ -1585,6 +1587,7 @@ You have no permission to create exam!
     <option value="live">Live</option>
     <option value="board">Board Exam Preparation</option>
     <option value="admission">Admission</option>
+    <option value="bcs">BCS</option>
   </select>
 </div>
 
@@ -1665,6 +1668,8 @@ You have no permission to create exam!
   <option value="120">120 minutes</option>
   </select>
   </div>
+
+  
 
   Select Start Date:
   <div style="width: 200px; margin: 10px auto;">
@@ -1777,8 +1782,21 @@ detalisform.addEventListener('submit', e=>{
       </select>
     </div>
 
+    <div class="input-field">
+      <select name="select_tag">
+        <option class="dis" value="" disabled>ট্যাগ</option>
+        <option value="bng">bng</option>
+        <option value="eng" selected>eng</option>
+        <option value="gk">gk</option>
+        <option value="mth">mth</option>
+        <option value="ict">ict</option>
+        <option value="gsc">gsc</option>
+        <option value=sco">sco</option>
+      </select>
+    </div>
+
 <div class="create-q">
-    <textarea name="explanation" id="create-ex" placeholder="ব্যাখ্যা/সমাধান" required></textarea>
+    <textarea name="explanation" id="create-ex" placeholder="ব্যাখ্যা/সমাধান"></textarea>
 </div>
 <center><button type="submit" class="btn red">Add Question</button><center>
 </form>
@@ -1828,12 +1846,14 @@ $('.counter').text(count);
 const question_form = document.querySelector('#question_form');
 question_form.addEventListener('submit', e=> {
   e.preventDefault();
-
+  let optArr = [question_form.a.value, question_form.b.value, question_form.c.value, question_form.d.value];
+  let ansText = `${ansOpt[parseInt(question_form.select_ans.value)]}. ${optArr[parseInt(question_form.select_ans.value)-1]}`;
   let question = {
       q: (question_form.question.value).replace(/(?:\r\n|\r|\n)/g, '<br>'),
       opt: [question_form.a.value, question_form.b.value, question_form.c.value, question_form.d.value],
       ans: question_form.select_ans.value,
-      ex: (question_form.explanation.value).replace(/(?:\r\n|\r|\n)/g, '<br>')
+      ex: ansText,
+      tag: question_form.select_tag.value
   }
     db.ref('app/users/'+user.uid+'/create/history/questions/'+count).update(question);
     $('.counter').hide();
