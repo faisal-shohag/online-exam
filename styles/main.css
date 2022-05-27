@@ -10,8 +10,15 @@ html {
 
 body {
   font-family: 'Lato', Kalpurush;
-  background: url(https://resources.beecrowd.com.br/academic/img/geometry.png);
-   
+    background: url(https://resources.beecrowd.com.br/academic/img/geometry.png) top left #fff;
+    background-image: url(https://resources.beecrowd.com.br/academic/img/geometry.png);
+    background-position-x: left;
+    background-position-y: top;
+    background-size: 250px 250px;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: rgb(255, 255, 255);
 }
 
 body:fullscreen {
