@@ -77,7 +77,7 @@
         //     'user_friends'
         //   ]
         // },
-        firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+        // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
 
 
       ],
