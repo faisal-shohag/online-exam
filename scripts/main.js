@@ -184,6 +184,7 @@ router.on({
 
 </div>
 
+<br/>
 <div class="div-1">
 <div class="menu_title"><img src="../images/together.png"> Recent Solution</div>
 
