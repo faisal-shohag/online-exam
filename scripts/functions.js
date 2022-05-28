@@ -86,12 +86,13 @@ const getSolution = (id, element) =>{
         </div>
 
         `
-
+        let secHTML = '';
         for(let i=0; i<sections.length; i++){
-            document.getElementById('sections').innerHTML += `
+           secHTML += `
             <div class="sec" id="${sections[i]}">${sectionsTag[sections[i]]}</div>
             `
         }
+        $('#sections').html(secHTML);
 
       
     const getQuestionByTag = (tag) => {

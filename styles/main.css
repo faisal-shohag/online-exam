@@ -644,7 +644,7 @@ label,
   display: flex;
   gap: 10px;
   align-items: center;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: bold;
   background: -webkit-linear-gradient(45deg, rgb(125, 87, 228), rgb(240, 96, 180));
   -webkit-background-clip: text;
@@ -654,7 +654,7 @@ label,
 }
 
 .menu_title img{
-  height: 40px;
+  height: 25px;
 }
 
 .menu_items{
@@ -1390,7 +1390,7 @@ color: var(--red);
 
 .card-head{
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   gap: 10px;
 }
@@ -1400,12 +1400,12 @@ color: var(--red);
 }
 
 .card-title{
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
 }
 
 .card-sub-title{
-  font-size: 12px;
+  font-size: 10px;
   font-weight: bold;
   color: grey;
 }
@@ -1424,7 +1424,7 @@ color: var(--red);
 }
 
 .progressBarBg{
-  background: rgb(190, 189, 189);
+  background: rgb(247, 227, 227);
   height: 12px;
   width: 100%;
   border-radius: 10px;
