@@ -131,10 +131,10 @@ const getSolution = (id, element, uid) =>{
             $('.sec').removeClass('sec-active');
             $('#'+sec_id).addClass('sec-active');
             $('#add_sq').html(`<a href="#!/add_solution/${id}/${sec_id}/${questions.length}"><div style="left: 80%;" class="floating-button"><img src="../images/plus.png"></div></a>`);
-
+            if(uid !== '094Rbu13YbWc9On6KnuJIUv3QMx2') $('.floating-button').hide();
             getQuestionByTag(sec_id);
         });
-        if(uid !== '094Rbu13YbWc9On6KnuJIUv3QMx2') $('.floating-button').hide();
+
         $('#'+sections[0]).click();
 
     })
