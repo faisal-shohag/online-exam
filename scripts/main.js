@@ -2400,7 +2400,28 @@ let question = {
       edit_det.edit_start.value = sdate[1] + " " + sdate[2] + " " + sdate[3] + " " +sdate[4];
       
       sdate = dt.details.end_date;
-      sdate = sdate.split(' ');
+      sdate = sdate.split(' ');var ans = [];
+      for(let i=0; i<dt.questions.length; i++){
+        ans.push(parseInt(dt.questions[i].ans)+i*4);
+        question_view.innerHTML += `
+        <div class="q-wrap">
+    <div class="question">
+       ${i+1}. ${dt.questions[i].q}
+    </div>
+    <div class="option">
+        <div class="opt" id="${i+1+i*3}"><div class="st"></div>${dt.questions[i].opt[0]}</div>
+        <div class="opt" id="${i+2+i*3}"><div class="st"></div>${dt.questions[i].opt[1]}</div>
+        <div class="opt" id="${i+3+i*3}"><div class="st"></div>${dt.questions[i].opt[2]}</div>
+        <div class="opt" id="${i+4+i*3}"><div class="st"></div>${dt.questions[i].opt[3]}</div>
+    </div>
+    <div class="solution"><b>Solution:</b></br> ${dt.questions[i].ex}</div>
+    <center><a href="#!/edit_q/create/${i}"><button class="btn green">Edit</button></a></center>
+</div>`
+  }
+      for(let a=0; a<ans.length; a++){
+           $("#" + ans[a] + " .st").addClass("cr");
+         }
+
       edit_det.edit_end.value = sdate[1] + " " + sdate[2] + " " + sdate[3] + " " +sdate[4];
      
       edit_det.addEventListener('submit', e=>{

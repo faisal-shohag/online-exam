@@ -12,6 +12,8 @@ const solutionsCard = (element)=>{
     store.collection('solutions').onSnapshot(snap=>{
         element.innerHTML = '';
         snap.forEach(item => {
+            let questions =  Object.entries(item.data().questions);
+            questions = questions.map(q=> q[1]);
             console.log(item.id);
             element.innerHTML += `
             <a href="#!/examsolution/${item.data().exam_name}/${item.id}"><div class="scroll-card">
@@ -29,8 +31,8 @@ const solutionsCard = (element)=>{
             <div>
             
             <div class="progressBarBg">
-            <div class="progressParc">${progress(200, 20)}%</div>
-            <div style="width:${progress(200, 20)}%;" class="progressLine red"></div>
+            <div class="progressParc">${progress(item.data().totalQ, questions.length)}%</div>
+            <div style="width:${progress(item.data().totalQ, questions.length)}%;" class="progressLine red"></div>
             </div>
             
             </div></a>
@@ -42,6 +44,8 @@ const solutionsCard = (element)=>{
 const SingleSolutionCard = (id, element) => {
     element = document.getElementById(element);
     store.collection('solutions').doc(id).onSnapshot(item=>{
+        let questions =  Object.entries(item.data().questions);
+            questions = questions.map(q=> q[1]);
         element.innerHTML = `
         <div class="scroll-card opacity5">
         <div class="card-head">
@@ -58,8 +62,8 @@ const SingleSolutionCard = (id, element) => {
         <div>
         
         <div class="progressBarBg">
-        <div class="progressParc">${progress(200, 20)}%</div>
-        <div style="width:${progress(200, 20)}%;" class="progressLine red"></div>
+        <div class="progressParc">${progress(item.data().totalQ, questions.length)}%</div>
+        <div style="width:${progress(item.data().totalQ, questions.length)}%;" class="progressLine red"></div>
         </div>
         
         </div></div>
@@ -78,9 +82,9 @@ const getSolution = (id, element) =>{
         element.innerHTML = `
         <div id="sections"></div>
         <center id="add_sq"></center>
-        <div class="question-body">
-        <center><h4>No question added to this section!</h4></center>
+        <div class="solution-body">
         </div>
+
         `
 
         for(let i=0; i<sections.length; i++){
@@ -89,17 +93,47 @@ const getSolution = (id, element) =>{
             `
         }
 
+      
+    const getQuestionByTag = (tag) => {
+        let question_view = document.querySelector('.solution-body');
+        question_view.innerHTML = '';
+    var ans = [];
+    let question = questions.filter(q => q.tag === tag);
+ if(question.length === 0){
+     question_view.innerHTML = `<center><h4>No question added to this section!</h4></center>`;
+     return;
+ }
+      for(let i=0; i<question.length; i++){
+        ans.push(parseInt(question[i].ans)+i*4);
+        question_view.innerHTML += `
+        <div class="q-wrap">
+    <div class="question">
+       ${i+1}. ${question[i].q}
+    </div>
+    <div class="option">
+        <div class="opt" id="${i+1+i*3}"><div class="st"></div>${question[i].opt[0]}</div>
+        <div class="opt" id="${i+2+i*3}"><div class="st"></div>${question[i].opt[1]}</div>
+        <div class="opt" id="${i+3+i*3}"><div class="st"></div>${question[i].opt[2]}</div>
+        <div class="opt" id="${i+4+i*3}"><div class="st"></div>${question[i].opt[3]}</div>
+    </div>
+    <div class="solution"><b>Solution:</b></br> ${question[i].ex}</div>
+</div>`
+  }
+      for(let a=0; a<ans.length; a++){
+           $("#" + ans[a] + " .st").addClass("cr");
+         }
+
+        }
+
         $('.sec').click(function(){
             const sec_id = $(this)[0].id;
             $('.sec').removeClass('sec-active');
             $('#'+sec_id).addClass('sec-active');
-            $('#add_sq').html(`<a href="#!/add_solution/${id}/${sec_id}/${questions.length}"><div style="margin-top:10px" class="btn add_sq"> Add questions</div></a>`)
+            $('#add_sq').html(`<a href="#!/add_solution/${id}/${sec_id}/${questions.length}"><div style="margin-top:10px" class="btn add_sq"> Add questions</div></a>`);
+
+            getQuestionByTag(sec_id);
         });
         $('#'+sections[0]).click();
-
-        const getQuestionByTag = (tag) => {
-
-        }
 
     })
 }
