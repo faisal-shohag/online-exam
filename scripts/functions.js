@@ -72,7 +72,7 @@ const SingleSolutionCard = (id, element) => {
     });
 }
 
-const getSolution = (id, element) =>{
+const getSolution = (id, element, uid) =>{
     element = document.getElementById(element);
     store.collection('solutions').doc(id).onSnapshot(item=>{
         const sections = item.data().sections;
@@ -134,6 +134,7 @@ const getSolution = (id, element) =>{
 
             getQuestionByTag(sec_id);
         });
+        if(uid !== '094Rbu13YbWc9On6KnuJIUv3QMx2') $('.floating-button').hide();
         $('#'+sections[0]).click();
 
     })

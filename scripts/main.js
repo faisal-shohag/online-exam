@@ -8,6 +8,7 @@ $(document).ready(function(){
 
 firebase.auth().onAuthStateChanged((user)=>{
   if(user){
+    
     $('.top').show();
     $('.image').html(`<img src="${user.photoURL}"/>`);
     $('.imagexBig0').html(`<div class="navprogImg"><img src="${user.photoURL}"/></div>`);
@@ -1418,7 +1419,7 @@ solutionsCard('solution_cards');
   <div id="sol_body"><div>
   `;
   SingleSolutionCard(params.id, 'sol_head');
-  getSolution(params.id, 'sol_body');
+  getSolution(params.id, 'sol_body', user.uid);
 },
 "/add_solution/:doc/:tag/:questionLength": function(params) {
   $('.footer').hide();
@@ -2981,6 +2982,7 @@ if (result.isConfirmed) {
 },
 
 "/resource":function(params){
+ 
   $('.footer').show();
   $('.footertext').hide();
     $('.footerIcon').removeClass('footerIconActive');
@@ -3119,7 +3121,7 @@ if (result.isConfirmed) {
         }
       }
     });
-
+    if(user.uid !== '094Rbu13YbWc9On6KnuJIUv3QMx2') $('.floating-button').hide();
 
 },
 
