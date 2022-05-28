@@ -1425,6 +1425,7 @@ solutionsCard('solution_cards');
   // $('#fullscr').click();
   $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text"> Add solution </div></div>`);
   app.innerHTML = `
+  <h5>${sectionsTag[params.tag]}</h5>
     <form id="question_form">
 <div class="input-field create-q">
 <textarea name="question" type="text" placeholder="Write Question..."></textarea>
