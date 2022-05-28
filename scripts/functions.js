@@ -129,7 +129,7 @@ const getSolution = (id, element) =>{
             const sec_id = $(this)[0].id;
             $('.sec').removeClass('sec-active');
             $('#'+sec_id).addClass('sec-active');
-            $('#add_sq').html(`<a href="#!/add_solution/${id}/${sec_id}/${questions.length}"><div style="margin-top:10px" class="btn add_sq"> Add questions</div></a>`);
+            $('#add_sq').html(`<a href="#!/add_solution/${id}/${sec_id}/${questions.length}"><div style="left: 80%;" class="floating-button"><img src="../images/plus.png"></div></a>`);
 
             getQuestionByTag(sec_id);
         });
