@@ -531,7 +531,17 @@ var tag = {
   "eng"  : "ইঞ্জিনিয়ারিং",
   "model": "মডেল টেস্ট"
 };
-
+const sectionsTag = {
+    "bngandlit": "বাংলা",
+    "eng": "English",
+    "bgk": "GK-বাংলাদেশ",
+    "igk": "GK-আন্তর্জাতিক",
+    "gsc": "সাধারণ বিজ্ঞান",
+    "ict": "তথ্য ও যোগা...",
+    "math": "গণিত",
+    "geo": "ভুগল, পরিবেশ...",
+    "moral": "নৈতিকতা, মূল্য..."
+}
 function firstLetter(str){
   return str[0];
 }

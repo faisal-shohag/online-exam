@@ -43,25 +43,3 @@
 
       
 }
-/*
-
-@media (min-width: 500px) {
-
-
-    .top_text{
-        display: block;
-        white-space: wrap;
-        width: 99%;
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
-
-      .chapterName{
-          text-overflow: none;
-          white-space: wrap;
-          display: block; 
-          overflow: hidden;
-          width: 100%;
-      }
-}
-*/

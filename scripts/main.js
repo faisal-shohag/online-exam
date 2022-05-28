@@ -186,10 +186,13 @@ router.on({
 
 <div class="div-1">
 <div class="menu_title"><img src="../images/together.png"> Recent Solution</div>
-</div>
+
+<div id="solution_cards" class="hoz-scroll"></div>
 
 
   `
+
+solutionsCard('solution_cards');
 
   
   store.collection('public_exams').orderBy("publish_date", 'desc').limit(100).onSnapshot(snap=> {
@@ -1362,6 +1365,7 @@ router.on({
 },
 
 "/solutions/:ida/:id": function (params) {
+
   $('.footer').hide();
   $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text">Solution</div></div>`);
   $('.app_loader').show();
@@ -1403,7 +1407,77 @@ router.on({
   
 })
 },
+"/examsolution/:exam_name/:id": function(params) {
+  $('.footer').hide();
+  // $('.app_loader').show();
+  // $('#fullscr').click();
+  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text"> ${params.exam_name} </div></div>`);
+  app.innerHTML = `
+  <div id="sol_head"></div>
+  <div id="sol_body"><div>
+  `;
+  SingleSolutionCard(params.id, 'sol_head');
+  getSolution(params.id, 'sol_body');
+},
+"/add_solution/:doc/:tag/:questionLength": function(params) {
+  $('.footer').hide();
+  // $('.app_loader').show();
+  // $('#fullscr').click();
+  $('.top_logo').html(`<div onclick="window.history.back()" class="top_app_title"><div class="animate__animated animate__fadeInRight top_dir"><i class="icofont-simple-left"></i></div> <div class="animate__animated animate__fadeIn top_text"> Add solution </div></div>`);
+  app.innerHTML = `
+    <form id="question_form">
+<div class="input-field create-q">
+<textarea name="question" type="text" placeholder="Write Question..."></textarea>
+</div>
 
+<div class="form_option create-q" >
+<div class="input-field">
+<div class="opt"><textarea name="a" placeholder="অপশন A"></textarea></div>
+<div class="opt"><textarea name="b" placeholder="অপশন B"></textarea></div>
+<div class="opt"><textarea name="c" placeholder="অপশন C"></textarea></div>
+<div class="opt"><textarea name="d" placeholder="অপশন D"></textarea></div>
+</div>
+</div>
+<div class="input-field">
+      <select name="select_ans">
+        <option class="dis" value="" disabled selected>উত্তর</option>
+        <option value="1">A</option>
+        <option value="2">B</option>
+        <option value="3">C</option>
+        <option value="4">D</option>
+      </select>
+    </div>
+
+<div class="create-q">
+    <textarea name="explanation" id="create-ex" placeholder="ব্যাখ্যা/সমাধান"></textarea>
+</div>
+<center><button type="submit" class="btn red">Add Question</button><center>
+</form>
+    `
+    $(document).ready(function () {
+      $("select").formSelect();
+    });
+    let len = params.questionLength;
+    const question_form = document.querySelector('#question_form');
+question_form.addEventListener('submit', e=> {
+  e.preventDefault();
+  let optArr = [question_form.a.value, question_form.b.value, question_form.c.value, question_form.d.value];
+  let ansText = `${ansOpt[parseInt(question_form.select_ans.value)]}. ${optArr[parseInt(question_form.select_ans.value)-1]}`;
+  let question = {
+      q: (question_form.question.value).replace(/(?:\r\n|\r|\n)/g, '<br>'),
+      opt: [question_form.a.value, question_form.b.value, question_form.c.value, question_form.d.value],
+      ans: question_form.select_ans.value,
+      ex: question_form.explanation.value === "" ? ansText : ansText + "<br>"+question_form.explanation.value,
+      tag: params.tag
+  }
+  // console.log(question);
+    store.collection('solutions').doc(params.doc).set({
+      questions: {
+        [len]: question
+      }
+    }, {merge: true}).then(()=>{window.history.back()});
+});
+},
  "/rank" : function(){
   $('.app_loader').show();
   $('.footer').show();

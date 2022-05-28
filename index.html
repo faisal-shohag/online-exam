@@ -28,7 +28,12 @@
 <script>
 MathJax = {
     tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [ ["$$","$$"]],
+			  processEscapes: false,
+			  packages: {
+				  '[+]': ['physics', 'color', 'bbox', 'cancel', 'mhchem', 'noundefined', ]
+			  }
     },
     svg: {
       fontCache: 'global',
@@ -36,7 +41,11 @@ MathJax = {
     },
     chtml: {
       scale: 0.8
-    }
+    },
+    loader: {
+			  load: ['[tex]/physics', '[tex]/color', '[tex]/bbox', '[tex]/cancel', '[tex]/mhchem', '[tex]/noundefined']
+			},
+			tags: 'ams'
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
@@ -256,6 +265,7 @@ $(document).ready(function(){
   </script>
   <script src="./scripts/common.js"></script>
   <script src="./scripts/firebaseui.js"></script>
+  <script src="./scripts/functions.js"></script>
     <script src="./scripts/main.js"></script>
     <script src="./scripts/firebase.js"></script>
 

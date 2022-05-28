@@ -1380,3 +1380,109 @@ color: var(--red);
   align-items: center;
   font-family: Kalpurush;
 }
+
+.scroll-card{
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 7px;
+}
+
+.card-head{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-circle-img img{
+ height: 50px;
+}
+
+.card-title{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.card-sub-title{
+  font-size: 12px;
+  font-weight: bold;
+  color: grey;
+}
+
+.horz-line{
+  height: 1px;
+  background: rgb(228, 225, 225);
+  width: 100%;
+  margin-top: 5px;
+}
+
+.flex-row-space-between{
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.progressBarBg{
+  background: rgb(190, 189, 189);
+  height: 12px;
+  width: 100%;
+  border-radius: 10px;
+  position: relative;
+}
+
+.progressLine{
+ width: 10%;
+ height: 12px;
+ border-radius: 10px;
+}
+
+.progressParc{
+ position: absolute;
+ top: -10%;
+ font-size: 10px;
+ display: flex;
+ justify-content: center;
+ width: 100%;
+ align-items: center;
+ font-weight: bold;
+}
+
+.red{
+  background: var(--red);
+}
+
+.green{
+  background: var(--green);
+}
+
+.opacity5{
+  background: #fff;
+}
+
+#sections{
+  display: flex;
+  gap: 5px;
+  overflow-x: scroll;
+}
+
+.sec{
+  min-width: 100px;
+  /* overflow: hidden; */
+  background: rgb(255, 253, 253);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  white-space: nowrap;
+  padding: 7px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.sec-active{
+  background: var(--red);
+  color: #fff;
+}
+
